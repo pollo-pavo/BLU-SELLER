@@ -5,6 +5,7 @@
   align-items: flex-start;
   background-color: #4a4949;
   padding-top: 5%;
+  padding-bottom: 5%
 }
 
 .caja {
@@ -18,4 +19,9 @@
 .texto-izquierda {
   display: block;
   text-align: left;
+}
+
+.menu {
+    max-height: 200px;
+    overflow-y: auto;
 }

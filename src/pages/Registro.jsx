@@ -1,9 +1,11 @@
-import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import SelectorUbicacion from '../components/forms/selectorUbicacion';
+
 import '../styles/Registro.css';
 import '../styles/General.css';
-import { Link } from "react-router-dom";
+
+
 
 
 function InicioSesion() {
@@ -49,13 +51,12 @@ function InicioSesion() {
               <Form.Label className='texto-izquierda'>Telefono(Opcional)</Form.Label>
               <Form.Control type="tel" placeholder="Ingrese su numero de telefono" />
             </Form.Group>
+
+            <SelectorUbicacion />
             
-            
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className='mt-3'>
               Registarte
             </Button>
-
-        
          
           </Form> 
           
