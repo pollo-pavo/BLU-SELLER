@@ -28,6 +28,9 @@ function BarraNavegacion() {
             <Nav.Link as={Link} to="/Nosotros">
               Nosotros
             </Nav.Link>
+          </Nav> 
+
+          <Nav>
 
             <Nav.Link as={Link} to="/InicioSesion">
               Inicio de Sesión
