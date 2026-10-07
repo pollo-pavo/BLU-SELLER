@@ -29,6 +29,11 @@ function BarraNavegacion() {
               Nosotros
             </Nav.Link>
 
+            <Nav.Link as={Link} to="/InicioSesion">
+              Inicio de Sesión
+            </Nav.Link>
+
+            
           </Nav>
       </Container>
     </Navbar>
