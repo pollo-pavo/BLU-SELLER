@@ -33,6 +33,10 @@ function BarraNavegacion() {
               Inicio de Sesión
             </Nav.Link>
 
+            <Nav.Link as={Link} to="/Registro">
+              Registrate
+            </Nav.Link>
+
             
           </Nav>
       </Container>

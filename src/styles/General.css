@@ -1,0 +1,21 @@
+.contenedor {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #4a4949;
+  padding-top: 5%;
+}
+
+.caja {
+  width: 700px;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  padding: 2%;
+}
+
+.texto-izquierda {
+  display: block;
+  text-align: left;
+}

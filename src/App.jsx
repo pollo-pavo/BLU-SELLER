@@ -8,6 +8,7 @@ import Contacto from "./pages/Contacto";
 import Blogs from "./pages/Blogs";
 import Nosotros from "./pages/Nosotros";
 import InicioSesion from "./pages/InicioSesion";
+import Registro from "./pages/Registro"
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/InicioSesion" element={<InicioSesion />} />
+          <Route path="/registro" element={<Registro />} />
   
         </Routes>
       </BrowserRouter>
