@@ -1,4 +1,5 @@
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import '../styles/Contacto.css';
 import '../styles/General.css';
 
@@ -36,6 +37,10 @@ function Contacto() {
               <Form.Label className='texto-izquierda'>Contenido</Form.Label>
               < Form.Control as="textarea" rows={10} placeholder="Escriba su mensaje aquí..."/>
             </Form.Group>
+
+            <Button variant="primary" type="submit" className='mt-3'>
+              ENVIAR
+            </Button>
 
           </Form>
 

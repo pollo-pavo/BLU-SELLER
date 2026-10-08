@@ -8,9 +8,12 @@ function SelectorUbicacion() {
     const [regionSeleccionada, setRegionSeleccionada] = useState(null);
     const [comunaSeleccionada, setComunaSeleccionada] = useState(null);
 
+    
+
     const seleccionarRegion = (region) => {
         setRegionSeleccionada(region);
         setComunaSeleccionada(null);
+
     }
 
     return (
