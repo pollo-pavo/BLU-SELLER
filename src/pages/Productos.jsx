@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button';
+import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/Productos.css';
 
@@ -11,16 +12,10 @@ const productos = Array.from({ length: 12 }, (_, i) => ({
 function Productos() {
   return (
     <>
-      <div className="productos-header">
-        <div className="productos-marca">
-          <img src="/imagenes/logo.png" alt="Logo" className="logo" />
-          <h1>BLU-SELLER</h1>
-        </div>
-        <span className="productos-carrito">Carrito (0)</span>
-      </div>
+      <HeaderGeneral />
 
-      <div className="productos-fondo">
-        <h2 className="productos-titulo">PRODUCTOS</h2>
+      <div className="fondo-pagina">
+        <h2 className="titulo-pagina">PRODUCTOS</h2>
 
         <div className="productos-grid">
           {productos.map((p) => (

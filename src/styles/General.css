@@ -25,3 +25,32 @@
     max-height: 200px;
     overflow-y: auto;
 }
+
+.header-general {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  background-color: #ddd;
+}
+
+.header-marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-carrito {
+  font-weight: 500;
+}
+
+.fondo-pagina {
+  background-color: #f2f2f2;
+  padding: 2% 5%;
+  min-height: 100vh;
+}
+
+.titulo-pagina {
+  text-align: center;
+  margin-bottom: 24px;
+}

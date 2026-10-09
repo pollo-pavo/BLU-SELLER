@@ -2,18 +2,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import '../styles/Contacto.css';
 import '../styles/General.css';
+import HeaderGeneral from '../components/layout/HeaderGeneral';
 
 function Contacto() {
   return (
     <>
-      <div>
-        <img 
-        src="/imagenes/logo.png" 
-        alt="Logo"
-        className="logo"
-      />
-        <h1>BLU-SELLER</h1>
-      </div>
+      <HeaderGeneral carrito={false} />
 
 
       <div className="contenedor">

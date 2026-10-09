@@ -1,9 +1,16 @@
+import HeaderGeneral from '../components/layout/HeaderGeneral';
+import '../styles/General.css';
+
 function Home() {
   return (
-    <div>
-      <h1>Inicio</h1>
-      <p>Bienvenido a mi aplicación.</p>
-    </div>
+    <>
+      <HeaderGeneral />
+
+      <div className="fondo-pagina">
+        <h2 className="titulo-pagina">INICIO</h2>
+        <p>Bienvenido a mi aplicación.</p>
+      </div>
+    </>
   );
 }
 

@@ -4,19 +4,13 @@ import Form from 'react-bootstrap/Form';
 import '../styles/InicioSesion.css';
 import '../styles/General.css';
 import { Link } from "react-router-dom";
+import HeaderGeneral from '../components/layout/HeaderGeneral';
 
 
 function InicioSesion() {
   return (
     <>
-      <div>
-        <img 
-        src="/imagenes/logo.png" 
-        alt="Logo"
-        className="logo"
-      />
-        <h1>BLU-SELLER</h1>
-      </div>
+      <HeaderGeneral carrito={false} />
 
       <div className="contenedor">
 

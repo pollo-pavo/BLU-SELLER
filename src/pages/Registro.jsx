@@ -1,7 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import SelectorUbicacion from '../components/forms/selectorUbicacion.jsx';
-
+import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/Registro.css';
 import '../styles/General.css';
 
@@ -11,14 +11,7 @@ import '../styles/General.css';
 function registro() {
   return (
     <>
-      <div>
-        <img 
-        src="/imagenes/logo.png" 
-        alt="Logo"
-        className="logo"
-      />
-        <h1>BLU-SELLER</h1>
-      </div>
+      <HeaderGeneral carrito={false} />
 
       <div className="contenedor">
 
