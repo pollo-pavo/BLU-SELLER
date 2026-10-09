@@ -9,9 +9,12 @@ import Blogs from "./pages/Blogs";
 import Nosotros from "./pages/Nosotros";
 import InicioSesion from "./pages/InicioSesion";
 import Registro from "./pages/Registro"
-import PanelAdmin from './pages/PanelAdmin';
+import PanelAdmin from './pages/admin/PanelAdmin';
 import RutaAdmin from './components/auth/RutaAdmin';
+import ProductosAdmin from './pages/admin/ProductosAdmin';
+import UsuariosAdmin from './pages/admin/UsuariosAdmin';
 import { AuthProvider } from "./context/AuthContext";
+import LayoutAdmin from './components/layout/LayoutAdmin';
 
 function App() {
   return (
@@ -29,11 +32,13 @@ function App() {
             <Route path="/InicioSesion" element={<InicioSesion />} />
             <Route path="/registro" element={<Registro />} />
 
-            <Route path="/PanelAdmin" element={
-              <RutaAdmin>
-                <PanelAdmin />
-              </RutaAdmin>
-            } />
+            <Route element={<RutaAdmin />}>
+              <Route element={<LayoutAdmin />}>
+                <Route path="/PanelAdmin" element={<PanelAdmin />} />
+                <Route path="/ProductosAdmin" element={<ProductosAdmin />} />
+                <Route path="/UsuariosAdmin" element={<UsuariosAdmin />} />
+              </Route>
+            </Route>
     
           </Routes>
         </BrowserRouter>

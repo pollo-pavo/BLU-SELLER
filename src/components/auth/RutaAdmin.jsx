@@ -1,13 +1,13 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate,Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 
-function RutaAdmin({ children }) {
+function RutaAdmin() {
     const { usuario } = useAuth();
 
     if (!usuario) return <Navigate to="/InicioSesion"  replace/>;
     if (usuario.rol !== "admin") return <Navigate to="/"  replace/>;
 
-    return children;
+    return <Outlet />;
 }
 
 export default RutaAdmin;
