@@ -17,7 +17,7 @@ function registro() {
         alt="Logo"
         className="logo"
       />
-        <h1>NOMBRE EMPRESA</h1>
+        <h1>BLU-SELLER</h1>
       </div>
 
       <div className="contenedor">

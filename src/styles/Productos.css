@@ -29,7 +29,7 @@
 
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -44,7 +44,7 @@
 
 .producto-imagen {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 9;
   background-color: #fff;
   border: 1px solid #999;
   display: flex;
