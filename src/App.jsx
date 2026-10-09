@@ -9,24 +9,36 @@ import Blogs from "./pages/Blogs";
 import Nosotros from "./pages/Nosotros";
 import InicioSesion from "./pages/InicioSesion";
 import Registro from "./pages/Registro"
+import PanelAdmin from './pages/PanelAdmin';
+import RutaAdmin from './components/auth/RutaAdmin';
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
 
-        <BarraNavegacion />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/productos" element={<Productos />} />
-          <Route path="/contacto" element={<Contacto />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/nosotros" element={<Nosotros />} />
-          <Route path="/InicioSesion" element={<InicioSesion />} />
-          <Route path="/registro" element={<Registro />} />
-  
-        </Routes>
-      </BrowserRouter>
+          <BarraNavegacion />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/productos" element={<Productos />} />
+            <Route path="/contacto" element={<Contacto />} />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/InicioSesion" element={<InicioSesion />} />
+            <Route path="/registro" element={<Registro />} />
+
+            <Route path="/PanelAdmin" element={
+              <RutaAdmin>
+                <PanelAdmin />
+              </RutaAdmin>
+            } />
+    
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
+
     </div>
   );
 }
