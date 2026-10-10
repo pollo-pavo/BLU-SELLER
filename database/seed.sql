@@ -2,9 +2,9 @@
 -- Contrasena de todos los usuarios de prueba: Test1234
 
 INSERT INTO usuarios (nombre, correo, contrasena, telefono, region, comuna, rol) VALUES
-('Administrador Prueba', 'admin@correo.com',   'ola123', '911111111', 'Región Metropolitana de Santiago', 'Santiago', 'administrador'),
-('Vendedor Prueba',      'vendedor@correo.com', 'oliwis123', '922222222', 'Región Metropolitana de Santiago', 'Providencia', 'vendedor'),
-('Cliente Prueba',       'cliente@correo.com',  'yiaa123', '933333333', 'Región Metropolitana de Santiago', 'Ñuñoa', 'cliente');
+('Administrador Prueba', 'admin@correo.com',    '$2b$10$HsrryMS5.dvlLRK8APVxVu2Z4jfZadTd.5F/F/fJ15q8ueeU.AfiG', '911111111', 'Región Metropolitana de Santiago', 'Santiago', 'administrador'),
+('Vendedor Prueba',      'vendedor@correo.com', '$2b$10$oBEjcZY6nbt89ttAYaX8aOUrfvEqM5vFXJ2DfzUOQwEmuWkrB77LW', '922222222', 'Región Metropolitana de Santiago', 'Providencia', 'vendedor'),
+('Cliente Prueba',       'cliente@correo.com',  '$2b$10$bp2sOfjSL/t594rNuivAquLFQlu.jNI3QYHfD9Oa4cK8rCwN9lDm.', '933333333', 'Región Metropolitana de Santiago', 'Ñuñoa', 'cliente');
 
 INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES
 ('Producto 1',  'Descripción del producto 1',  1000, 10, NULL),
