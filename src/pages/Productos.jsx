@@ -1,15 +1,19 @@
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/Productos.css';
 
-const productos = Array.from({ length: 12 }, (_, i) => ({
-  id: i + 1,
-  nombre: `Producto ${i + 1}`,
-  precio: 1000,
-}));
-
 function Productos() {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/productos')
+      .then((respuesta) => respuesta.json())
+      .then((datos) => setProductos(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <>
       <HeaderGeneral />
@@ -22,7 +26,7 @@ function Productos() {
             <div className="producto-card" key={p.id}>
               <div className="producto-imagen"></div>
               <span className="producto-nombre">{p.nombre}</span>
-              <span className="producto-precio">${p.precio}</span>
+              <span className="producto-precio">${Number(p.precio)}</span>
               <Button size="sm" variant="light">Añadir</Button>
             </div>
           ))}
