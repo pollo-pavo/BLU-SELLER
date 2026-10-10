@@ -5,6 +5,7 @@ import BarraNavegacion from "./components/layout/navbar";
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
 import ProductoDetalle from "./pages/ProductoDetalle";
+import { CarritoProvider } from "./context/CarritoContext";
 import Contacto from "./pages/Contacto";
 import Blogs from "./pages/Blogs";
 import BlogDetalle from "./pages/BlogDetalle";
@@ -22,6 +23,7 @@ function App() {
   return (
     <div className="App">
       <AuthProvider>
+        <CarritoProvider>
         <BrowserRouter>
 
           <BarraNavegacion />
@@ -46,6 +48,7 @@ function App() {
     
           </Routes>
         </BrowserRouter>
+        </CarritoProvider>
       </AuthProvider>
 
     </div>
