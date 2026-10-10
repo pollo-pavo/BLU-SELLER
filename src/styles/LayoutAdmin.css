@@ -20,21 +20,10 @@
   margin-bottom: 16px;
 }
 
-.layout-admin-superior {
-  padding: 16px;
-  border-bottom: 1px solid #cccccc;
-}
-
 .layout-admin-menu {
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.layout-admin-inferior {
-  margin-top: auto;
-  border-top: 1px solid #cccccc;
-  padding-top: 12px;
 }
 
 .layout-admin-link {
@@ -54,13 +43,33 @@
   font-weight: bold;
 }
 
-.layout-admin-perfil {
-  margin-top: 12px;
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
 .layout-admin-contenido {
   flex: 1;
   padding: 24px;
+}
+
+.layout-admin-superior {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.layout-admin-inferior {
+  margin-top: auto;
+  border-top: 1px solid #cccccc;
+  padding-top: 12px;
+}
+
+.layout-admin-salir {
+  width: 100%;
+  padding: 8px 10px;
+  background: transparent;
+  color: #333333;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.layout-admin-salir:hover {
+  background: #e0e0e0;
 }
