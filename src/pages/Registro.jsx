@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import SelectorUbicacion from '../components/forms/selectorUbicacion.jsx';
@@ -9,6 +11,34 @@ import '../styles/General.css';
 
 
 function registro() {
+    const navigate = useNavigate();
+  const [ubicacion, setUbicacion] = useState({ region: null, comuna: null });
+
+  const enviar = async (e) => {
+    e.preventDefault();
+    const campos = e.target.elements;
+
+    const respuesta = await fetch('/api/registro', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: campos.nombre.value,
+        correo: campos.correo.value,
+        contrasena: campos.contrasena.value,
+        telefono: campos.telefono.value,
+        region: ubicacion.region,
+        comuna: ubicacion.comuna,
+      }),
+    });
+    const datos = await respuesta.json();
+
+    if (respuesta.ok) {
+      navigate('/InicioSesion');
+    } else {
+      alert(datos.error);
+    }
+  };
+
   return (
     <>
       <HeaderGeneral carrito={false} />
@@ -19,7 +49,7 @@ function registro() {
           
           <h1>Registro de usuario</h1>
         
-          <Form>
+          <Form onSubmit={enviar}>
             <Form.Group className="mb-3" controlId="nombre">
               <Form.Label className='texto-izquierda'>Nombre Completo</Form.Label>
               <Form.Control type="text" placeholder="Ingrese su nombre completo" />
@@ -45,7 +75,7 @@ function registro() {
               <Form.Control type="tel" placeholder="Ingrese su numero de telefono" />
             </Form.Group>
 
-            <SelectorUbicacion />
+            <SelectorUbicacion onCambio={setUbicacion} />
             
             <Button variant="primary" type="submit" className='mt-3'>
               Regístrate

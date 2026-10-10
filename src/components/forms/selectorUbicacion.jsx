@@ -3,7 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import datos from '../../data/ubicaciones.json';
 
-function SelectorUbicacion() {
+function SelectorUbicacion({ onCambio }) {
     
     const [regionSeleccionada, setRegionSeleccionada] = useState(null);
     const [comunaSeleccionada, setComunaSeleccionada] = useState(null);
@@ -13,6 +13,7 @@ function SelectorUbicacion() {
     const seleccionarRegion = (region) => {
         setRegionSeleccionada(region);
         setComunaSeleccionada(null);
+        onCambio?.({ region: region.region, comuna: null });
 
     }
 
@@ -52,7 +53,10 @@ function SelectorUbicacion() {
                     {regionSeleccionada?.comunas.map((comuna) => (
                         <Dropdown.Item
                             key={comuna}
-                            onClick={() => setComunaSeleccionada(comuna)}
+                            onClick={() => {
+                                setComunaSeleccionada(comuna);
+                                onCambio?.({ region: regionSeleccionada.region, comuna });
+                            }}
                         >
                             {comuna}
                         </Dropdown.Item>
