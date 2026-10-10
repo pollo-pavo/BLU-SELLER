@@ -21,8 +21,8 @@ INSERT INTO productos (nombre, descripcion, precio, stock, imagen) VALUES
 ('Producto 12', 'Descripción del producto 12', 1000, 10, NULL);
 
 INSERT INTO blogs (titulo, descripcion, contenido, imagen_portada, autor_id) VALUES
-('CASO 1', 'omgg', 'huhh', NULL, 1),
-('CASO 2', 'aaaaa', 'huhh!!!', NULL, 1);
+('hola', 'que pasa??!!!', 'que pasa??!!!', NULL, 1),
+('Spider-Man: Brand New Day Es BUENISIMAAAA', 'Esto no tiene nada que ver con la pagina o los blu-rays, es algo que queria decir, de hecho si o si uno de los productos va a ser un blu-ray de la pelicula', 'Esto no tiene nada que ver con la pagina o los blu-rays, es algo que queria decir, de hecho si o si uno de los productos va a ser un blu-ray de la pelicula', NULL, 1);
 
 INSERT INTO mensajes_contacto (nombre, correo, contenido) VALUES
 ('Cliente Prueba', 'cliente@correo.com', 'Todo mal!!');
