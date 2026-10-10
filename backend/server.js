@@ -29,6 +29,26 @@ app.get('/api/productos', async (req, res) => {
   }
 });
 
+app.get('/api/productos/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de producto inválido' });
+  }
+  try {
+    const resultado = await pool.query(
+      'SELECT id, nombre, descripcion, precio, stock, imagen FROM productos WHERE id = $1 AND activo = TRUE',
+      [id]
+    );
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el producto' });
+  }
+});
+
 app.post('/api/registro', async (req, res) => {
   const { nombre, correo, contrasena, telefono, region, comuna } = req.body;
 
