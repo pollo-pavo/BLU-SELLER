@@ -4,9 +4,12 @@ import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/Productos.css';
 import { Link } from 'react-router-dom';
+import { useCarrito } from '../context/CarritoContext';
 
 function Productos() {
   const [productos, setProductos] = useState([]);
+
+  const { agregar } = useCarrito();
 
   useEffect(() => {
     fetch('/api/productos')
@@ -28,7 +31,7 @@ function Productos() {
               <Link to={`/productos/${p.id}`} className="producto-imagen"></Link>
               <Link to={`/productos/${p.id}`} className="producto-nombre">{p.nombre}</Link>
               <span className="producto-precio">${Number(p.precio)}</span>
-              <Button size="sm" variant="light">Añadir</Button>
+              <Button size="sm" variant="light" onClick={() => agregar(p)}>Añadir</Button>
             </div>
           ))}
         </div>

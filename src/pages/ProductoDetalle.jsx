@@ -5,12 +5,15 @@ import Form from 'react-bootstrap/Form';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/ProductoDetalle.css';
+import { useCarrito } from '../context/CarritoContext';
 
 function ProductoDetalle() {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [relacionados, setRelacionados] = useState([]);
   const [error, setError] = useState('');
+  const { agregar } = useCarrito();
+  const [cantidad, setCantidad] = useState(1);
 
   useEffect(() => {
     setError('');
@@ -82,7 +85,7 @@ function ProductoDetalle() {
 
             <Form.Group controlId="cantidad" className="detalle-cantidad">
               <Form.Label>Cantidad</Form.Label>
-              <Form.Select>
+              <Form.Select value={cantidad} onChange={(e) => setCantidad(Number(e.target.value))}>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -91,7 +94,7 @@ function ProductoDetalle() {
               </Form.Select>
             </Form.Group>
 
-            <Button variant="primary" className="detalle-boton">Añadir al carrito</Button>
+            <Button variant="primary" className="detalle-boton" onClick={() => agregar(producto, cantidad)}>Añadir al carrito</Button>
           </div>
         </div>
 
