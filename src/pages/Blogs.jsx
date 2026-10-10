@@ -4,13 +4,13 @@ import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/Blogs.css';
 import { Link } from 'react-router-dom';
+import { obtenerBlogs } from '../services/api';
 
 function Blogs() {
   const [casos, setCasos] = useState([]);
 
   useEffect(() => {
-    fetch('/api/blogs')
-      .then((respuesta) => respuesta.json())
+    obtenerBlogs()
       .then((datos) => setCasos(datos))
       .catch((error) => console.error(error));
   }, []);

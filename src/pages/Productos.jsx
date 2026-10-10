@@ -5,6 +5,7 @@ import '../styles/General.css';
 import '../styles/Productos.css';
 import { Link } from 'react-router-dom';
 import { useCarrito } from '../context/CarritoContext';
+import { obtenerProductos } from '../services/api';
 
 function Productos() {
   const [productos, setProductos] = useState([]);
@@ -12,8 +13,7 @@ function Productos() {
   const { agregar } = useCarrito();
 
   useEffect(() => {
-    fetch('/api/productos')
-      .then((respuesta) => respuesta.json())
+    obtenerProductos()
       .then((datos) => setProductos(datos))
       .catch((error) => console.error(error));
   }, []);

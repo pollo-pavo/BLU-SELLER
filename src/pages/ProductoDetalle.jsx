@@ -6,6 +6,7 @@ import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/ProductoDetalle.css';
 import { useCarrito } from '../context/CarritoContext';
+import { obtenerProducto, obtenerProductos } from '../services/api';
 
 function ProductoDetalle() {
   const { id } = useParams();
@@ -19,16 +20,11 @@ function ProductoDetalle() {
     setError('');
     setProducto(null);
 
-    fetch(`/api/productos/${id}`)
-      .then((respuesta) => {
-        if (!respuesta.ok) throw new Error('Producto no encontrado');
-        return respuesta.json();
-      })
+    obtenerProducto(id)
       .then((datos) => setProducto(datos))
       .catch((err) => setError(err.message));
 
-    fetch('/api/productos')
-      .then((respuesta) => respuesta.json())
+    obtenerProductos()
       .then((datos) =>
         setRelacionados(datos.filter((p) => p.id !== Number(id)).slice(0, 5))
       )

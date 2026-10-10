@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/BlogDetalle.css';
+import { obtenerBlog } from '../services/api';
 
 function BlogDetalle() {
   const { id } = useParams();
@@ -13,11 +14,7 @@ function BlogDetalle() {
     setError('');
     setBlog(null);
 
-    fetch(`/api/blogs/${id}`)
-      .then((respuesta) => {
-        if (!respuesta.ok) throw new Error('Blog no encontrado');
-        return respuesta.json();
-      })
+    obtenerBlog(id)
       .then((datos) => setBlog(datos))
       .catch((err) => setError(err.message));
   }, [id]);
