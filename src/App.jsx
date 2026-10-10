@@ -7,13 +7,14 @@ import Productos from "./pages/Productos";
 import ProductoDetalle from "./pages/ProductoDetalle";
 import Contacto from "./pages/Contacto";
 import Blogs from "./pages/Blogs";
+import BlogDetalle from "./pages/BlogDetalle";
 import Nosotros from "./pages/Nosotros";
 import InicioSesion from "./pages/InicioSesion";
 import Registro from "./pages/Registro"
 import PanelAdmin from './pages/admin/PanelAdmin';
 import RutaAdmin from './components/auth/RutaAdmin';
-import ProductosAdmin from './pages/admin/ProductosAdmin';
-import UsuariosAdmin from './pages/admin/UsuariosAdmin';
+import ProductosAdmin from './pages/admin/productos/ProductosAdmin';
+import UsuariosAdmin from './pages/admin/usuarios/UsuariosAdmin';
 import { AuthProvider } from "./context/AuthContext";
 import LayoutAdmin from './components/layout/LayoutAdmin';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/productos/:id" element={<ProductoDetalle />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:id" element={<BlogDetalle />} />
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/InicioSesion" element={<InicioSesion />} />
             <Route path="/registro" element={<Registro />} />

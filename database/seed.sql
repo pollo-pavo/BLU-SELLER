@@ -26,3 +26,6 @@ INSERT INTO blogs (titulo, descripcion, contenido, imagen_portada, autor_id) VAL
 
 INSERT INTO mensajes_contacto (nombre, correo, contenido) VALUES
 ('Cliente Prueba', 'cliente@correo.com', 'Todo mal!!');
+
+UPDATE blogs SET contenido = 'desquiciado' WHERE id = 1;
+UPDATE blogs SET contenido = 'eloquente' WHERE id = 2;

@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/General.css';
 import '../styles/Blogs.css';
+import { Link } from 'react-router-dom';
 
 function Blogs() {
   const [casos, setCasos] = useState([]);
@@ -26,7 +27,7 @@ function Blogs() {
             <div className="blog-info">
               <h3>{c.titulo}</h3>
               <p>{c.descripcion}</p>
-              <Button variant="light" className="blog-boton">VER CASO</Button>
+              <Button as={Link} to={`/blogs/${c.id}`} variant="light" className="blog-boton">VER CASO</Button>
             </div>
             <div className="blog-imagen"></div>
           </div>

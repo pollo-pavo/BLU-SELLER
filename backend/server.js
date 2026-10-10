@@ -138,6 +138,34 @@ app.get('/api/blogs', async (req, res) => {
   }
 });
 
+app.get('/api/blogs/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de blog inválido' });
+  }
+
+  try {
+    const resultado = await pool.query(
+      `SELECT b.id, b.titulo, b.descripcion, b.contenido, b.imagen_portada, b.fecha_creacion,
+              u.nombre AS autor
+       FROM blogs b
+       JOIN usuarios u ON u.id = b.autor_id
+       WHERE b.id = $1 AND b.activo = TRUE`,
+      [id]
+    );
+
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Blog no encontrado' });
+    }
+
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el blog' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);

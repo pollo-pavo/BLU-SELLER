@@ -1,0 +1,24 @@
+.blogdetalle-migas {
+  text-align: left;
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+}
+
+.blogdetalle-contenido {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.blogdetalle-datos {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 16px;
+}
+
+.blogdetalle-imagen {
+  aspect-ratio: 16 / 9;
+  background-color: #fff;
+  border: 1px solid #000;
+  margin-bottom: 16px;
+}
