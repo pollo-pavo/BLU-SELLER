@@ -1,4 +1,5 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import '../../styles/LayoutAdmin.css';
 
 const menuPrincipal = [
@@ -11,7 +12,15 @@ const menuPrincipal = [
 ];
 
 function LayoutAdmin() {
-  return (
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const cerrarSesion = () => {
+    logout();
+    navigate('/InicioSesion');
+  };
+
+return (
     <div className="layout-admin">
       <aside className="layout-admin-barra">
         <div className="layout-admin-logo">Company</div>
@@ -30,12 +39,12 @@ function LayoutAdmin() {
           ))}
         </nav>
 
-        <nav className="layout-admin-menu layout-admin-inferior">
-          <span className="layout-admin-link">Configuración</span>
-          <span className="layout-admin-link">Ayuda</span>
-          <div className="layout-admin-perfil">Perfil</div>
-        </nav>
-        </aside>
+        <div className="layout-admin-inferior">
+          <button className="layout-admin-salir" onClick={cerrarSesion}>
+            Cerrar sesión
+          </button>
+        </div>
+      </aside>
 
       <main className="layout-admin-contenido">
         <div className="layout-admin-superior">
@@ -43,10 +52,7 @@ function LayoutAdmin() {
         </div>
         <Outlet />
       </main>
-  </div>
-    
-
-    
+    </div>
   );
 }
 

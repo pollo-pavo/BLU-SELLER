@@ -22,7 +22,7 @@ function InicioSesion() {
     setError('');
     try {
       const usuario = await iniciarSesion(correo, contraseña);
-      navigate(usuario.rol === 'admin' ? '/PanelAdmin' : '/');
+      navigate(usuario.rol === 'admin' ? '/admin/dashboard' : '/');
     } catch (err) {
       setError('Correo o contraseña incorrectos');
     }
