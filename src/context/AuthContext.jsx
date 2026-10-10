@@ -2,10 +2,6 @@ import {createContext, useState, useContext} from 'react';
 
 const AuthContext = createContext(null);
 
-const usuarioPrueba = [
-    { correo: "admin@gmail.com", contraseña: "admin123", rol: "admin" },
-    { correo: "cliente@gmail.com", contraseña: "cliente123", rol: "cliente" },
-];
 
 export function AuthProvider({ children }) {
     const [usuario, setUsuario] = useState(() => {
@@ -14,16 +10,24 @@ export function AuthProvider({ children }) {
     });
 
     const iniciarSesion = async (correo, contraseña) => {
-        const encontrado = usuarioPrueba.find(
-            (u) => u.correo === correo && u.contraseña === contraseña
-    );
+        const respuesta = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo, contrasena: contraseña }),
+        });
 
-    if (!encontrado) throw new Error('Correo o contraseña incorrectos');
-    
-    const data = { correo: encontrado.correo, rol: encontrado.rol };
-    setUsuario(data);
-    localStorage.setItem('usuario', JSON.stringify(data));
-    return data;
+        if (!respuesta.ok) throw new Error('Correo o contraseña incorrectos');
+
+        const datos = await respuesta.json();
+        const data = {
+            id: datos.id,
+            nombre: datos.nombre,
+            correo: datos.correo,
+            rol: datos.rol === 'administrador' ? 'admin' : datos.rol,
+        };
+        setUsuario(data);
+        localStorage.setItem('usuario', JSON.stringify(data));
+        return data;
     };
 
     const logout = () => {
