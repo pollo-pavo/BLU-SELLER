@@ -12,8 +12,8 @@ import InicioSesion from "./pages/InicioSesion";
 import Registro from "./pages/Registro"
 import PanelAdmin from './pages/admin/PanelAdmin';
 import RutaAdmin from './components/auth/RutaAdmin';
-import ProductosAdmin from './pages/admin/ProductosAdmin';
-import UsuariosAdmin from './pages/admin/UsuariosAdmin';
+import ProductosAdmin from './pages/admin/productos/ProductosAdmin';
+import UsuariosAdmin from './pages/admin/usuarios/UsuariosAdmin';
 import { AuthProvider } from "./context/AuthContext";
 import LayoutAdmin from './components/layout/LayoutAdmin';
 
