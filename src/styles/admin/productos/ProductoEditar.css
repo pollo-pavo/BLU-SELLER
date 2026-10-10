@@ -1,0 +1,6 @@
+/* src/styles/admin/ProductoNuevo.css */
+.producto-editar-caja { background: #eee; border: 1px solid #333; padding: 24px; max-width: 700px; display: flex; flex-direction: column; gap: 6px; }
+.producto-editar-encabezado { background: #ccc; padding: 6px 10px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
+.producto-editar-caja label { font-size: 11px; margin-top: 8px; }
+.producto-editar-caja input, .producto-editar-caja select, .producto-editar-caja textarea { padding: 6px; border: 1px solid #333; background: #fff; }
+.producto-editar-caja button { align-self: center; margin-top: 24px; padding: 8px 40px; background: #000; color: #fff; border: none; cursor: pointer; }
