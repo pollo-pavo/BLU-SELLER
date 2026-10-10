@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS blogs CASCADE;
 DROP TABLE IF EXISTS mensajes_contacto CASCADE;
 DROP TABLE IF EXISTS productos CASCADE;
 DROP TABLE IF EXISTS usuarios CASCADE;
+DROP TABLE IF EXISTS categorias CASCADE;
 
 CREATE TABLE usuarios (
   id             SERIAL PRIMARY KEY,
@@ -17,13 +18,21 @@ CREATE TABLE usuarios (
   fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE categorias (
+  id     SERIAL PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE
+);
+
 CREATE TABLE productos (
   id             SERIAL PRIMARY KEY,
   nombre         VARCHAR(250) NOT NULL,
   descripcion    TEXT,
   precio         NUMERIC(10, 2) NOT NULL CHECK (precio >= 0),
+  precio_oferta  NUMERIC(10, 2) CHECK (precio_oferta >= 0),
   stock          INTEGER NOT NULL DEFAULT 0 CHECK (stock >= 0),
-  imagen         VARCHAR(300),                   -- ruta, ej: /imagenes/producto1.png
+  stock_critico  INTEGER NOT NULL DEFAULT 5 CHECK (stock_critico >= 0),
+  categoria_id   INTEGER REFERENCES categorias(id) ON DELETE SET NULL,
+  imagen         VARCHAR(300),
   activo         BOOLEAN NOT NULL DEFAULT TRUE,
   fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW()
 );
