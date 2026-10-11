@@ -25,10 +25,6 @@ function BarraNavegacion() {
               Ofertas
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/Contacto">
-              Contacto
-            </Nav.Link>
-
             <Nav.Link as={Link} to="/Blogs">
               Blogs
             </Nav.Link>
@@ -36,6 +32,11 @@ function BarraNavegacion() {
             <Nav.Link as={Link} to="/Nosotros">
               Nosotros
             </Nav.Link>
+
+            <Nav.Link as={Link} to="/Contacto">
+              Contacto
+            </Nav.Link>
+            
           </Nav> 
 
           <Nav>
