@@ -1,4 +1,3 @@
-// src/data/regiones.js
 export const regiones = [
   { nombre: 'Región Metropolitana de Santiago', comunas: ['Santiago', 'Maipú', 'Las Condes'] },
   { nombre: 'Región de la Araucanía', comunas: ['Temuco', 'Villarrica', 'Pucón'] },

@@ -1,0 +1,12 @@
+.ordenes-admin-encabezado { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.ordenes-admin-tabla { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+.ordenes-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
+.ordenes-admin-tabla td { padding: 6px 10px; }
+.ordenes-admin-tabla tbody tr:nth-child(even) { background: #eee; }
+
+.estado { padding: 2px 8px; border-radius: 10px; font-size: 12px; text-transform: capitalize; }
+.estado-pendiente { background: #fff3cd; color: #856404; }
+.estado-pagada { background: #d1ecf1; color: #0c5460; }
+.estado-enviada { background: #cce5ff; color: #004085; }
+.estado-entregada { background: #d4edda; color: #155724; }
+.estado-cancelada, .estado-pago_fallido { background: #f8d7da; color: #721c24; }

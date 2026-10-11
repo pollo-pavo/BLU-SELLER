@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { usuarios } from '../../../data/usuarios';
+import { ordenes } from '../../../data/ordenes';
 import '../../../styles/admin/usuarios/UsuarioHistorial.css';
 
 const compras = [
@@ -14,7 +15,7 @@ function UsuarioHistorial() {
 
   if (!u) return <p>Usuario no encontrado</p>;
 
-  const misCompras = compras.filter((c) => c.usuario_id === u.id);
+  const misCompras = ordenes.filter((o) => o.usuario_id === u.id);
 
   return (
     <div className="usuario-historial">
