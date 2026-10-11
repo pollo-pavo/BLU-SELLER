@@ -9,19 +9,19 @@ INSERT INTO usuarios (nombre, correo, contrasena, telefono, region, comuna, rol)
 INSERT INTO categorias (nombre) VALUES
 ('Películas'), ('Series'), ('Ediciones especiales'), ('Sagas');
 
-INSERT INTO productos (nombre, descripcion, precio, precio_oferta, stock, categoria_id, imagen) VALUES
-('Producto 1',  'Descripción del producto 1',  1000, NULL, 10, 1, NULL),
-('Producto 2',  'Descripción del producto 2',  1000, 800,  10, 1, NULL),
-('Producto 3',  'Descripción del producto 3',  1000, NULL, 10, 1, NULL),
-('Producto 4',  'Descripción del producto 4',  1000, NULL, 3,  2, NULL),
-('Producto 5',  'Descripción del producto 5',  1000, NULL, 10, 2, NULL),
-('Producto 6',  'Descripción del producto 6',  1000, NULL, 10, 2, NULL),
-('Producto 7',  'Descripción del producto 7',  1000, 800,  10, 3, NULL),
-('Producto 8',  'Descripción del producto 8',  1000, NULL, 10, 3, NULL),
-('Producto 9',  'Descripción del producto 9',  1000, NULL, 3,  3, NULL),
-('Producto 10', 'Descripción del producto 10', 1000, NULL, 10, 4, NULL),
-('Producto 11', 'Descripción del producto 11', 1000, NULL, 10, 4, NULL),
-('Producto 12', 'Descripción del producto 12', 1000, NULL, 10, 4, NULL);
+INSERT INTO productos (codigo, nombre, descripcion, precio, precio_oferta, stock, categoria_id, imagen) VALUES
+('P001', 'Producto 1',  'Descripción del producto 1',  1000, NULL, 10, 1, NULL),
+('P002', 'Producto 2',  'Descripción del producto 2',  1000, 800,  10, 1, NULL),
+('P003', 'Producto 3',  'Descripción del producto 3',  1000, NULL, 10, 1, NULL),
+('P004', 'Producto 4',  'Descripción del producto 4',  1000, NULL, 3,  2, NULL),
+('P005', 'Producto 5',  'Descripción del producto 5',  1000, NULL, 10, 2, NULL),
+('P006', 'Producto 6',  'Descripción del producto 6',  1000, NULL, 10, 2, NULL),
+('P007', 'Producto 7',  'Descripción del producto 7',  1000, 800,  10, 3, NULL),
+('P008', 'Producto 8',  'Descripción del producto 8',  1000, NULL, 10, 3, NULL),
+('P009', 'Producto 9',  'Descripción del producto 9',  1000, NULL, 3,  3, NULL),
+('P010', 'Producto 10', 'Descripción del producto 10', 1000, NULL, 10, 4, NULL),
+('P011', 'Producto 11', 'Descripción del producto 11', 1000, NULL, 10, 4, NULL),
+('P012', 'Producto 12', 'Descripción del producto 12', 1000, NULL, 10, 4, NULL);
 
 INSERT INTO blogs (titulo, descripcion, contenido, imagen_portada, autor_id) VALUES
 ('hola', 'que pasa??!!!', 'que pasa??!!!', NULL, 1),

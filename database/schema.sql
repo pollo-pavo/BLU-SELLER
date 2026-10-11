@@ -25,6 +25,7 @@ CREATE TABLE categorias (
 
 CREATE TABLE productos (
   id             SERIAL PRIMARY KEY,
+  codigo         VARCHAR(20) NOT NULL UNIQUE,
   nombre         VARCHAR(250) NOT NULL,
   descripcion    TEXT,
   precio         NUMERIC(10, 2) NOT NULL CHECK (precio >= 0),
