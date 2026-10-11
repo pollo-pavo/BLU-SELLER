@@ -1,5 +1,6 @@
 import '../../../styles/admin/productos/ProductoNuevo.css';
 
+
 function ProductoNuevo() {
   return (
     <div className="producto-nuevo">

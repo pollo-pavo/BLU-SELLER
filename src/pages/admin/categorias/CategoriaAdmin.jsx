@@ -1,5 +1,33 @@
+import { Link } from 'react-router-dom';
+import { categorias } from '../../../data/categorias';
+import '../../../styles/admin/categorias/CategoriaAdmin.css';
+
 function CategoriaAdmin() {
-  return <h1>Categoria</h1>;
+  return (
+    <div className="categoria-admin">
+      <div className="categoria-admin-encabezado">
+        <h1>Categorías</h1>
+        <Link to="/admin/categorias/nueva" className="categoria-admin-boton">NUEVA CATEGORÍA</Link>
+      </div>
+
+      <table className="categoria-admin-tabla">
+        <thead>
+          <tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr>
+        </thead>
+        <tbody>
+          {categorias.map((c) => (
+            <tr key={c.id}>
+              <td>{c.id}</td>
+              <td>{c.nombre}</td>
+              <td>
+                <Link to={`/admin/categorias/${c.id}/editar`}>Editar</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 export default CategoriaAdmin;

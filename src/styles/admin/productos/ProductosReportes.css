@@ -1,4 +1,3 @@
-/* src/styles/admin/ProductosReportes.css */
 .productos-reportes-tarjetas { display: flex; flex-wrap: wrap; gap: 16px; }
 .productos-reportes-tarjetas .tarjeta { background: #fff; border: 1px solid #ccc; padding: 16px 24px; min-width: 180px; display: flex; flex-direction: column; gap: 6px; }
 .productos-reportes-tarjetas strong { font-size: 24px; }

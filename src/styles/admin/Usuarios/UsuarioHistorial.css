@@ -1,0 +1,4 @@
+.usuario-historial-tabla { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; margin-bottom: 16px; }
+.usuario-historial-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
+.usuario-historial-tabla td { padding: 6px 10px; }
+.usuario-historial-tabla tbody tr:nth-child(even) { background: #eee; }
