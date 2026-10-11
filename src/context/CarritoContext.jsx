@@ -22,7 +22,7 @@ export function CarritoProvider({ children }) {
       }
       return [
         ...actuales,
-        { id: producto.id, nombre: producto.nombre, precio: Number(producto.precio), cantidad },
+                { id: producto.id, nombre: producto.nombre, precio: Number(producto.precio_oferta ?? producto.precio), cantidad },
       ];
     });
   };
