@@ -29,13 +29,20 @@ export function CarritoProvider({ children }) {
 
   const quitar = (id) => setItems((actuales) => actuales.filter((i) => i.id !== id));
 
+  const cambiarCantidad = (id, cantidad) => {
+    if (cantidad < 1) return;
+    setItems((actuales) =>
+      actuales.map((i) => (i.id === id ? { ...i, cantidad } : i))
+    );
+  };
+
   const vaciar = () => setItems([]);
 
   const cantidadTotal = items.reduce((total, i) => total + i.cantidad, 0);
   const totalPrecio = items.reduce((total, i) => total + i.precio * i.cantidad, 0);
 
   return (
-    <CarritoContext.Provider value={{ items, agregar, quitar, vaciar, cantidadTotal, totalPrecio }}>
+    <CarritoContext.Provider value={{ items, agregar, quitar, cambiarCantidad, vaciar, cantidadTotal, totalPrecio }}>
       {children}
     </CarritoContext.Provider>
   );

@@ -44,6 +44,7 @@ import UsuarioHistorial from "./pages/admin/usuarios/UsuarioHistorial";
 import Categorias from "./pages/Categorias";
 import CategoriaDetalle from "./pages/CategoriaDetalle";
 import Ofertas from "./pages/Ofertas";
+import Carrito from "./pages/Carrito";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/InicioSesion" element={<InicioSesion />} />
               <Route path="/registro" element={<Registro />} />
+              <Route path="/carrito" element={<Carrito />} />
             </Route>
 
             <Route element={<RutaAdmin />}>

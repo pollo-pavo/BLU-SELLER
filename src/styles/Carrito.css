@@ -1,0 +1,52 @@
+.carrito-contenido {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  text-align: left;
+}
+
+.carrito-productos .productos-grid {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.carrito-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  font-size: 0.85rem;
+}
+
+.carrito-tabla th {
+  background-color: #ddd;
+  text-align: left;
+  padding: 6px 8px;
+  border: 1px solid #999;
+}
+
+.carrito-tabla td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.carrito-miniatura {
+  width: 40px;
+  height: 30px;
+  background-color: #fff;
+  border: 1px solid #999;
+}
+
+.carrito-total {
+  text-align: right;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.carrito-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+@media (max-width: 992px) {
+  .carrito-contenido { grid-template-columns: 1fr; }
+}
