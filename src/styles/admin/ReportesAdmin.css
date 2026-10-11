@@ -1,0 +1,11 @@
+.reportes-admin-tarjetas { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+.reportes-admin-tarjetas .tarjeta { background: #fff; border: 1px solid #ccc; padding: 16px 24px; min-width: 180px; display: flex; flex-direction: column; gap: 6px; }
+.reportes-admin-tarjetas strong { font-size: 24px; }
+
+.reportes-admin-bloques { display: flex; flex-wrap: wrap; gap: 24px; }
+.reportes-admin-bloque { background: #fff; border: 1px solid #ccc; padding: 16px; flex: 1; min-width: 280px; }
+.reportes-admin-bloque h2 { font-size: 16px; margin-top: 0; }
+
+.reportes-admin-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
+.reportes-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
+.reportes-admin-tabla td { padding: 6px 10px; border-bottom: 1px solid #eee; text-transform: capitalize; }
