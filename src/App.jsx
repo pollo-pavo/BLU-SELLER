@@ -41,6 +41,9 @@ import UsuarioNuevo from "./pages/admin/usuarios/UsuarioNuevo";
 import UsuarioDetalle from "./pages/admin/usuarios/UsuarioDetalle";
 import UsuarioEditar from "./pages/admin/usuarios/UsuarioEditar";
 import UsuarioHistorial from "./pages/admin/usuarios/UsuarioHistorial";
+import Categorias from "./pages/Categorias";
+import CategoriaDetalle from "./pages/CategoriaDetalle";
+import Ofertas from "./pages/Ofertas";
 
 
 function App() {
@@ -58,6 +61,9 @@ function App() {
               <Route path="/contacto" element={<Contacto />} />
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blogs/:id" element={<BlogDetalle />} />
+              <Route path="/categorias" element={<Categorias />} />
+              <Route path="/categorias/:id" element={<CategoriaDetalle />} />
+              <Route path="/ofertas" element={<Ofertas />} />
               <Route path="/nosotros" element={<Nosotros />} />
               <Route path="/InicioSesion" element={<InicioSesion />} />
               <Route path="/registro" element={<Registro />} />

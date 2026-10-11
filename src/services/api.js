@@ -31,3 +31,10 @@ export const obtenerProducto = (id) => leer(`/productos/${id}`);
 // Blogs
 export const obtenerBlogs = () => leer('/blogs');
 export const obtenerBlog = (id) => leer(`/blogs/${id}`);
+
+// Categorías
+export const obtenerCategorias = () => leer('/categorias');
+export const obtenerProductosPorCategoria = (id) => leer(`/productos?categoria=${id}`);
+
+// Ofertas
+export const obtenerOfertas = () => leer('/productos?oferta=true');

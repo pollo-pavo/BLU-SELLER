@@ -17,6 +17,14 @@ function BarraNavegacion() {
               Productos
             </Nav.Link>
 
+            <Nav.Link as={Link} to="/Categorias">
+              Categorías
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/Ofertas">
+              Ofertas
+            </Nav.Link>
+
             <Nav.Link as={Link} to="/Contacto">
               Contacto
             </Nav.Link>

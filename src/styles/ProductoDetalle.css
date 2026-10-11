@@ -97,6 +97,13 @@
   border: 1px solid #999;
 }
 
+.detalle-precio-antes {
+  color: #777;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-right: 6px;
+}
+
 @media (max-width: 768px) {
   .detalle-principal { grid-template-columns: 1fr; }
   .relacionados-grid { grid-template-columns: repeat(2, 1fr); }

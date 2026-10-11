@@ -58,7 +58,13 @@ function ProductoDetalle() {
 
       <div className="fondo-pagina">
         <div className="detalle-migas">
-          <Link to="/">Home</Link> &gt; <Link to="/productos">Productos</Link> &gt; {producto.nombre}
+          <Link to="/">Home</Link> &gt;{' '}
+          {producto.categoria && (
+            <>
+              <Link to={`/categorias/${producto.categoria_id}`}>{producto.categoria}</Link> &gt;{' '}
+            </>
+          )}
+          {producto.nombre}
         </div>
 
         <div className="detalle-principal">
@@ -74,7 +80,16 @@ function ProductoDetalle() {
           <div className="detalle-info">
             <div className="detalle-encabezado">
               <h2>{producto.nombre}</h2>
-              <span className="detalle-precio">${Number(producto.precio)}</span>
+              <span className="detalle-precio">
+                {producto.precio_oferta !== null ? (
+                  <>
+                    <s className="detalle-precio-antes">${Number(producto.precio)}</s>
+                    ${Number(producto.precio_oferta)}
+                  </>
+                ) : (
+                  <>${Number(producto.precio)}</>
+                )}
+              </span>
             </div>
 
             <p className="detalle-descripcion">{producto.descripcion}</p>
