@@ -209,6 +209,113 @@ app.get('/api/blogs/:id', async (req, res) => {
   }
 });
 
+app.post('/api/ordenes', async (req, res) => {
+  const { usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, items } = req.body;
+
+  if (!nombre || !apellidos || !correo || !calle || !region || !comuna) {
+    return res.status(400).json({ error: 'Faltan datos obligatorios del cliente o de la entrega' });
+  }
+  if (!Array.isArray(items) || items.length === 0) {
+    return res.status(400).json({ error: 'El carrito está vacío' });
+  }
+  const itemsValidos = items.every(
+    (i) => Number.isInteger(i.id) && Number.isInteger(i.cantidad) && i.cantidad > 0
+  );
+  if (!itemsValidos) {
+    return res.status(400).json({ error: 'Los productos del carrito son inválidos' });
+  }
+
+  const cliente = await pool.connect();
+  try {
+    await cliente.query('BEGIN');
+
+    let total = 0;
+    const lineas = [];
+
+    for (const item of items) {
+      const resultado = await cliente.query(
+        'SELECT id, nombre, precio, precio_oferta, stock FROM productos WHERE id = $1 AND activo = TRUE FOR UPDATE',
+        [item.id]
+      );
+      const producto = resultado.rows[0];
+
+      if (!producto) {
+        await cliente.query('ROLLBACK');
+        return res.status(404).json({ error: `El producto ${item.id} ya no está disponible` });
+      }
+      if (producto.stock < item.cantidad) {
+        await cliente.query('ROLLBACK');
+        return res.status(409).json({ error: `Stock insuficiente para ${producto.nombre}` });
+      }
+
+      await cliente.query('UPDATE productos SET stock = stock - $1 WHERE id = $2', [item.cantidad, item.id]);
+
+      const precio = Number(producto.precio_oferta ?? producto.precio);
+      total += precio * item.cantidad;
+      lineas.push({ producto, precio, cantidad: item.cantidad });
+    }
+
+    total = Math.round(total * 100) / 100;
+
+    const orden = await cliente.query(
+      `INSERT INTO ordenes (usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, total)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+       RETURNING id, total, estado, fecha_creacion`,
+      [usuario_id || null, nombre, apellidos, correo, calle, departamento || null, region, comuna, indicaciones || null, total]
+    );
+    const ordenId = orden.rows[0].id;
+
+    for (const linea of lineas) {
+      await cliente.query(
+        `INSERT INTO orden_items (orden_id, producto_id, nombre, precio_unitario, cantidad)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [ordenId, linea.producto.id, linea.producto.nombre, linea.precio, linea.cantidad]
+      );
+    }
+
+    await cliente.query('COMMIT');
+    res.status(201).json(orden.rows[0]);
+  } catch (error) {
+    await cliente.query('ROLLBACK');
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo registrar la compra' });
+  } finally {
+    cliente.release();
+  }
+});
+
+app.get('/api/ordenes/:id', async (req, res) => {
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de orden inválido' });
+  }
+
+  try {
+    const orden = await pool.query(
+      `SELECT id, usuario_id, nombre, apellidos, correo, calle, departamento,
+              region, comuna, indicaciones, total, estado, fecha_creacion
+       FROM ordenes WHERE id = $1`,
+      [id]
+    );
+
+    if (orden.rows.length === 0) {
+      return res.status(404).json({ error: 'Orden no encontrada' });
+    }
+
+    const items = await pool.query(
+      `SELECT producto_id, nombre, precio_unitario, cantidad
+       FROM orden_items WHERE orden_id = $1 ORDER BY id`,
+      [id]
+    );
+
+    res.json({ ...orden.rows[0], items: items.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener la orden' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);
