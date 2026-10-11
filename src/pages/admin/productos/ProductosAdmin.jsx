@@ -1,9 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { productos } from '../../../data/productos';
+import { adminObtenerProductos } from '../../../services/api';
 import '../../../styles/admin/productos/ProductosAdmin.css';
 
-
 function ProductosAdmin() {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    adminObtenerProductos()
+      .then((datos) => setProductos(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className="productos-admin">
       <div className="productos-admin-encabezado">
@@ -25,8 +33,8 @@ function ProductosAdmin() {
             <tr key={p.id}>
               <td>{p.codigo}</td>
               <td>{p.nombre}</td>
-              <td>{p.categoria}</td>
-              <td>${p.precio.toLocaleString('es-CL')}</td>
+              <td>{p.categoria ?? '-'}</td>
+              <td>${Number(p.precio).toLocaleString('es-CL')}</td>
               <td>{p.stock}</td>
               <td>
                 <Link to={`/admin/productos/${p.id}`}>Ver</Link>{' '}

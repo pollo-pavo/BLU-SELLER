@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
-import { validarProducto, validarProducto } from './validaciones.js';
+import { validarProducto, validarUsuario } from './validaciones.js';
 
 const app = express();
 app.use(cors());

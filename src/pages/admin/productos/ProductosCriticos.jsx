@@ -1,9 +1,16 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { productos } from '../../../data/productos';
+import { adminObtenerCriticos } from '../../../services/api';
 import '../../../styles/admin/productos/ProductosCriticos.css';
 
 function ProductosCriticos() {
-  const criticos = productos.filter((p) => p.stock <= p.stockCritico);
+  const [criticos, setCriticos] = useState([]);
+
+  useEffect(() => {
+    adminObtenerCriticos()
+      .then((datos) => setCriticos(datos))
+      .catch((error) => console.error(error));
+  }, []);
 
   return (
     <div className="productos-criticos">
@@ -19,7 +26,7 @@ function ProductosCriticos() {
               <td>{p.codigo}</td>
               <td>{p.nombre}</td>
               <td className={p.stock === 0 ? 'agotado' : 'bajo'}>{p.stock}</td>
-              <td>{p.stockCritico}</td>
+              <td>{p.stock_critico}</td>
               <td><Link to={`/admin/productos/${p.id}/editar`}>Reponer</Link></td>
             </tr>
           ))}

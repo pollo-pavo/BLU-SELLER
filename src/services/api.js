@@ -39,3 +39,11 @@ export const obtenerProductosPorCategoria = (id) => leer(`/productos?categoria=$
 
 // Ofertas
 export const obtenerOfertas = () => leer('/productos?oferta=true');
+
+// Administración de productos
+export const adminObtenerProductos = () => leer('/admin/productos');
+export const adminObtenerProducto = (id) => leer(`/admin/productos/${id}`);
+export const adminObtenerCriticos = () => leer('/admin/productos/criticos');
+export const adminObtenerReporteProductos = () => leer('/admin/productos/reportes');
+export const adminCrearProducto = (datos) => crear('/admin/productos', datos);
+export const adminActualizarProducto = (id, datos) => actualizar(`/admin/productos/${id}`, datos);
