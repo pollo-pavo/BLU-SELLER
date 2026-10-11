@@ -1,21 +1,56 @@
 import { Container, Form, Button, Row, Col, Table } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import { regiones } from '../data/regiones';
+import { useCarrito } from '../context/CarritoContext';
+import { useAuth } from '../context/AuthContext';
+import { crearOrden } from '../services/api';
 import '../styles/Checkout.css';
 
-const items = [
-  { id: 1, nombre: 'ejemplo 1', precio: 2695, cantidad: 4 },
-  { id: 2, nombre: 'ejemplo 2', precio: 5999, cantidad: 1 },
-  { id: 3, nombre: 'ejemplo 3', precio: 499, cantidad: 1 },
-  { id: 4, nombre: 'ejemplo 4', precio: 3999, cantidad: 1 },
-];
-const total = items.reduce((suma, i) => suma + i.precio * i.cantidad, 0);
-
 function Checkout() {
+  const navigate = useNavigate();
+  const { items, totalPrecio: total, vaciar } = useCarrito();
+  const { usuario } = useAuth();
   const comunas = regiones.flatMap((r) => r.comunas);
+
+  const pagar = async (e) => {
+    e.preventDefault();
+    const c = e.target.elements;
+    const datos = {
+      usuario_id: usuario?.id,
+      nombre: c.nombre.value,
+      apellidos: c.apellidos.value,
+      correo: c.correo.value,
+      calle: c.calle.value,
+      departamento: c.departamento.value,
+      region: c.region.value,
+      comuna: c.comuna.value,
+      indicaciones: c.indicaciones.value,
+    };
+
+    try {
+      const orden = await crearOrden({
+        ...datos,
+        items: items.map((i) => ({ id: i.id, cantidad: i.cantidad })),
+      });
+      navigate(`/pago-correcto?orden=${orden.id}`);
+      vaciar();
+    } catch (err) {
+      navigate('/pago-error', { state: { mensaje: err.message, compra: { ...datos, items } } });
+    }
+  };
+
+  if (items.length === 0) {
+    return (
+      <Container className="checkout">
+        <p>Tu carrito está vacío.</p>
+        <Link to="/productos">Ver productos</Link>
+      </Container>
+    );
+  }
 
   return (
     <Container className="checkout">
-      <Form className="checkout-tarjeta" onSubmit={(e) => e.preventDefault()}>
+      <Form className="checkout-tarjeta" onSubmit={pagar}>
         <div className="checkout-encabezado">
           <div>
             <h1>Carrito de compra</h1>
@@ -50,13 +85,13 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="nombre">
               <Form.Label>Nombre<span className="checkout-req">*</span></Form.Label>
-              <Form.Control type="text" required maxLength={75} />
+              <Form.Control type="text" required maxLength={75} defaultValue={usuario?.nombre ?? ''} />
             </Form.Group>
           </Col>
           <Col md={6}>
             <Form.Group className="mb-3" controlId="apellidos">
               <Form.Label>Apellidos<span className="checkout-req">*</span></Form.Label>
-              <Form.Control type="text" required maxLength={75} />
+              <Form.Control type="text" required maxLength={75} defaultValue={usuario?.apellidos ?? ''} />
             </Form.Group>
           </Col>
         </Row>
@@ -65,7 +100,7 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="correo">
               <Form.Label>Correo<span className="checkout-req">*</span></Form.Label>
-              <Form.Control type="email" required maxLength={100} />
+              <Form.Control type="email" required maxLength={100} defaultValue={usuario?.correo ?? ''} />
             </Form.Group>
           </Col>
         </Row>
@@ -77,7 +112,7 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="calle">
               <Form.Label>Calle<span className="checkout-req">*</span></Form.Label>
-              <Form.Control type="text" required maxLength={300} />
+              <Form.Control type="text" required maxLength={300} defaultValue={usuario?.direccion ?? ''} />
             </Form.Group>
           </Col>
           <Col md={6}>
@@ -92,7 +127,7 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="region">
               <Form.Label>Región<span className="checkout-req">*</span></Form.Label>
-              <Form.Select defaultValue="" required>
+              <Form.Select defaultValue={usuario?.region ?? ''} required>
                 <option value="" disabled>-- Seleccione la región --</option>
                 {regiones.map((r) => (
                   <option key={r.nombre}>{r.nombre}</option>
@@ -103,7 +138,7 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="comuna">
               <Form.Label>Comuna<span className="checkout-req">*</span></Form.Label>
-              <Form.Select defaultValue="" required>
+              <Form.Select defaultValue={usuario?.comuna ?? ''} required>
                 <option value="" disabled>-- Seleccione la comuna --</option>
                 {comunas.map((c) => (
                   <option key={c}>{c}</option>

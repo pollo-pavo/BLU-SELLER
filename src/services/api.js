@@ -47,3 +47,7 @@ export const adminObtenerCriticos = () => leer('/admin/productos/criticos');
 export const adminObtenerReporteProductos = () => leer('/admin/productos/reportes');
 export const adminCrearProducto = (datos) => crear('/admin/productos', datos);
 export const adminActualizarProducto = (id, datos) => actualizar(`/admin/productos/${id}`, datos);
+
+// Órdenes
+export const crearOrden = (datos) => crear('/ordenes', datos);
+export const obtenerOrden = (id) => leer(`/ordenes/${id}`);

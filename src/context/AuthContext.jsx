@@ -22,7 +22,11 @@ export function AuthProvider({ children }) {
         const data = {
             id: datos.id,
             nombre: datos.nombre,
+            apellidos: datos.apellidos,
             correo: datos.correo,
+            direccion: datos.direccion,
+            region: datos.region,
+            comuna: datos.comuna,
             rol: datos.rol === 'administrador' ? 'admin' : datos.rol,
         };
         setUsuario(data);

@@ -137,7 +137,7 @@ app.post('/api/login', async (req, res) => {
 
   try {
     const resultado = await pool.query(
-      'SELECT id, nombre, correo, contrasena, rol FROM usuarios WHERE LOWER(correo) = LOWER($1)',
+      'SELECT id, nombre, apellidos, correo, contrasena, rol, direccion, region, comuna FROM usuarios WHERE LOWER(correo) = LOWER($1)',
       [correo]
     );
     const usuario = resultado.rows[0];
@@ -147,7 +147,16 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
 
-    res.json({ id: usuario.id, nombre: usuario.nombre, correo: usuario.correo, rol: usuario.rol });
+      res.json({
+      id: usuario.id,
+      nombre: usuario.nombre,
+      apellidos: usuario.apellidos,
+      correo: usuario.correo,
+      rol: usuario.rol,
+      direccion: usuario.direccion,
+      region: usuario.region,
+      comuna: usuario.comuna,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'No se pudo iniciar sesión' });
