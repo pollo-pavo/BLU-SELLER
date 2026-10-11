@@ -32,3 +32,10 @@ INSERT INTO mensajes_contacto (nombre, correo, contenido) VALUES
 
 UPDATE blogs SET contenido = 'desquiciado' WHERE id = 1;
 UPDATE blogs SET contenido = 'eloquente' WHERE id = 2;
+
+INSERT INTO ordenes (usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, total) VALUES
+(3, 'Cliente', 'Prueba', 'cliente@correo.com', 'Calle Falsa 123', '603', 'Región Metropolitana de Santiago', 'Ñuñoa', 'Dejar con el conserje', 2600);
+
+INSERT INTO orden_items (orden_id, producto_id, nombre, precio_unitario, cantidad) VALUES
+(1, 1, 'Producto 1', 1000, 1),
+(1, 2, 'Producto 2', 800, 2);

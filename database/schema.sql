@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS mensajes_contacto CASCADE;
 DROP TABLE IF EXISTS productos CASCADE;
 DROP TABLE IF EXISTS usuarios CASCADE;
 DROP TABLE IF EXISTS categorias CASCADE;
+DROP TABLE IF EXISTS orden_items CASCADE;
+DROP TABLE IF EXISTS ordenes CASCADE;
 
 CREATE TABLE usuarios (
   id             SERIAL PRIMARY KEY,
@@ -63,4 +65,30 @@ CREATE TABLE mensajes_contacto (
   contenido   TEXT NOT NULL,
   fecha_envio TIMESTAMP NOT NULL DEFAULT NOW(),
   revisado    BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE ordenes (
+  id             SERIAL PRIMARY KEY,
+  usuario_id     INTEGER REFERENCES usuarios(id) ON DELETE SET NULL,
+  nombre         VARCHAR(100) NOT NULL,
+  apellidos      VARCHAR(100) NOT NULL,
+  correo         VARCHAR(100) NOT NULL,
+  calle          VARCHAR(200) NOT NULL,
+  departamento   VARCHAR(50),
+  region         VARCHAR(300) NOT NULL,
+  comuna         VARCHAR(300) NOT NULL,
+  indicaciones   VARCHAR(500),
+  total          NUMERIC(10, 2) NOT NULL CHECK (total >= 0),
+  estado         VARCHAR(20) NOT NULL DEFAULT 'pagada'
+                 CHECK (estado IN ('pagada', 'enviada', 'entregada', 'cancelada')),
+  fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE orden_items (
+  id              SERIAL PRIMARY KEY,
+  orden_id        INTEGER NOT NULL REFERENCES ordenes(id) ON DELETE CASCADE,
+  producto_id     INTEGER REFERENCES productos(id) ON DELETE SET NULL,
+  nombre          VARCHAR(250) NOT NULL,
+  precio_unitario NUMERIC(10, 2) NOT NULL CHECK (precio_unitario >= 0),
+  cantidad        INTEGER NOT NULL CHECK (cantidad > 0)
 );
