@@ -17,10 +17,48 @@ app.get('/api/salud', async (req, res) => {
   }
 });
 
+app.get('/api/categorias', async (req, res) => {
+  try {
+    const resultado = await pool.query('SELECT id, nombre FROM categorias ORDER BY id');
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudieron obtener las categorías' });
+  }
+});
+
 app.get('/api/productos', async (req, res) => {
+  const { categoria, oferta, buscar } = req.query;
+  const condiciones = ['p.activo = TRUE'];
+  const valores = [];
+
+  if (categoria) {
+    if (!Number.isInteger(Number(categoria))) {
+      return res.status(400).json({ error: 'Categoría inválida' });
+    }
+    valores.push(Number(categoria));
+    condiciones.push(`p.categoria_id = $${valores.length}`);
+  }
+
+  if (oferta === 'true') {
+    condiciones.push('p.precio_oferta IS NOT NULL');
+  }
+
+  if (buscar) {
+    valores.push(`%${buscar}%`);
+    condiciones.push(`p.nombre ILIKE $${valores.length}`);
+  }
+
   try {
     const resultado = await pool.query(
-      'SELECT id, nombre, descripcion, precio, stock, imagen FROM productos WHERE activo = TRUE ORDER BY id'
+      `SELECT p.id, p.codigo, p.nombre, p.descripcion, p.precio, p.precio_oferta,
+              p.stock, p.stock_critico, p.imagen,
+              p.categoria_id, c.nombre AS categoria
+       FROM productos p
+       LEFT JOIN categorias c ON c.id = p.categoria_id
+       WHERE ${condiciones.join(' AND ')}
+       ORDER BY p.id`,
+      valores
     );
     res.json(resultado.rows);
   } catch (error) {
@@ -36,7 +74,12 @@ app.get('/api/productos/:id', async (req, res) => {
   }
   try {
     const resultado = await pool.query(
-      'SELECT id, nombre, descripcion, precio, stock, imagen FROM productos WHERE id = $1 AND activo = TRUE',
+      `SELECT p.id, p.codigo, p.nombre, p.descripcion, p.precio, p.precio_oferta,
+              p.stock, p.stock_critico, p.imagen,
+              p.categoria_id, c.nombre AS categoria
+       FROM productos p
+       LEFT JOIN categorias c ON c.id = p.categoria_id
+       WHERE p.id = $1 AND p.activo = TRUE`,
       [id]
     );
     if (resultado.rows.length === 0) {
