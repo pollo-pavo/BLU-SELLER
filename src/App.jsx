@@ -19,6 +19,10 @@ import Nosotros from "./pages/Nosotros";
 import InicioSesion from "./pages/InicioSesion";
 import Registro from "./pages/Registro"
 
+import Checkout from "./pages/Checkout";
+import PagoCorrecto from "./pages/PagoCorrecto";
+import PagoError from "./pages/PagoError";
+
 import PanelAdmin from "./pages/admin/PanelAdmin";
 import ReportesAdmin from "./pages/admin/ReportesAdmin";
 
@@ -69,6 +73,9 @@ function App() {
               <Route path="/InicioSesion" element={<InicioSesion />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/carrito" element={<Carrito />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/pago-correcto" element={<PagoCorrecto />} />
+              <Route path="/pago-error" element={<PagoError />} />
             </Route>
 
             <Route element={<RutaAdmin />}>
