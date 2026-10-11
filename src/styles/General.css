@@ -54,3 +54,12 @@
   text-align: center;
   margin-bottom: 24px;
 }
+
+.header-buscador {
+  display: flex;
+  gap: 6px;
+}
+
+.header-buscador input {
+  width: 220px;
+}

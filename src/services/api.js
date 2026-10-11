@@ -25,7 +25,8 @@ export const eliminar = (ruta) =>
   solicitar(ruta, { method: 'DELETE' });
 
 // Productos
-export const obtenerProductos = () => leer('/productos');
+export const obtenerProductos = (buscar = '') =>
+  leer(buscar ? `/productos?buscar=${encodeURIComponent(buscar)}` : '/productos');
 export const obtenerProducto = (id) => leer(`/productos/${id}`);
 
 // Blogs
