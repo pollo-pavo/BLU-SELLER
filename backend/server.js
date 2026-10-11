@@ -2,10 +2,15 @@ import express from 'express';
 import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
+import { validarProducto } from './validaciones.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+process.on('unhandledRejection', (error) => {
+  console.error('Error no controlado:', error);
+});
 
 app.get('/api/salud', async (req, res) => {
   try {
@@ -313,6 +318,156 @@ app.get('/api/ordenes/:id', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'No se pudo obtener la orden' });
+  }
+});
+
+// ---------- Administración de productos ----------
+const aNulo = (v) => (v === undefined || v === '' ? null : v);
+
+const COLUMNAS_ADMIN = `p.id, p.codigo, p.nombre, p.descripcion, p.precio, p.precio_oferta,
+  p.stock, p.stock_critico, p.imagen, p.activo, p.categoria_id, c.nombre AS categoria`;
+
+app.get('/api/admin/productos', async (req, res) => {
+  try {
+    const resultado = await pool.query(
+      `SELECT ${COLUMNAS_ADMIN}
+       FROM productos p
+       LEFT JOIN categorias c ON c.id = p.categoria_id
+       ORDER BY p.id`
+    );
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudieron obtener los productos' });
+  }
+});
+
+app.get('/api/admin/productos/criticos', async (req, res) => {
+  try {
+    const resultado = await pool.query(
+      `SELECT ${COLUMNAS_ADMIN}
+       FROM productos p
+       LEFT JOIN categorias c ON c.id = p.categoria_id
+       WHERE p.stock <= p.stock_critico
+       ORDER BY p.stock, p.id`
+    );
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudieron obtener los productos críticos' });
+  }
+});
+
+app.get('/api/admin/productos/reportes', async (req, res) => {
+  try {
+    const resultado = await pool.query(
+      `SELECT COUNT(*)::int AS total,
+              COALESCE(SUM(stock), 0)::int AS stock_total,
+              COALESCE(SUM(precio * stock), 0)::float AS valor_inventario,
+              COUNT(*) FILTER (WHERE stock <= stock_critico)::int AS criticos
+       FROM productos
+       WHERE activo = TRUE`
+    );
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo generar el reporte' });
+  }
+});
+
+app.get('/api/admin/productos/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de producto inválido' });
+  }
+
+  try {
+    const resultado = await pool.query(
+      `SELECT ${COLUMNAS_ADMIN}
+       FROM productos p
+       LEFT JOIN categorias c ON c.id = p.categoria_id
+       WHERE p.id = $1`,
+      [id]
+    );
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el producto' });
+  }
+});
+
+app.post('/api/admin/productos', async (req, res) => {
+  const mensaje = validarProducto(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+
+  const { codigo, nombre, descripcion, precio, precio_oferta, stock, stock_critico, categoria_id, imagen } = req.body;
+
+  try {
+    const resultado = await pool.query(
+      `INSERT INTO productos (codigo, nombre, descripcion, precio, precio_oferta, stock, stock_critico, categoria_id, imagen)
+       VALUES ($1, $2, $3, $4, $5, $6, COALESCE($7, 5), $8, $9)
+       RETURNING id`,
+      [
+        String(codigo).trim(), String(nombre).trim(), aNulo(descripcion), precio,
+        aNulo(precio_oferta), stock, aNulo(stock_critico), categoria_id, aNulo(imagen),
+      ]
+    );
+    res.status(201).json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ error: 'Ya existe un producto con ese código' });
+    }
+    if (error.code === '23503') {
+      return res.status(400).json({ error: 'La categoría no existe' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo crear el producto' });
+  }
+});
+
+app.put('/api/admin/productos/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de producto inválido' });
+  }
+
+  const mensaje = validarProducto(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+
+  const { codigo, nombre, descripcion, precio, precio_oferta, stock, stock_critico, categoria_id, imagen } = req.body;
+
+  try {
+    const resultado = await pool.query(
+      `UPDATE productos
+       SET codigo = $1, nombre = $2, descripcion = $3, precio = $4, precio_oferta = $5,
+           stock = $6, stock_critico = COALESCE($7, stock_critico), categoria_id = $8, imagen = $9
+       WHERE id = $10
+       RETURNING id`,
+      [
+        String(codigo).trim(), String(nombre).trim(), aNulo(descripcion), precio,
+        aNulo(precio_oferta), stock, aNulo(stock_critico), categoria_id, aNulo(imagen), id,
+      ]
+    );
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ error: 'Ya existe un producto con ese código' });
+    }
+    if (error.code === '23503') {
+      return res.status(400).json({ error: 'La categoría no existe' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo actualizar el producto' });
   }
 });
 
