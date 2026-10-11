@@ -21,11 +21,15 @@ function registro() {
     const respuesta = await fetch('/api/registro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+            body: JSON.stringify({
+        run: campos.run.value,
         nombre: campos.nombre.value,
+        apellidos: campos.apellidos.value,
         correo: campos.correo.value,
         contrasena: campos.contrasena.value,
+        fecha_nacimiento: campos.fechaNacimiento.value,
         telefono: campos.telefono.value,
+        direccion: campos.direccion.value,
         region: ubicacion.region,
         comuna: ubicacion.comuna,
       }),
@@ -50,9 +54,19 @@ function registro() {
           <h1>Registro de usuario</h1>
         
           <Form onSubmit={enviar}>
+            <Form.Group className="mb-3" controlId="run">
+              <Form.Label className='texto-izquierda'>RUN</Form.Label>
+              <Form.Control type="text" placeholder="Sin puntos ni guion, ej: 123456785" />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="nombre">
-              <Form.Label className='texto-izquierda'>Nombre Completo</Form.Label>
-              <Form.Control type="text" placeholder="Ingrese su nombre completo" />
+              <Form.Label className='texto-izquierda'>Nombre</Form.Label>
+              <Form.Control type="text" placeholder="Ingrese su nombre" />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="apellidos">
+              <Form.Label className='texto-izquierda'>Apellidos</Form.Label>
+              <Form.Control type="text" placeholder="Ingrese sus apellidos" />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="correo">
@@ -75,7 +89,17 @@ function registro() {
               <Form.Control type="tel" placeholder="Ingrese su numero de telefono" />
             </Form.Group>
 
+            <Form.Group className="mb-3" controlId="fechaNacimiento">
+              <Form.Label className='texto-izquierda'>Fecha de nacimiento (Opcional)</Form.Label>
+              <Form.Control type="date" />
+            </Form.Group>
+
             <SelectorUbicacion onCambio={setUbicacion} />
+
+            <Form.Group className="mb-3" controlId="direccion">
+              <Form.Label className='texto-izquierda'>Dirección</Form.Label>
+              <Form.Control type="text" placeholder="Ingrese su dirección" />
+            </Form.Group>
             
             <Button variant="primary" type="submit" className='mt-3'>
               Regístrate

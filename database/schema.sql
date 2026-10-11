@@ -8,16 +8,20 @@ DROP TABLE IF EXISTS orden_items CASCADE;
 DROP TABLE IF EXISTS ordenes CASCADE;
 
 CREATE TABLE usuarios (
-  id             SERIAL PRIMARY KEY,
-  nombre         VARCHAR(150) NOT NULL,
-  correo         VARCHAR(100) NOT NULL UNIQUE,
-  contrasena     VARCHAR(100) NOT NULL,          -- hash bcrypt, nunca texto plano
-  telefono       VARCHAR(20),
-  region         VARCHAR(300),
-  comuna         VARCHAR(300),
-  rol            VARCHAR(20) NOT NULL DEFAULT 'cliente'
-                 CHECK (rol IN ('cliente', 'vendedor', 'administrador')),
-  fecha_creacion TIMESTAMP NOT NULL DEFAULT NOW()
+  id               SERIAL PRIMARY KEY,
+  run              VARCHAR(9) NOT NULL UNIQUE,
+  nombre           VARCHAR(50) NOT NULL,
+  apellidos        VARCHAR(100) NOT NULL,
+  correo           VARCHAR(100) NOT NULL UNIQUE,
+  contrasena       VARCHAR(100) NOT NULL,          -- hash bcrypt, nunca texto plano
+  fecha_nacimiento DATE,
+  telefono         VARCHAR(20),
+  direccion        VARCHAR(300) NOT NULL,
+  region           VARCHAR(300),
+  comuna           VARCHAR(300),
+  rol              VARCHAR(20) NOT NULL DEFAULT 'cliente'
+                   CHECK (rol IN ('cliente', 'vendedor', 'administrador')),
+  fecha_creacion   TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE categorias (

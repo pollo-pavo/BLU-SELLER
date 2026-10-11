@@ -1,10 +1,9 @@
 -- seed.sql: datos de prueba. Ejecutar despues de schema.sql.
--- Contrasena de todos los usuarios de prueba: Test1234
 
-INSERT INTO usuarios (nombre, correo, contrasena, telefono, region, comuna, rol) VALUES
-('Administrador Prueba', 'admin@correo.com',    '$2b$10$HsrryMS5.dvlLRK8APVxVu2Z4jfZadTd.5F/F/fJ15q8ueeU.AfiG', '911111111', 'Región Metropolitana de Santiago', 'Santiago', 'administrador'),
-('Vendedor Prueba',      'vendedor@correo.com', '$2b$10$oBEjcZY6nbt89ttAYaX8aOUrfvEqM5vFXJ2DfzUOQwEmuWkrB77LW', '922222222', 'Región Metropolitana de Santiago', 'Providencia', 'vendedor'),
-('Cliente Prueba',       'cliente@correo.com',  '$2b$10$bp2sOfjSL/t594rNuivAquLFQlu.jNI3QYHfD9Oa4cK8rCwN9lDm.', '933333333', 'Región Metropolitana de Santiago', 'Ñuñoa', 'cliente');
+INSERT INTO usuarios (run, nombre, apellidos, correo, contrasena, fecha_nacimiento, telefono, direccion, region, comuna, rol) VALUES
+('111111111', 'Admin',    'Prueba', 'admin@duoc.cl',            '$2b$10$HsrryMS5.dvlLRK8APVxVu2Z4jfZadTd.5F/F/fJ15q8ueeU.AfiG', '1990-01-15', '911111111', 'Av. Libertador Bernardo O''Higgins 1000', 'Región Metropolitana de Santiago', 'Santiago',    'administrador'),
+('123456785', 'Vendedor', 'Prueba', 'vendedor@profesor.duoc.cl', '$2b$10$oBEjcZY6nbt89ttAYaX8aOUrfvEqM5vFXJ2DfzUOQwEmuWkrB77LW', NULL,         '922222222', 'Av. Providencia 1234',                   'Región Metropolitana de Santiago', 'Providencia', 'vendedor'),
+('222222222', 'Cliente',  'Prueba', 'cliente@gmail.com',         '$2b$10$bp2sOfjSL/t594rNuivAquLFQlu.jNI3QYHfD9Oa4cK8rCwN9lDm.', '2000-06-30', '933333333', 'Av. Irarrázaval 2000',                   'Región Metropolitana de Santiago', 'Ñuñoa',       'cliente');
 
 INSERT INTO categorias (nombre) VALUES
 ('Películas'), ('Series'), ('Ediciones especiales'), ('Sagas');
@@ -34,7 +33,7 @@ UPDATE blogs SET contenido = 'desquiciado' WHERE id = 1;
 UPDATE blogs SET contenido = 'eloquente' WHERE id = 2;
 
 INSERT INTO ordenes (usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, total) VALUES
-(3, 'Cliente', 'Prueba', 'cliente@correo.com', 'Calle Falsa 123', '603', 'Región Metropolitana de Santiago', 'Ñuñoa', 'Dejar con el conserje', 2600);
+(3, 'Cliente', 'Prueba', 'cliente@gmail.com', 'Calle Falsa 123', '603', 'Región Metropolitana de Santiago', 'Ñuñoa', 'Dejar con el conserje', 2600);
 
 INSERT INTO orden_items (orden_id, producto_id, nombre, precio_unitario, cantidad) VALUES
 (1, 1, 'Producto 1', 1000, 1),

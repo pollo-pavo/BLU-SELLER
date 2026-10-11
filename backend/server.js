@@ -2,11 +2,12 @@ import express from 'express';
 import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
-import { validarProducto } from './validaciones.js';
+import { validarProducto, validarProducto } from './validaciones.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+const aNulo = (v) => (v === undefined || v === '' ? null : v);
 
 process.on('unhandledRejection', (error) => {
   console.error('Error no controlado:', error);
@@ -98,24 +99,29 @@ app.get('/api/productos/:id', async (req, res) => {
 });
 
 app.post('/api/registro', async (req, res) => {
-  const { nombre, correo, contrasena, telefono, region, comuna } = req.body;
-
-  if (!nombre || !correo || !contrasena) {
-    return res.status(400).json({ error: 'Nombre, correo y contraseña son obligatorios' });
+  const mensaje = validarUsuario(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
   }
+
+  const { run, nombre, apellidos, correo, contrasena, fecha_nacimiento, telefono, direccion, region, comuna } = req.body;
 
   try {
     const hash = await bcrypt.hash(contrasena, 10);
     const resultado = await pool.query(
-      `INSERT INTO usuarios (nombre, correo, contrasena, telefono, region, comuna)
-       VALUES ($1, $2, $3, $4, $5, $6)
-       RETURNING id, nombre, correo, rol`,
-      [nombre, correo, hash, telefono, region, comuna]
+      `INSERT INTO usuarios (run, nombre, apellidos, correo, contrasena, fecha_nacimiento, telefono, direccion, region, comuna)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+       RETURNING id, nombre, apellidos, correo, rol`,
+      [
+        String(run).toUpperCase(), nombre.trim(), apellidos.trim(), correo.trim().toLowerCase(), hash,
+        aNulo(fecha_nacimiento), aNulo(telefono), direccion.trim(), region, comuna,
+      ]
     );
     res.status(201).json(resultado.rows[0]);
   } catch (error) {
     if (error.code === '23505') {
-      return res.status(409).json({ error: 'Ese correo ya está registrado' });
+      const campo = error.constraint === 'usuarios_run_key' ? 'RUN' : 'correo';
+      return res.status(409).json({ error: `Ese ${campo} ya está registrado` });
     }
     console.error(error);
     res.status(500).json({ error: 'No se pudo registrar el usuario' });
@@ -131,7 +137,7 @@ app.post('/api/login', async (req, res) => {
 
   try {
     const resultado = await pool.query(
-      'SELECT id, nombre, correo, contrasena, rol FROM usuarios WHERE correo = $1',
+      'SELECT id, nombre, correo, contrasena, rol FROM usuarios WHERE LOWER(correo) = LOWER($1)',
       [correo]
     );
     const usuario = resultado.rows[0];
@@ -322,7 +328,6 @@ app.get('/api/ordenes/:id', async (req, res) => {
 });
 
 // ---------- Administración de productos ----------
-const aNulo = (v) => (v === undefined || v === '' ? null : v);
 
 const COLUMNAS_ADMIN = `p.id, p.codigo, p.nombre, p.descripcion, p.precio, p.precio_oferta,
   p.stock, p.stock_critico, p.imagen, p.activo, p.categoria_id, c.nombre AS categoria`;
