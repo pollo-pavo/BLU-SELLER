@@ -101,3 +101,41 @@ export function validarCategoria(d) {
   }
   return null;
 }
+
+export function validarContacto(d) {
+  if (vacio(d.nombre) || String(d.nombre).trim() === '' || String(d.nombre).length > 100) {
+    return 'El nombre es obligatorio (máximo 100 caracteres)';
+  }
+  if (vacio(d.correo) || !correoPermitido(d.correo)) {
+    return 'El correo es obligatorio y debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com (máximo 100 caracteres)';
+  }
+  if (vacio(d.contenido) || String(d.contenido).trim() === '' || String(d.contenido).length > 500) {
+    return 'El comentario es obligatorio (máximo 500 caracteres)';
+  }
+  return null;
+}
+
+export function validarCompra(d) {
+  if (vacio(d.nombre) || String(d.nombre).trim() === '' || String(d.nombre).length > 100) {
+    return 'El nombre es obligatorio (máximo 100 caracteres)';
+  }
+  if (vacio(d.apellidos) || String(d.apellidos).trim() === '' || String(d.apellidos).length > 100) {
+    return 'Los apellidos son obligatorios (máximo 100 caracteres)';
+  }
+  if (vacio(d.correo) || !correoPermitido(d.correo)) {
+    return 'El correo es obligatorio y debe ser @duoc.cl, @profesor.duoc.cl o @gmail.com (máximo 100 caracteres)';
+  }
+  if (vacio(d.calle) || String(d.calle).trim() === '' || String(d.calle).length > 300) {
+    return 'La dirección es obligatoria (máximo 300 caracteres)';
+  }
+  if (!vacio(d.departamento) && String(d.departamento).length > 50) {
+    return 'El departamento admite un máximo de 50 caracteres';
+  }
+  if (vacio(d.region) || vacio(d.comuna)) {
+    return 'Debes seleccionar la región y la comuna';
+  }
+  if (!vacio(d.indicaciones) && String(d.indicaciones).length > 500) {
+    return 'Las indicaciones admiten un máximo de 500 caracteres';
+  }
+  return null;
+}

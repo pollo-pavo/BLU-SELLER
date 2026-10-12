@@ -77,7 +77,7 @@ CREATE TABLE ordenes (
   nombre         VARCHAR(100) NOT NULL,
   apellidos      VARCHAR(100) NOT NULL,
   correo         VARCHAR(100) NOT NULL,
-  calle          VARCHAR(200) NOT NULL,
+  calle          VARCHAR(300) NOT NULL,
   departamento   VARCHAR(50),
   region         VARCHAR(300) NOT NULL,
   comuna         VARCHAR(300) NOT NULL,

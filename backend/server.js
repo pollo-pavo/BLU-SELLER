@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
-import { validarProducto, validarUsuario, validarCategoria } from './validaciones.js';
+import { validarProducto, validarUsuario, validarCategoria, validarContacto, validarCompra } from './validaciones.js';
 
 const app = express();
 app.use(cors());
@@ -166,8 +166,9 @@ app.post('/api/login', async (req, res) => {
 app.post('/api/contacto', async (req, res) => {
   const { nombre, correo, contenido } = req.body;
 
-  if (!nombre || !correo || !contenido) {
-    return res.status(400).json({ error: 'Nombre, correo y mensaje son obligatorios' });
+  const errorValidacion = validarContacto(req.body);
+  if (errorValidacion) {
+    return res.status(400).json({ error: errorValidacion });
   }
 
   try {
@@ -232,17 +233,9 @@ app.get('/api/blogs/:id', async (req, res) => {
 app.post('/api/ordenes', async (req, res) => {
   const { usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, items } = req.body;
 
-  if (!nombre || !apellidos || !correo || !calle || !region || !comuna) {
-    return res.status(400).json({ error: 'Faltan datos obligatorios del cliente o de la entrega' });
-  }
-  if (!Array.isArray(items) || items.length === 0) {
-    return res.status(400).json({ error: 'El carrito está vacío' });
-  }
-  const itemsValidos = items.every(
-    (i) => Number.isInteger(i.id) && Number.isInteger(i.cantidad) && i.cantidad > 0
-  );
-  if (!itemsValidos) {
-    return res.status(400).json({ error: 'Los productos del carrito son inválidos' });
+  const errorValidacion = validarCompra(req.body);
+  if (errorValidacion) {
+    return res.status(400).json({ error: errorValidacion });
   }
 
   const cliente = await pool.connect();
