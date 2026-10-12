@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.59% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>25/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">85.18% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>23/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,38 +112,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -154,38 +154,38 @@ import Button from 'react-bootstrap/Button';
 import { useCarrito } from '../../context/CarritoContext';
 import '../../styles/General.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function HeaderGeneral(<span class="cstat-no" title="statement not covered" >{</span></span> <span class="cstat-no" title="statement not covered" >c</span>arrito = true }) {</span>
-  const { cantidadTotal } = <span class="cstat-no" title="statement not covered" >useCarrito()</span>;
-  const [texto, setTexto] = <span class="cstat-no" title="statement not covered" >useState('');</span>
-  const navigate = <span class="cstat-no" title="statement not covered" >useNavigate()</span>;<span class="cstat-no" title="statement not covered" ></span>
+function HeaderGeneral({ carrito = true }) {
+  const { cantidadTotal } = useCarrito();
+  const [texto, setTexto] = useState('');
+  const navigate = useNavigate();
 &nbsp;
-  const buscar = <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(e) =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >    e.preventDefault();</span>
-    const termino = <span class="cstat-no" title="statement not covered" >texto.trim();</span>
-<span class="cstat-no" title="statement not covered" >    navigate(termino ? `/productos?buscar=${encodeURIComponent(termino)}` : '/productos');</span>
-  }<span class="cstat-no" title="statement not covered" >;<span class="cstat-no" title="statement not covered" ></span></span>
+  const buscar = (e) =&gt; {
+    e.preventDefault();
+    const termino = texto.trim();
+    navigate(termino ? `/productos?buscar=${encodeURIComponent(termino)}` : '/productos');
+  };
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;div className="header-general"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;div className="header-marca"&gt;</span>
+    &lt;div className="header-general"&gt;
+      &lt;div className="header-marca"&gt;
         &lt;img src="/imagenes/logo.png" alt="Logo" className="logo" /&gt;
         &lt;h1&gt;BLU-SELLER&lt;/h1&gt;
-      &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+      &lt;/div&gt;<span class="branch-2 cbranch-no" title="branch not covered" ></span>
 &nbsp;
-      {<span class="cstat-no" title="statement not covered" >carrito &amp;&amp; (</span>
+      {carrito &amp;&amp; (
         &lt;Form className="header-buscador" onSubmit={buscar}&gt;
           &lt;Form.Control
             type="search"
             placeholder="Buscar"
             value={texto}
-            onChange={<span class="fstat-no" title="function not covered" >(e) =&gt; <span class="cstat-no" title="statement not covered" >s</span>etTexto(e.target.value)}</span>
+            onChange={(e) =&gt; setTexto(e.target.value)}
           /&gt;
           &lt;Button type="submit" variant="outline-secondary" size="sm"&gt;Buscar&lt;/Button&gt;
         &lt;/Form&gt;
-      )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
+      )<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span>
 &nbsp;
-      {<span class="cstat-no" title="statement not covered" >carrito &amp;&amp; &lt;Link to="</span>/carrito" className="header-carrito"&gt;Carrito ({cantidadTotal})&lt;/Link&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
-    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+      {carrito &amp;&amp; &lt;Link to="/carrito" className="header-carrito"&gt;Carrito ({cantidadTotal})&lt;/Link&gt;<span class="branch-1 cbranch-no" title="branch not covered" >}</span>
+    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -196,7 +196,7 @@ export default HeaderGeneral;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T07:41:54.073Z
+                at 2026-10-12T15:51:10.415Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

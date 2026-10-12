@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">78.26% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/23</span>
+                <span class='fraction'>18/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">48% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/25</span>
+                <span class='fraction'>12/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,26 +96,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -124,26 +124,26 @@ import Button from 'react-bootstrap/Button';
 import { useCarrito } from '../../context/CarritoContext';
 import '../../styles/Productos.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function TarjetaProducto(<span class="cstat-no" title="statement not covered" >{</span></span> producto }) {</span>
-  const { agregar } = <span class="cstat-no" title="statement not covered" >useCarrito()</span>;
-  const enOferta = <span class="cstat-no" title="statement not covered" >producto.precio_oferta !== null &amp;&amp; producto.precio_oferta !== undefined;</span>
+function TarjetaProducto({ producto }) {
+  const { agregar } = useCarrito();
+  const enOferta = producto.precio_oferta !== null &amp;&amp; producto.precio_oferta !== undefined;
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;div className="producto-card"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;Link to={<span class="cstat-no" title="statement not covered" >`/productos/${producto.id}`<span class="cstat-no" title="statement not covered" >}</span> className="producto-imagen"&gt;&lt;/Link&gt;<span class="cstat-no" title="statement not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >      &lt;Link to={<span class="cstat-no" title="statement not covered" >`</span>/productos/${producto.id}`<span class="cstat-no" title="statement not covered" >}</span> className="producto-nombre"&gt;{producto.nombre}&lt;/Link&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+    &lt;div className="producto-card"&gt;
+      &lt;Link to={`/productos/${producto.id}`} className="producto-imagen"&gt;&lt;/Link&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+      &lt;Link to={`/productos/${producto.id}`<span class="branch-1 cbranch-no" title="branch not covered" >} className="</span>producto-nombre"&gt;{producto.nombre}&lt;/Link&gt;<span class="cstat-no" title="statement not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span></span></span>
 &nbsp;
-      {<span class="cstat-no" title="statement not covered" >enOferta ? (</span>
+      {enOferta ? (
         &lt;span className="producto-precio"&gt;
           &lt;s className="producto-precio-antes"&gt;${Number(producto.precio)}&lt;/s&gt;
           ${Number(producto.precio_oferta)}
         &lt;/span&gt;
       ) : (
-        &lt;span className="producto-precio"&gt;${Number(producto.precio)}&lt;/span&gt;
-      )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
+<span class="branch-1 cbranch-no" title="branch not covered" >        &lt;span className="producto-precio"&gt;${Number(producto.precio)}&lt;/span&gt;</span>
+      )<span class="cstat-no" title="statement not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      &lt;Button size="</span>sm" variant="light" onClick={<span class="fstat-no" title="function not covered" >() =&gt; <span class="cstat-no" title="statement not covered" >a</span>gregar(producto)}&gt;A</span>ñadir&lt;/Button&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
-    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+      &lt;Button size="sm" variant="light" onClick={() =&gt; agregar(producto)}&gt;Añadir&lt;/Button&gt;<span class="cstat-no" title="statement not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span></span></span></span>
+    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -154,7 +154,7 @@ export default TarjetaProducto;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T07:41:54.073Z
+                at 2026-10-12T15:51:10.415Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
