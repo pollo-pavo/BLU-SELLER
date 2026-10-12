@@ -78,3 +78,8 @@
     text-align: center; 
     margin-top: 8px; 
 }
+
+.home-fondo {
+  background-color: #001a35; 
+  min-height: 100vh;
+}

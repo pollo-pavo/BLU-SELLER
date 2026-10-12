@@ -35,63 +35,65 @@ function Home() {
 
   return (
     <>
-      <HeaderGeneral />
+      <div className='home-fondo'>
+        <HeaderGeneral />
 
-      <Carousel className="home-carrusel">
-        {slides.map((s) => (
-          <Carousel.Item key={s.id}>
-            <div className="home-slide">1200 x 300</div>
-            <Carousel.Caption>
-              <h3>{s.titulo}</h3>
-              <p>{s.texto}</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-
-      <Container className="home-categorias">
-        <h2>Categorías</h2>
-        <Row>
-          {categorias.map((c) => (
-            <Col md={4} key={c.id} className="mb-4">
-              <Card as={Link} to={`/categorias/${c.id}`} className="home-tarjeta">
-                <div className="home-tarjeta-imagen">400 x 200</div>
-                <Card.Body>
-                  <Card.Title>{c.nombre}</Card.Title>
-                </Card.Body>
-              </Card>
-            </Col>
+        <Carousel className="home-carrusel">
+          {slides.map((s) => (
+            <Carousel.Item key={s.id}>
+              <div className="home-slide">1200 x 300</div>
+              <Carousel.Caption>
+                <h3>{s.titulo}</h3>
+                <p>{s.texto}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
           ))}
-        </Row>
-      </Container>
+        </Carousel>
 
-      <Container className="home-productos">
-        <h2>Productos destacados</h2>
-        <Row>
-          {destacados.map((p) => (
-            <Col sm={6} lg={3} key={p.id} className="mb-4">
-              <Card className="home-producto">
-                <div className="home-producto-imagen">300 x 200</div>
-                <Card.Body>
-                  <Card.Title>{p.nombre}</Card.Title>
-                  <Card.Text className="home-producto-precio">
-                    ${Number(p.precio).toLocaleString('es-CL')}
-                  </Card.Text>
-                  <Link to={`/productos/${p.id}`} className="btn btn-primary btn-sm">
-                    Ver detalle
-                  </Link>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
+        <Container className="home-categorias">
+          <h2 className='titulo-pagina'>Categorías</h2>
+          <Row>
+            {categorias.map((c) => (
+              <Col md={4} key={c.id} className="mb-4">
+                <Card as={Link} to={`/categorias/${c.id}`} className="home-tarjeta">
+                  <div className="home-tarjeta-imagen">400 x 200</div>
+                  <Card.Body>
+                    <Card.Title>{c.nombre}</Card.Title>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+        </Container>
 
-        <div className="home-productos-ver">
-          <Link to="/productos" className="btn btn-outline-dark">
-            Ver todos los productos
-          </Link>
-        </div>
-      </Container>
+        <Container className="home-productos">
+          <h2 className='titulo-pagina'>Productos destacados</h2>
+          <Row>
+            {destacados.map((p) => (
+              <Col sm={6} lg={3} key={p.id} className="mb-4">
+                <Card className="home-producto">
+                  <div className="home-producto-imagen">300 x 200</div>
+                  <Card.Body>
+                    <Card.Title>{p.nombre}</Card.Title>
+                    <Card.Text className="home-producto-precio">
+                      ${Number(p.precio).toLocaleString('es-CL')}
+                    </Card.Text>
+                    <Link to={`/productos/${p.id}`} className="btn btn-primary btn-sm">
+                      Ver detalle
+                    </Link>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))}
+          </Row>
+
+          <div className="home-productos-ver">
+            <Link to="/productos" className="btn btn-outline-light">
+              Ver todos los productos
+            </Link>
+          </div>
+        </Container>
+      </div>
     </>
   );
 }

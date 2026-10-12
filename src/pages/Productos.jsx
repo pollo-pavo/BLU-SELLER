@@ -19,22 +19,24 @@ function Productos() {
 
   return (
     <>
-      <HeaderGeneral />
+    <div className='producto-fondo'>
+        <HeaderGeneral />
 
-      <div className="fondo-pagina">
-        <h2 className="titulo-pagina">
-          {buscar ? `RESULTADOS PARA "${buscar}"` : 'PRODUCTOS'}
-        </h2>
+        <div className="fondo-pagina">
+          <h2 className="titulo-pagina">
+            {buscar ? `RESULTADOS PARA "${buscar}"` : 'PRODUCTOS'}
+          </h2>
 
-        {productos.length === 0 ? (
-          <p>No se encontraron productos.</p>
-        ) : (
-          <div className="productos-grid">
-            {productos.map((p) => (
-              <TarjetaProducto key={p.id} producto={p} />
-            ))}
-          </div>
-        )}
+          {productos.length === 0 ? (
+            <p className='texto-pagina'>No se encontraron productos.</p>
+          ) : (
+            <div className="productos-grid">
+              {productos.map((p) => (
+                <TarjetaProducto key={p.id} producto={p} />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </>
   );
