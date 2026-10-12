@@ -777,7 +777,4 @@ app.get('/api/admin/reportes', async (req, res) => {
   }
 });
 
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Servidor en http://localhost:${PORT}`);
-});
+export default app;
