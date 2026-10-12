@@ -63,3 +63,6 @@ export const adminObtenerUsuario = (id) => leer(`/admin/usuarios/${id}`);
 export const adminObtenerHistorial = (id) => leer(`/admin/usuarios/${id}/historial`);
 export const adminCrearUsuario = (datos) => crear('/admin/usuarios', datos);
 export const adminActualizarUsuario = (id, datos) => actualizar(`/admin/usuarios/${id}`, datos);
+
+// Administración de órdenes
+export const adminObtenerOrdenes = () => leer('/admin/ordenes');

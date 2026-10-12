@@ -696,6 +696,21 @@ app.put('/api/admin/usuarios/:id', async (req, res) => {
   }
 });
 
+// ---------- Administración de órdenes ----------
+app.get('/api/admin/ordenes', async (req, res) => {
+  try {
+    const resultado = await pool.query(
+      `SELECT id, fecha_creacion, nombre || ' ' || apellidos AS cliente, correo, estado, total
+       FROM ordenes
+       ORDER BY id DESC`
+    );
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudieron obtener las órdenes' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);

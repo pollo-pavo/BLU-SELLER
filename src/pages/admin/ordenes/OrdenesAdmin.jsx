@@ -1,8 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ordenes } from '../../../data/ordenes';
+import { adminObtenerOrdenes } from '../../../services/api';
 import '../../../styles/admin/ordenes/OrdenesAdmin.css';
 
 function OrdenesAdmin() {
+  const [ordenes, setOrdenes] = useState([]);
+
+  useEffect(() => {
+    adminObtenerOrdenes()
+      .then((datos) => setOrdenes(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className="ordenes-admin">
       <div className="ordenes-admin-encabezado">
@@ -23,11 +32,11 @@ function OrdenesAdmin() {
         <tbody>
           {ordenes.map((o) => (
             <tr key={o.id}>
-              <td>{o.fecha_creacion}</td>
+              <td>{new Date(o.fecha_creacion).toLocaleDateString('es-CL')}</td>
               <td>#{o.id}</td>
-              <td>{o.nombre_cliente}</td>
+              <td>{o.cliente}</td>
               <td><span className={`estado estado-${o.estado}`}>{o.estado}</span></td>
-              <td>${o.total.toLocaleString('es-CL')}</td>
+              <td>${Number(o.total).toLocaleString('es-CL')}</td>
               <td><Link to={`/admin/ordenes/${o.id}`}>Ver boleta</Link></td>
             </tr>
           ))}
