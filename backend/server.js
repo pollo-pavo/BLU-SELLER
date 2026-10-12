@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
-import { validarProducto, validarUsuario } from './validaciones.js';
+import { validarProducto, validarUsuario, validarCategoria } from './validaciones.js';
 
 const app = express();
 app.use(cors());
@@ -485,7 +485,100 @@ app.put('/api/admin/productos/:id', async (req, res) => {
   }
 });
 
+// ---------- Administración de categorías ----------
+app.get('/api/admin/categorias/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de categoría inválido' });
+  }
+
+  try {
+    const resultado = await pool.query('SELECT id, nombre FROM categorias WHERE id = $1', [id]);
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Categoría no encontrada' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener la categoría' });
+  }
+});
+
+app.post('/api/admin/categorias', async (req, res) => {
+  const mensaje = validarCategoria(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+  const nombre = String(req.body.nombre).trim();
+
+  try {
+    const existente = await pool.query(
+      'SELECT 1 FROM categorias WHERE LOWER(nombre) = LOWER($1)',
+      [nombre]
+    );
+    if (existente.rows.length > 0) {
+      return res.status(409).json({ error: 'Ya existe una categoría con ese nombre' });
+    }
+
+    const resultado = await pool.query(
+      'INSERT INTO categorias (nombre) VALUES ($1) RETURNING id, nombre',
+      [nombre]
+    );
+    res.status(201).json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ error: 'Ya existe una categoría con ese nombre' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo crear la categoría' });
+  }
+});
+
+app.put('/api/admin/categorias/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de categoría inválido' });
+  }
+
+  const mensaje = validarCategoria(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+  const nombre = String(req.body.nombre).trim();
+
+  try {
+    const existente = await pool.query(
+      'SELECT 1 FROM categorias WHERE LOWER(nombre) = LOWER($1) AND id <> $2',
+      [nombre, id]
+    );
+    if (existente.rows.length > 0) {
+      return res.status(409).json({ error: 'Ya existe una categoría con ese nombre' });
+    }
+
+    const resultado = await pool.query(
+      'UPDATE categorias SET nombre = $1 WHERE id = $2 RETURNING id, nombre',
+      [nombre, id]
+    );
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Categoría no encontrada' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ error: 'Ya existe una categoría con ese nombre' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo actualizar la categoría' });
+  }
+});
+
+// Administración de categorías
+export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);
+export const adminCrearCategoria = (datos) => crear('/admin/categorias', datos);
+export const adminActualizarCategoria = (id, datos) => actualizar(`/admin/categorias/${id}`, datos);
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);
 });
+

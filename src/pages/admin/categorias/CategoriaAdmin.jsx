@@ -1,8 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { categorias } from '../../../data/categorias';
+import { obtenerCategorias } from '../../../services/api';
 import '../../../styles/admin/categorias/CategoriaAdmin.css';
 
 function CategoriaAdmin() {
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    obtenerCategorias()
+      .then((datos) => setCategorias(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className="categoria-admin">
       <div className="categoria-admin-encabezado">

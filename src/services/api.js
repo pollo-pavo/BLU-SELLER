@@ -51,3 +51,8 @@ export const adminActualizarProducto = (id, datos) => actualizar(`/admin/product
 // Órdenes
 export const crearOrden = (datos) => crear('/ordenes', datos);
 export const obtenerOrden = (id) => leer(`/ordenes/${id}`);
+
+// Administración de categorías
+export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);
+export const adminCrearCategoria = (datos) => crear('/admin/categorias', datos);
+export const adminActualizarCategoria = (id, datos) => actualizar(`/admin/categorias/${id}`, datos);

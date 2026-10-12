@@ -93,3 +93,11 @@ export function validarUsuario(d, { contrasenaObligatoria = true } = {}) {
   }
   return null;
 }
+
+export function validarCategoria(d) {
+  const nombre = vacio(d.nombre) ? '' : String(d.nombre).trim();
+  if (nombre.length < 2 || nombre.length > 50) {
+    return 'El nombre es obligatorio (entre 2 y 50 caracteres)';
+  }
+  return null;
+}
