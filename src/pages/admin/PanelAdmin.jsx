@@ -1,22 +1,21 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ordenes } from '../../data/ordenes';
-import { productos } from '../../data/productos';
-import { usuarios } from '../../data/usuarios';
+import { adminObtenerDashboard } from '../../services/api';
 import '../../styles/admin/PanelAdmin.css';
 
 function PanelAdmin() {
+  const [datos, setDatos] = useState(null);
 
-  const ordenesValidas = ordenes.filter(
-    (o) => o.estado !== 'cancelada' && o.estado !== 'pago_fallido'
-  );
-  const totalVentas = ordenesValidas.reduce((suma, o) => suma + o.total, 0);
-  const pendientes = ordenes.filter((o) => o.estado === 'pendiente').length;
+  useEffect(() => {
+    adminObtenerDashboard()
+      .then((respuesta) => setDatos(respuesta))
+      .catch((error) => console.error(error));
+  }, []);
 
-  const criticos = productos.filter((p) => p.stock <= p.stock_critico);
+  if (!datos) return <p>Cargando...</p>;
 
-  const ultimas = [...ordenes]
-    .sort((a, b) => new Date(b.fecha_creacion) - new Date(a.fecha_creacion))
-    .slice(0, 5);
+  const criticos = datos.productos_criticos;
+  const ultimas = datos.ultimas_ordenes;
 
   return (
     <div className="panel-admin">
@@ -25,10 +24,10 @@ function PanelAdmin() {
       <section className="panel-admin-bloque">
         <h2>Resumen</h2>
         <div className="panel-admin-tarjetas">
-          <div className="tarjeta"><span>Ventas totales</span><strong>${totalVentas.toLocaleString('es-CL')}</strong></div>
-          <div className="tarjeta"><span>Órdenes</span><strong>{ordenes.length}</strong></div>
-          <div className="tarjeta"><span>Pendientes</span><strong>{pendientes}</strong></div>
-          <div className="tarjeta"><span>Usuarios</span><strong>{usuarios.length}</strong></div>
+          <div className="tarjeta"><span>Ventas totales</span><strong>${datos.ventas_totales.toLocaleString('es-CL')}</strong></div>
+          <div className="tarjeta"><span>Órdenes</span><strong>{datos.ordenes}</strong></div>
+          <div className="tarjeta"><span>Pendientes</span><strong>{datos.pendientes}</strong></div>
+          <div className="tarjeta"><span>Usuarios</span><strong>{datos.usuarios}</strong></div>
           <div className="tarjeta"><span>Productos críticos</span><strong>{criticos.length}</strong></div>
         </div>
       </section>
@@ -44,7 +43,7 @@ function PanelAdmin() {
               {ultimas.map((o) => (
                 <tr key={o.id}>
                   <td><Link to={`/admin/ordenes/${o.id}`}>#{o.id}</Link></td>
-                  <td>{o.nombre_cliente}</td>
+                  <td>{o.cliente}</td>
                   <td>{o.estado}</td>
                   <td>${o.total.toLocaleString('es-CL')}</td>
                 </tr>

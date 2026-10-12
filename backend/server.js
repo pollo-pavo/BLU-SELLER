@@ -711,8 +711,80 @@ app.get('/api/admin/ordenes', async (req, res) => {
   }
 });
 
+app.get('/api/admin/dashboard', async (req, res) => {
+  try {
+    const [resumen, criticos, ultimas] = await Promise.all([
+      pool.query(
+        `SELECT
+           COALESCE(SUM(total) FILTER (WHERE estado <> 'cancelada'), 0)::float AS ventas_totales,
+           COUNT(*)::int AS ordenes,
+           COUNT(*) FILTER (WHERE estado = 'pagada')::int AS pendientes,
+           (SELECT COUNT(*)::int FROM usuarios) AS usuarios
+         FROM ordenes`
+      ),
+      pool.query(
+        `SELECT id, nombre, stock, stock_critico
+         FROM productos
+         WHERE activo = TRUE AND stock <= stock_critico
+         ORDER BY stock, id`
+      ),
+      pool.query(
+        `SELECT id, nombre || ' ' || apellidos AS cliente, estado, total::float AS total
+         FROM ordenes
+         ORDER BY id DESC
+         LIMIT 5`
+      ),
+    ]);
+    res.json({
+      ...resumen.rows[0],
+      productos_criticos: criticos.rows,
+      ultimas_ordenes: ultimas.rows,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el dashboard' });
+  }
+});
+
+app.get('/api/admin/reportes', async (req, res) => {
+  try {
+    const [resumen, estados, masVendidos] = await Promise.all([
+      pool.query(
+        `SELECT
+           COALESCE(SUM(total) FILTER (WHERE estado <> 'cancelada'), 0)::float AS ventas_totales,
+           COUNT(*)::int AS ordenes,
+           COALESCE(ROUND(AVG(total) FILTER (WHERE estado <> 'cancelada')), 0)::float AS ticket_promedio,
+           (SELECT COUNT(*)::int FROM usuarios WHERE rol = 'cliente') AS clientes
+         FROM ordenes`
+      ),
+      pool.query(
+        `SELECT e.estado, COUNT(o.id)::int AS cantidad
+         FROM (VALUES ('pagada'), ('enviada'), ('entregada'), ('cancelada')) AS e(estado)
+         LEFT JOIN ordenes o ON o.estado = e.estado
+         GROUP BY e.estado`
+      ),
+      pool.query(
+        `SELECT oi.producto_id AS id, oi.nombre, SUM(oi.cantidad)::int AS unidades
+         FROM orden_items oi
+         JOIN ordenes o ON o.id = oi.orden_id
+         WHERE o.estado <> 'cancelada'
+         GROUP BY oi.producto_id, oi.nombre
+         ORDER BY unidades DESC, oi.nombre`
+      ),
+    ]);
+    const orden = ['pagada', 'enviada', 'entregada', 'cancelada'];
+    res.json({
+      ...resumen.rows[0],
+      por_estado: orden.map((e) => estados.rows.find((r) => r.estado === e)),
+      mas_vendidos: masVendidos.rows,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo generar el reporte' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);
 });
-

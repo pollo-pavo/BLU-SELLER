@@ -66,3 +66,7 @@ export const adminActualizarUsuario = (id, datos) => actualizar(`/admin/usuarios
 
 // Administración de órdenes
 export const adminObtenerOrdenes = () => leer('/admin/ordenes');
+
+// Dashboard y reportes (admin)
+export const adminObtenerDashboard = () => leer('/admin/dashboard');
+export const adminObtenerReportes = () => leer('/admin/reportes');
