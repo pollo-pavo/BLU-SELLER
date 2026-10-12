@@ -14,8 +14,12 @@ function UsuariosAdmin() {
 
   return (
     <div className="usuarios-admin">
+
+    <div className='usuarios-admin'>
+      <h1>Usuarios</h1>
+    </div>
+
       <div className="usuarios-admin-encabezado">
-        <h1>Usuarios</h1>
         <Link to="/admin/usuarios/nuevo" className="usuarios-admin-boton">NUEVO USUARIO</Link>
       </div>
 

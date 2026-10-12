@@ -1,6 +1,42 @@
-.usuarios-admin-encabezado { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
-.usuarios-admin-boton { background: #000; color: #fff; padding: 10px 24px; font-size: 12px; text-decoration: none; }
-.usuarios-admin-tabla { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
-.usuarios-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
-.usuarios-admin-tabla td { padding: 6px 10px; }
-.usuarios-admin-tabla tbody tr:nth-child(even) { background: #eee; }
+.usuarios-admin {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.usuarios-admin-encabezado { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+    margin-bottom: 16px; 
+}
+
+.usuarios-admin-boton { 
+    background: #000; 
+    color: #fff; 
+    padding: 10px 24px; 
+    font-size: 12px; 
+    text-decoration: none; 
+}
+
+.usuarios-admin-tabla { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: #fff; 
+    font-size: 13px; 
+}
+
+.usuarios-admin-tabla th { 
+    background: #ddd; 
+    text-align: left; 
+    padding: 6px 10px; 
+    border: 1px solid #999; 
+}
+
+.usuarios-admin-tabla td { 
+    padding: 6px 10px; 
+}
+
+.usuarios-admin-tabla tbody tr:nth-child(even) { 
+    background: #eee; 
+}

@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  background-color: #4a4949;
+  background-color: #001a35;
   padding-top: 5%;
   padding-bottom: 5%
 }
@@ -45,7 +45,7 @@
 }
 
 .fondo-pagina {
-  background-color: #f2f2f2;
+  background-color: #001a35;
   padding: 2% 5%;
   min-height: 100vh;
 }
@@ -53,6 +53,13 @@
 .titulo-pagina {
   text-align: center;
   margin-bottom: 24px;
+  color: #ffffff;
+}
+
+.texto-pagina {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #ffffff;
 }
 
 .header-buscador {
@@ -62,4 +69,13 @@
 
 .header-buscador input {
   width: 220px;
+}
+
+.header-general {
+  background-color: #1e3a5f;
+  color: white;
+}
+
+.header-carrito {
+  color: white;
 }

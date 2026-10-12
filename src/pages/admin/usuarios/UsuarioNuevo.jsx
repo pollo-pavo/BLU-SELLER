@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { regiones } from '../../../data/regiones';
+import { Link } from 'react-router-dom';
 import { adminCrearUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioNuevo.css';
 import { validarRun, PATRON_CORREO, TEXTO_CORREO } from '../../../utils/validaciones';
@@ -108,6 +109,7 @@ function UsuarioNuevo() {
         </div>
 
         <button type="submit">REGISTRAR</button>
+        <Link to="/admin/usuarios">Volver</Link>
       </form>
     </div>
   );

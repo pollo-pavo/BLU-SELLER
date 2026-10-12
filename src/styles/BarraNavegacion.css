@@ -1,0 +1,7 @@
+.navbar-personalizada {
+  background-color: #0b1f3a; 
+}
+
+.navbar-personalizada .nav-link {
+  color: white;
+}

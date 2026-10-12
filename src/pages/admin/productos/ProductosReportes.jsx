@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link} from 'react-router-dom';
 import { adminObtenerReporteProductos } from '../../../services/api';
 import '../../../styles/admin/productos/ProductosReportes.css';
 
@@ -23,6 +24,9 @@ function ProductosReportes() {
         <div className="tarjeta"><span>Valor del inventario</span><strong>${reporte.valor_inventario.toLocaleString('es-CL')}</strong></div>
         <div className="tarjeta"><span>En estado crítico</span><strong>{reporte.criticos}</strong></div>
       </div>
+
+      <Link to="/admin/productos">Volver</Link>
+
     </div>
   );
 }

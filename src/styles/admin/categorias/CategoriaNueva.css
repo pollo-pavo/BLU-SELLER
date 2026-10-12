@@ -1,5 +1,46 @@
-.categoria-form-caja { background: #eee; border: 1px solid #333; padding: 24px; max-width: 500px; display: flex; flex-direction: column; gap: 6px; }
-.categoria-form-encabezado { background: #ccc; padding: 6px 10px; font-size: 12px; font-weight: bold; margin-bottom: 8px; }
-.categoria-form-caja label { font-size: 11px; margin-top: 8px; }
-.categoria-form-caja input { padding: 6px; border: 1px solid #333; background: #fff; }
-.categoria-form-caja button { align-self: center; margin-top: 24px; padding: 8px 40px; background: #000; color: #fff; border: none; cursor: pointer; }
+.categoria-form-caja { 
+    background: #eee; 
+    border: 1px solid #333; 
+    padding: 24px; 
+    max-width: 500px; 
+    display: flex; 
+    flex-direction: column;
+    gap: 6px; 
+    margin: 0 auto 16px; 
+}
+
+.categoria-form-encabezado { 
+    background: #ccc; 
+    padding: 6px 10px; 
+    font-size: 12px; 
+    font-weight: bold; 
+    margin-bottom: 8px; 
+}
+
+.categoria-form-caja label { 
+    font-size: 11px; 
+    margin-top: 8px; 
+}
+
+.categoria-form-caja input { 
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+}
+
+.categoria-form-caja button { 
+    align-self: center; 
+    margin-top: 24px; 
+    padding: 8px 40px; 
+    background: #000; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.categoria-form-caja input { 
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}

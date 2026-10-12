@@ -14,7 +14,14 @@ function ProductosCriticos() {
 
   return (
     <div className="productos-criticos">
-      <h1>Productos críticos</h1>
+
+      <div className='productos-criticos-admin'>
+        <h1>Productos críticos</h1>
+      </div>
+
+      <div className="productos-admin-encabezado">
+        <Link to="/admin/productos/" className="productos-admin-boton">PRODUCTOS</Link>
+      </div>
 
       <table className="productos-criticos-tabla">
         <thead>
