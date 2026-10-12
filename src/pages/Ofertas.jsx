@@ -22,7 +22,7 @@ function Ofertas() {
         <h2 className="titulo-pagina">OFERTAS</h2>
 
         {productos.length === 0 ? (
-          <p>No hay productos en oferta por ahora.</p>
+          <p className='texto-pagina'>No hay productos en oferta por ahora.</p>
         ) : (
           <div className="productos-grid">
             {productos.map((p) => (

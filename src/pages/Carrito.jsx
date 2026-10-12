@@ -26,7 +26,7 @@ function Carrito() {
       <div className="fondo-pagina">
         <div className="carrito-contenido">
           <div className="carrito-productos">
-            <h4>Lista de productos</h4>
+            <h4 className='texto-pagina'>Lista de productos</h4>
             <div className="productos-grid">
               {productos.map((p) => (
                 <TarjetaProducto key={p.id} producto={p} />
@@ -35,10 +35,10 @@ function Carrito() {
           </div>
 
           <div className="carrito-compras">
-            <h4>Carrito de Compras</h4>
+            <h4 className='texto-pagina'>Carrito de Compras</h4>
 
             {items.length === 0 ? (
-              <p>El carrito está vacío.</p>
+              <p className='texto-pagina'>El carrito está vacío.</p>
             ) : (
               <>
                 <table className="carrito-tabla">

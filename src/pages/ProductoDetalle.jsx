@@ -79,7 +79,7 @@ function ProductoDetalle() {
 
           <div className="detalle-info">
             <div className="detalle-encabezado">
-              <h2>{producto.nombre}</h2>
+              <h2 className='texto-pagina'>{producto.nombre}</h2>
               <span className="detalle-precio">
                 {producto.precio_oferta !== null ? (
                   <>
@@ -95,7 +95,7 @@ function ProductoDetalle() {
             <p className="detalle-descripcion">{producto.descripcion}</p>
 
             <Form.Group controlId="cantidad" className="detalle-cantidad">
-              <Form.Label>Cantidad</Form.Label>
+              <Form.Label className='texto-pagina'>Cantidad</Form.Label>
               <Form.Select value={cantidad} onChange={(e) => setCantidad(Number(e.target.value))}>
                 <option>1</option>
                 <option>2</option>
@@ -110,7 +110,7 @@ function ProductoDetalle() {
         </div>
 
         <div className="detalle-relacionados">
-          <h5>Productos relacionados</h5>
+          <h5 className='texto-pagina'>Productos relacionados</h5>
           <div className="relacionados-grid">
             {relacionados.map((p) => (
               <Link to={`/productos/${p.id}`} className="relacionado-card" key={p.id}>

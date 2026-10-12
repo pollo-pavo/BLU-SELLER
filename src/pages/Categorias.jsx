@@ -38,7 +38,7 @@ function Categorias() {
 
         {categorias.map((c) => (
           <section className="categoria-seccion" key={c.id}>
-            <h3>{c.nombre}</h3>
+            <h3 className='texto-pagina'>{c.nombre}</h3>
             <div className="productos-grid">
               {productos
                 .filter((p) => p.categoria_id === c.id)
