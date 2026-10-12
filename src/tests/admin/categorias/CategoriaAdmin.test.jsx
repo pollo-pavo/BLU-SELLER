@@ -22,17 +22,14 @@ describe('CategoriaAdmin', () => {
       </MemoryRouter>
     );
 
-    // Encabezado y botón de nueva categoría
     expect(screen.getByRole('heading', { name: 'Categorías' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'NUEVA CATEGORÍA' })).toHaveAttribute(
       'href',
       '/admin/categorias/nueva'
     );
 
-    // Espera a que carguen los datos de la API
     await screen.findByText('Bebidas');
 
-    // Cada categoría aparece en su fila con su id y su enlace de edición
     categorias.forEach(({ id, nombre }) => {
       const fila = screen.getByText(nombre).closest('tr');
       expect(within(fila).getByText(String(id))).toBeInTheDocument();

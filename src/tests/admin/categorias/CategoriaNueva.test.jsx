@@ -24,16 +24,13 @@ describe('CategoriaNueva', () => {
       </MemoryRouter>
     );
 
-    // El formulario se muestra vacío
     expect(screen.getByRole('heading', { name: 'NUEVA CATEGORÍA' })).toBeInTheDocument();
     const input = screen.getByLabelText('NOMBRE');
     expect(input).toHaveValue('');
 
-    // El usuario escribe el nombre y envía el formulario
     await user.type(input, 'Lácteos');
     await user.click(screen.getByRole('button', { name: 'GUARDAR' }));
 
-    // Se envía el nombre, se avisa al usuario y se redirige al listado
     expect(adminCrearCategoria).toHaveBeenCalledWith({ nombre: 'Lácteos' });
     expect(alertSpy).toHaveBeenCalledWith('Categoría creada correctamente');
     expect(await screen.findByText('Listado de categorías')).toBeInTheDocument();

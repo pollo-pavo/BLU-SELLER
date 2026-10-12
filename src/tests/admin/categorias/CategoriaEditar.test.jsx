@@ -29,21 +29,17 @@ describe('CategoriaEditar', () => {
       </MemoryRouter>
     );
 
-    // Mientras carga se muestra el mensaje de espera
     expect(screen.getByText('Cargando...')).toBeInTheDocument();
 
-    // Al cargar, el formulario aparece con los datos de la categoría
     const input = await screen.findByLabelText('NOMBRE');
     expect(adminObtenerCategoria).toHaveBeenCalledWith('7');
     expect(screen.getByText('Editar categoría #7')).toBeInTheDocument();
     expect(input).toHaveValue('Bebidas');
 
-    // El usuario cambia el nombre y envía el formulario
     await user.clear(input);
     await user.type(input, 'Jugos');
     await user.click(screen.getByRole('button', { name: 'ACTUALIZAR' }));
 
-    // Se envía el nuevo nombre, se avisa al usuario y se redirige al listado
     expect(adminActualizarCategoria).toHaveBeenCalledWith('7', { nombre: 'Jugos' });
     expect(alertSpy).toHaveBeenCalledWith('Categoría actualizada correctamente');
     expect(await screen.findByText('Listado de categorías')).toBeInTheDocument();
