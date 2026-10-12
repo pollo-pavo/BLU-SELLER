@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { regiones } from '../../../data/regiones';
 import { adminObtenerUsuario, adminActualizarUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioEditar.css';
+import { validarRun, PATRON_CORREO, TEXTO_CORREO } from '../../../utils/validaciones';
 
 function UsuarioEditar() {
   const { id } = useParams();
@@ -21,6 +22,11 @@ function UsuarioEditar() {
   const guardar = async (e) => {
     e.preventDefault();
     const c = e.target.elements;
+
+    if (!validarRun(c.run.value)) {
+      window.alert('El RUN es inválido (sin puntos ni guion, con dígito verificador correcto)');
+      return;
+    }
 
     try {
       await adminActualizarUsuario(id, {
@@ -56,7 +62,7 @@ function UsuarioEditar() {
         <input id="run" type="text" defaultValue={u.run} required minLength={7} maxLength={9} />
 
         <label htmlFor="nombre">NOMBRE</label>
-        <input id="nombre" type="text" defaultValue={u.nombre} required maxLength={50} />
+        <input id="correo" type="email" defaultValue={u.correo} required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
 
         <label htmlFor="apellidos">APELLIDOS</label>
         <input id="apellidos" type="text" defaultValue={u.apellidos} required maxLength={100} />

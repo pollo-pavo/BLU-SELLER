@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { regiones } from '../../../data/regiones';
 import { adminCrearUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioNuevo.css';
+import { validarRun, PATRON_CORREO, TEXTO_CORREO } from '../../../utils/validaciones';
 
 function UsuarioNuevo() {
   const navigate = useNavigate();
@@ -10,6 +11,11 @@ function UsuarioNuevo() {
   const guardar = async (e) => {
     e.preventDefault();
     const c = e.target.elements;
+
+    if (!validarRun(c.run.value)) {
+      window.alert('El RUN es inválido (sin puntos ni guion, con dígito verificador correcto)');
+      return;
+    }
 
     if (c.correo.value !== c.correo2.value) {
       window.alert('Los correos no coinciden');
@@ -52,10 +58,10 @@ function UsuarioNuevo() {
         <input id="run" type="text" required minLength={7} maxLength={9} placeholder="Sin puntos ni guion, ej: 123456785" />
 
         <label htmlFor="nombre">NOMBRE</label>
-        <input id="nombre" type="text" required maxLength={50} />
+        <input id="correo" type="email" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
 
         <label htmlFor="apellidos">APELLIDOS</label>
-        <input id="apellidos" type="text" required maxLength={100} />
+        <input id="correo2" type="email" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
 
         <label htmlFor="correo">CORREO</label>
         <input id="correo" type="email" required maxLength={100} />

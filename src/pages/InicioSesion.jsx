@@ -52,7 +52,7 @@ function InicioSesion() {
                 onChange={(e) => setCorreo(e.target.value)}
                 required
                 minLength={4}
-                maxLength={10}
+                maxLength={100}
                 pattern={PATRON_CORREO}
                 title={TEXTO_CORREO}
               />
