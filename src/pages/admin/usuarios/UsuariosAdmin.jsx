@@ -1,8 +1,17 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { usuarios } from '../../../data/usuarios';
+import { adminObtenerUsuarios } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioAdmin.css';
 
 function UsuariosAdmin() {
+  const [usuarios, setUsuarios] = useState([]);
+
+  useEffect(() => {
+    adminObtenerUsuarios()
+      .then((datos) => setUsuarios(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   return (
     <div className="usuarios-admin">
       <div className="usuarios-admin-encabezado">
@@ -20,7 +29,7 @@ function UsuariosAdmin() {
           {usuarios.map((u) => (
             <tr key={u.id}>
               <td>{u.id}</td>
-              <td>{u.nombre}</td>
+              <td>{u.nombre} {u.apellidos}</td>
               <td>{u.correo}</td>
               <td>{u.rol}</td>
               <td>

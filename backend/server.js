@@ -577,6 +577,125 @@ export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);
 export const adminCrearCategoria = (datos) => crear('/admin/categorias', datos);
 export const adminActualizarCategoria = (id, datos) => actualizar(`/admin/categorias/${id}`, datos);
 
+// ---------- Administración de usuarios ----------
+const COLUMNAS_USUARIO = `id, run, nombre, apellidos, correo, telefono, direccion, region, comuna, rol,
+  to_char(fecha_nacimiento, 'YYYY-MM-DD') AS fecha_nacimiento, fecha_creacion`;
+
+app.get('/api/admin/usuarios', async (req, res) => {
+  try {
+    const resultado = await pool.query(`SELECT ${COLUMNAS_USUARIO} FROM usuarios ORDER BY id`);
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudieron obtener los usuarios' });
+  }
+});
+
+app.get('/api/admin/usuarios/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de usuario inválido' });
+  }
+
+  try {
+    const resultado = await pool.query(`SELECT ${COLUMNAS_USUARIO} FROM usuarios WHERE id = $1`, [id]);
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el usuario' });
+  }
+});
+
+app.get('/api/admin/usuarios/:id/historial', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de usuario inválido' });
+  }
+
+  try {
+    const resultado = await pool.query(
+      'SELECT id, fecha_creacion, estado, total FROM ordenes WHERE usuario_id = $1 ORDER BY id DESC',
+      [id]
+    );
+    res.json(resultado.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el historial de compras' });
+  }
+});
+
+app.post('/api/admin/usuarios', async (req, res) => {
+  const mensaje = validarUsuario(req.body);
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+
+  const { run, nombre, apellidos, correo, contrasena, fecha_nacimiento, telefono, direccion, region, comuna, rol } = req.body;
+
+  try {
+    const hash = await bcrypt.hash(contrasena, 10);
+    const resultado = await pool.query(
+      `INSERT INTO usuarios (run, nombre, apellidos, correo, contrasena, fecha_nacimiento, telefono, direccion, region, comuna, rol)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, COALESCE($11, 'cliente'))
+       RETURNING id`,
+      [
+        String(run).toUpperCase(), nombre.trim(), apellidos.trim(), correo.trim().toLowerCase(), hash,
+        aNulo(fecha_nacimiento), aNulo(telefono), direccion.trim(), region, comuna, aNulo(rol),
+      ]
+    );
+    res.status(201).json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      const campo = error.constraint === 'usuarios_run_key' ? 'RUN' : 'correo';
+      return res.status(409).json({ error: `Ese ${campo} ya está registrado` });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo crear el usuario' });
+  }
+});
+
+app.put('/api/admin/usuarios/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) {
+    return res.status(400).json({ error: 'Id de usuario inválido' });
+  }
+
+  const mensaje = validarUsuario(req.body, { contrasenaObligatoria: false });
+  if (mensaje) {
+    return res.status(400).json({ error: mensaje });
+  }
+
+  const { run, nombre, apellidos, correo, fecha_nacimiento, telefono, direccion, region, comuna, rol } = req.body;
+
+  try {
+    const resultado = await pool.query(
+      `UPDATE usuarios
+       SET run = $1, nombre = $2, apellidos = $3, correo = $4, fecha_nacimiento = $5,
+           telefono = $6, direccion = $7, region = $8, comuna = $9, rol = COALESCE($10, rol)
+       WHERE id = $11
+       RETURNING id`,
+      [
+        String(run).toUpperCase(), nombre.trim(), apellidos.trim(), correo.trim().toLowerCase(),
+        aNulo(fecha_nacimiento), aNulo(telefono), direccion.trim(), region, comuna, aNulo(rol), id,
+      ]
+    );
+    if (resultado.rows.length === 0) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+    res.json(resultado.rows[0]);
+  } catch (error) {
+    if (error.code === '23505') {
+      const campo = error.constraint === 'usuarios_run_key' ? 'RUN' : 'correo';
+      return res.status(409).json({ error: `Ese ${campo} ya está registrado` });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+  }
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Servidor en http://localhost:${PORT}`);

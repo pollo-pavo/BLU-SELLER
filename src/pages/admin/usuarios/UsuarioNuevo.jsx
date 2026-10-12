@@ -1,18 +1,61 @@
+import { useNavigate } from 'react-router-dom';
 import { regiones } from '../../../data/regiones';
+import { adminCrearUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioNuevo.css';
 
 function UsuarioNuevo() {
+  const navigate = useNavigate();
   const comunas = regiones.flatMap((r) => r.comunas);
+
+  const guardar = async (e) => {
+    e.preventDefault();
+    const c = e.target.elements;
+
+    if (c.correo.value !== c.correo2.value) {
+      window.alert('Los correos no coinciden');
+      return;
+    }
+    if (c.clave.value !== c.clave2.value) {
+      window.alert('Las contraseñas no coinciden');
+      return;
+    }
+
+    try {
+      await adminCrearUsuario({
+        run: c.run.value,
+        nombre: c.nombre.value,
+        apellidos: c.apellidos.value,
+        correo: c.correo.value,
+        contrasena: c.clave.value,
+        fecha_nacimiento: c.fechaNacimiento.value,
+        telefono: c.telefono.value,
+        direccion: c.direccion.value,
+        rol: c.rol.value,
+        region: c.region.value,
+        comuna: c.comuna.value,
+      });
+      window.alert('Usuario creado correctamente');
+      navigate('/admin/usuarios');
+    } catch (err) {
+      window.alert(err.message);
+    }
+  };
 
   return (
     <div className="usuario-nuevo">
       <h1>NUEVO USUARIO</h1>
 
-      <form className="usuario-form-caja" onSubmit={(e) => e.preventDefault()}>
+      <form className="usuario-form-caja" onSubmit={guardar}>
         <div className="usuario-form-encabezado">Registro de usuario</div>
 
-        <label htmlFor="nombre">NOMBRE COMPLETO</label>
-        <input id="nombre" type="text" required maxLength={150} />
+        <label htmlFor="run">RUN</label>
+        <input id="run" type="text" required minLength={7} maxLength={9} placeholder="Sin puntos ni guion, ej: 123456785" />
+
+        <label htmlFor="nombre">NOMBRE</label>
+        <input id="nombre" type="text" required maxLength={50} />
+
+        <label htmlFor="apellidos">APELLIDOS</label>
+        <input id="apellidos" type="text" required maxLength={100} />
 
         <label htmlFor="correo">CORREO</label>
         <input id="correo" type="email" required maxLength={100} />
@@ -21,15 +64,21 @@ function UsuarioNuevo() {
         <input id="correo2" type="email" required maxLength={100} />
 
         <label htmlFor="clave">CONTRASEÑA</label>
-        <input id="clave" type="password" required minLength={6} maxLength={100} />
+        <input id="clave" type="password" required minLength={4} maxLength={10} />
 
         <label htmlFor="clave2">CONFIRMAR CONTRASEÑA</label>
-        <input id="clave2" type="password" required minLength={6} maxLength={100} />
+        <input id="clave2" type="password" required minLength={4} maxLength={10} />
+
+        <label htmlFor="fechaNacimiento">FECHA DE NACIMIENTO (opcional)</label>
+        <input id="fechaNacimiento" type="date" />
 
         <label htmlFor="telefono">TELÉFONO (opcional)</label>
         <input id="telefono" type="tel" maxLength={20} />
 
-        <label htmlFor="rol">ROL</label>
+        <label htmlFor="direccion">DIRECCIÓN</label>
+        <input id="direccion" type="text" required maxLength={300} />
+
+        <label htmlFor="rol">TIPO DE USUARIO</label>
         <select id="rol" defaultValue="cliente" required>
           <option value="cliente">Cliente</option>
           <option value="vendedor">Vendedor</option>
@@ -37,14 +86,14 @@ function UsuarioNuevo() {
         </select>
 
         <div className="usuario-form-selects">
-          <select defaultValue="" required>
+          <select id="region" defaultValue="" required>
             <option value="" disabled>-- Seleccione la región --</option>
             {regiones.map((r) => (
               <option key={r.nombre}>{r.nombre}</option>
             ))}
           </select>
 
-          <select defaultValue="" required>
+          <select id="comuna" defaultValue="" required>
             <option value="" disabled>-- Seleccione la comuna --</option>
             {comunas.map((c) => (
               <option key={c}>{c}</option>

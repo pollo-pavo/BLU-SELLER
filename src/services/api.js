@@ -56,3 +56,10 @@ export const obtenerOrden = (id) => leer(`/ordenes/${id}`);
 export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);
 export const adminCrearCategoria = (datos) => crear('/admin/categorias', datos);
 export const adminActualizarCategoria = (id, datos) => actualizar(`/admin/categorias/${id}`, datos);
+
+// Administración de usuarios
+export const adminObtenerUsuarios = () => leer('/admin/usuarios');
+export const adminObtenerUsuario = (id) => leer(`/admin/usuarios/${id}`);
+export const adminObtenerHistorial = (id) => leer(`/admin/usuarios/${id}/historial`);
+export const adminCrearUsuario = (datos) => crear('/admin/usuarios', datos);
+export const adminActualizarUsuario = (id, datos) => actualizar(`/admin/usuarios/${id}`, datos);
