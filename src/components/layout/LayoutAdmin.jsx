@@ -9,6 +9,7 @@ const menuPrincipal = [
   { to: '/admin/categorias', texto: 'Categorías' },
   { to: '/admin/usuarios', texto: 'Usuarios' },
   { to: '/admin/reportes', texto: 'Reportes' },
+    { to: '/admin/perfil', texto: 'Perfil' },
 ];
 
 function LayoutAdmin() {

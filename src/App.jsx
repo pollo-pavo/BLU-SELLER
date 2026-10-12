@@ -45,6 +45,7 @@ import UsuarioNuevo from "./pages/admin/usuarios/UsuarioNuevo";
 import UsuarioDetalle from "./pages/admin/usuarios/UsuarioDetalle";
 import UsuarioEditar from "./pages/admin/usuarios/UsuarioEditar";
 import UsuarioHistorial from "./pages/admin/usuarios/UsuarioHistorial";
+import PerfilAdmin from "./pages/admin/PerfilAdmin";
 import Categorias from "./pages/Categorias";
 import CategoriaDetalle from "./pages/CategoriaDetalle";
 import Ofertas from "./pages/Ofertas";
@@ -80,6 +81,7 @@ function App() {
 
             <Route element={<RutaAdmin />}>
               <Route element={<LayoutAdmin />}>
+                <Route path="/admin/perfil" element={<PerfilAdmin />} />
                 <Route path="/admin/dashboard" element={<PanelAdmin />} />
                 <Route path="/admin/reportes" element={<ReportesAdmin />} />
 

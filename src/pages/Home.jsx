@@ -1,7 +1,8 @@
+import { useState, useEffect } from 'react';
 import { Carousel, Container, Row, Col, Card } from 'react-bootstrap';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import { Link } from 'react-router-dom';
-import { productos } from '../data/productos';
+import { obtenerProductos, obtenerCategorias } from '../services/api';
 import '../styles/General.css';
 import '../styles/Home.css';
 
@@ -18,6 +19,18 @@ const categorias = [
 ];
 
 function Home() {
+  const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    obtenerProductos()
+      .then((datos) => setProductos(datos))
+      .catch((error) => console.error(error));
+    obtenerCategorias()
+      .then((datos) => setCategorias(datos))
+      .catch((error) => console.error(error));
+  }, []);
+
   const destacados = productos.slice(0, 4);
 
   return (
