@@ -100,8 +100,8 @@ function Checkout() {
         <Row>
           <Col md={6}>
             <Form.Group className="mb-3" controlId="correo">
+              <Form.Label>Correo<span className="checkout-req">*</span></Form.Label>
               <Form.Control type="email" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} defaultValue={usuario?.correo ?? ''} />
-              <Form.Control type="email" required maxLength={100} defaultValue={usuario?.correo ?? ''} />
             </Form.Group>
           </Col>
         </Row>

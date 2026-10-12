@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">76.19% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/21</span>
+                <span class='fraction'>16/21</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">56.25% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>9/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -97,27 +97,27 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -126,27 +126,27 @@ import { Link, useLocation } from 'react-router-dom';
 import ResumenCompra from '../components/ui/ResumenCompra';
 import '../styles/PagoError.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function PagoError() {</span></span>
-  const { state } = <span class="cstat-no" title="statement not covered" >useLocation()</span>;
-  const compra = <span class="cstat-no" title="statement not covered" >state?.compra;</span>
-  const mensaje = <span class="cstat-no" title="statement not covered" >state?.mensaje;<span class="cstat-no" title="statement not covered" ></span></span>
+function PagoError() {
+  const { state } = useLocation();
+  const compra = state?.compra;
+  const mensaje = state?.mensaje;
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;Container className="</span>pago-error"&gt;
+    &lt;Container className="pago-error"&gt;
       &lt;section className="pago-error-tarjeta"&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;h1&gt;</span>
+        &lt;h1&gt;
           &lt;span className="pago-error-icono"&gt;✕&lt;/span&gt;
           No se pudo realizar el pago.
-        &lt;/h1&gt;<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >        &lt;p className="pago-error-ayuda"&gt;{<span class="cstat-no" title="statement not covered" >mensaje ?? 'Detalle de compra'<span class="cstat-no" title="statement not covered" >}</span>&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+        &lt;/h1&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+        &lt;p className="pago-error-ayuda"&gt;{<span class="branch-1 cbranch-no" title="branch not covered" >mensaje ?? 'Detalle de compra'}</span>&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        &lt;div className="pago-error-reintento"&gt;</span>
+        &lt;div className="pago-error-reintento"&gt;
           &lt;Link to="/checkout" className="pago-error-boton"&gt;VOLVER A REALIZAR EL PAGO&lt;/Link&gt;
-        &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+        &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
 &nbsp;
-        {<span class="cstat-no" title="statement not covered" >compra &amp;&amp; &lt;ResumenCompra compra={compra} /&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span></span>
+        {compra &amp;&amp; &lt;ResumenCompra compra={compra} /&gt;<span class="cstat-no" title="statement not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span></span>
       &lt;/section&gt;
-    &lt;/Container&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;/Container&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -157,7 +157,7 @@ export default PagoError;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T03:43:48.759Z
+                at 2026-10-12T07:41:54.073Z
             </div>
         <script src="../prettify.js"></script>
         <script>

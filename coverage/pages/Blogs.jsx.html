@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>24/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -110,34 +110,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -149,23 +149,23 @@ import '../styles/Blogs.css';
 import { Link } from 'react-router-dom';
 import { obtenerBlogs } from '../services/api';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function Blogs() {</span></span></span></span></span>
-  const [casos, setCasos] = <span class="cstat-no" title="statement not covered" >useState(<span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)</span>;<span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >function Blogs() {</span>
+  const [casos, setCasos] = useState([]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >    obtenerBlogs()<span class="fstat-no" title="function not covered" ></span></span>
-      .then((datos) =&gt; <span class="cstat-no" title="statement not covered" >setCasos(datos))</span>
+  useEffect(() =&gt; {
+    obtenerBlogs()
+      .then((datos) =&gt; setCasos(datos))
       .catch((error) =&gt; console.error(error));
-  }, <span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)<span class="cstat-no" title="statement not covered" ></span>;</span></span>
+  }, []);
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;HeaderGeneral /&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+    &lt;&gt;
+      &lt;HeaderGeneral /&gt;
 &nbsp;
       &lt;div className="fondo-pagina"&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;h2 className="titulo-pagina"&gt;NOTICIAS IMPORTANTES&lt;/h2&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+        &lt;h2 className="titulo-pagina"&gt;NOTICIAS IMPORTANTES&lt;/h2&gt;
 &nbsp;
-        {<span class="cstat-no" title="statement not covered" >casos.map((c) =&gt; (</span>
+        {casos.map((c) =&gt; (
           &lt;div className="blog-card" key={c.id}&gt;
             &lt;div className="blog-info"&gt;
               &lt;h3&gt;{c.titulo}&lt;/h3&gt;
@@ -174,9 +174,9 @@ import { obtenerBlogs } from '../services/api';
             &lt;/div&gt;
             &lt;div className="blog-imagen"&gt;&lt;/div&gt;
           &lt;/div&gt;
-        ))<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
+        ))<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span>
       &lt;/div&gt;
-    &lt;/&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;/&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -187,7 +187,7 @@ export default Blogs;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T03:43:48.759Z
+                at 2026-10-12T07:41:54.073Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">90.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>29/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>18/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -113,37 +113,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -155,27 +155,27 @@ import { obtenerProductos } from '../services/api';
 import '../styles/General.css';
 import '../styles/Productos.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function Productos() {</span></span></span></span></span>
-  const [productos, setProductos] = <span class="cstat-no" title="statement not covered" >useState(<span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)</span>;</span></span>
-  const [parametros] = <span class="cstat-no" title="statement not covered" >useSearchParams()</span>;<span class="cstat-no" title="statement not covered" ></span>
-  const buscar = <span class="cstat-no" title="statement not covered" >parametros.</span>get('buscar') || ''<span class="cstat-no" title="statement not covered" >;<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >function Productos() {</span>
+  const [productos, setProductos] = useState([]);
+  const [parametros] = useSearchParams();
+  const buscar = <span class="branch-1 cbranch-no" title="branch not covered" >parametros.</span>get('buscar') || '';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >    obtenerProductos(buscar)<span class="fstat-no" title="function not covered" ></span></span>
-      .then((datos) =&gt; <span class="cstat-no" title="statement not covered" >setProductos(datos))</span>
+  useEffect(() =&gt; {
+    obtenerProductos(buscar)
+      .then((datos) =&gt; setProductos(datos))
       .catch((error) =&gt; console.error(error));
-  }, <span class="cstat-no" title="statement not covered" >[buscar]<span class="cstat-no" title="statement not covered" >)<span class="cstat-no" title="statement not covered" ></span>;</span></span>
+  }, [buscar]);
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;HeaderGeneral /&gt;<span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;&gt;
+      &lt;HeaderGeneral /&gt;
 &nbsp;
       &lt;div className="fondo-pagina"&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;h2 className="titulo-pagina"&gt;</span>
-          {<span class="cstat-no" title="statement not covered" >buscar ? `RESULTADOS PARA "${b</span>uscar}"` : 'PRODUCTOS'<span class="cstat-no" title="statement not covered" >}</span>
-        &lt;/h2&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+        &lt;h2 className="titulo-pagina"&gt;
+          {<span class="branch-1 cbranch-no" title="branch not covered" >buscar ? `RESULTADOS PARA "${b</span>uscar}"` : 'PRODUCTOS'}
+        &lt;/h2&gt;
 &nbsp;
-        {<span class="cstat-no" title="statement not covered" >productos.length === 0 ? (</span>
+        {productos.length === 0 ? (
           &lt;p&gt;No se encontraron productos.&lt;/p&gt;
         ) : (
           &lt;div className="productos-grid"&gt;
@@ -183,9 +183,9 @@ import '../styles/Productos.css';
               &lt;TarjetaProducto key={p.id} producto={p} /&gt;
             ))}
           &lt;/div&gt;
-        )<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
+        )<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span>
       &lt;/div&gt;
-    &lt;/&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;/&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -196,7 +196,7 @@ export default Productos;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T03:43:48.759Z
+                at 2026-10-12T07:41:54.073Z
             </div>
         <script src="../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">73.46% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/49</span>
+                <span class='fraction'>36/49</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">53.12% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/32</span>
+                <span class='fraction'>17/32</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -96,28 +96,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -125,28 +125,28 @@
 import { adminObtenerReporteProductos } from '../../../services/api';
 import '../../../styles/admin/productos/ProductosReportes.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function ProductosReportes() {</span></span></span>
-  const [reporte, setReporte] = <span class="cstat-no" title="statement not covered" >useState(null);<span class="cstat-no" title="statement not covered" ></span></span>
+<span class="cstat-no" title="statement not covered" >function ProductosReportes() {</span>
+  const [reporte, setReporte] = useState(null);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >    adminObtenerReporteProductos()<span class="fstat-no" title="function not covered" ></span></span>
-      .then((datos) =&gt; <span class="cstat-no" title="statement not covered" >setReporte(datos))</span>
+  useEffect(() =&gt; {
+    adminObtenerReporteProductos()
+      .then((datos) =&gt; setReporte(datos))
       .catch((error) =&gt; console.error(error));
-  }, <span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)</span>;</span>
+  }, []);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (!reporte<span class="cstat-no" title="statement not covered" >) return <span class="cstat-no" title="statement not covered" >&lt;p&gt;Cargando...&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >;<span class="cstat-no" title="statement not covered" ></span></span></span></span></span></span>
+  if (!reporte) return &lt;p&gt;Cargando...&lt;/p&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>;</span>
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;div className="productos-reportes"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;h1&gt;Reporte de productos&lt;/h1&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+    &lt;div className="productos-reportes"&gt;
+      &lt;h1&gt;Reporte de productos&lt;/h1&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
 &nbsp;
       &lt;div className="productos-reportes-tarjetas"&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;div className="tarjeta"&gt;<span class="cstat-no" title="statement not covered" >&lt;span&gt;Productos&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >&lt;strong&gt;{r</span></span>eporte.total}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="tarjeta"&gt;<span class="cstat-no" title="statement not covered" >&lt;span&gt;Unidades en stock&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >&lt;strong&gt;{r</span></span>eporte.stock_total}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="tarjeta"&gt;<span class="cstat-no" title="statement not covered" >&lt;span&gt;Valor del inventario&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >&lt;strong&gt;$</span></span>{<span class="cstat-no" title="statement not covered" >reporte.valor_inventario.toLocaleString('es-CL')<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span>&lt;/strong&gt;&lt;</span></span>/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="tarjeta"&gt;<span class="cstat-no" title="statement not covered" >&lt;span&gt;En estado crítico&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >&lt;strong&gt;{r</span></span>eporte.criticos}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span></span>
+        &lt;div className="tarjeta"&gt;&lt;span&gt;Productos&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>&lt;strong&gt;{r</span>eporte.total}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+        &lt;div className="tarjeta"&gt;&lt;span&gt;Unidades en stock&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>&lt;strong&gt;{r</span>eporte.stock_total}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+        &lt;div className="tarjeta"&gt;&lt;span&gt;Valor del inventario&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>&lt;strong&gt;$</span>{reporte.valor_inventario.toLocaleString('es-CL')<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}&lt;/strong&gt;&lt;</span>/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
+        &lt;div className="tarjeta"&gt;&lt;span&gt;En estado crítico&lt;/span&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>&lt;strong&gt;{r</span>eporte.criticos}&lt;/strong&gt;&lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="branch-3 cbranch-no" title="branch not covered" ><span class="branch-2 cbranch-no" title="branch not covered" ><span class="branch-1 cbranch-no" title="branch not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span></span></span></span>
       &lt;/div&gt;
-    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -157,7 +157,7 @@ export default ProductosReportes;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T03:43:48.759Z
+                at 2026-10-12T07:41:54.073Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">88.88% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>24/27</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">85.71% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>12/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>13/13</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,36 +106,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,25 +144,25 @@ import { Link } from 'react-router-dom';
 import { adminObtenerCriticos } from '../../../services/api';
 import '../../../styles/admin/productos/ProductosCriticos.css';
 &nbsp;
-<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >function ProductosCriticos() {</span></span></span></span></span>
-  const [criticos, setCriticos] = <span class="cstat-no" title="statement not covered" >useState(<span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)</span>;<span class="cstat-no" title="statement not covered" ></span></span></span>
+<span class="cstat-no" title="statement not covered" >function ProductosCriticos() {</span>
+  const [criticos, setCriticos] = useState([]);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  useEffect(<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =&gt; {</span></span></span>
-<span class="cstat-no" title="statement not covered" >    adminObtenerCriticos()<span class="fstat-no" title="function not covered" ></span></span>
-      .then((datos) =&gt; <span class="cstat-no" title="statement not covered" >setCriticos(datos))</span>
+  useEffect(() =&gt; {
+    adminObtenerCriticos()
+      .then((datos) =&gt; setCriticos(datos))
       .catch((error) =&gt; console.error(error));
-  }, <span class="cstat-no" title="statement not covered" >[]<span class="cstat-no" title="statement not covered" >)<span class="cstat-no" title="statement not covered" ></span>;</span></span>
+  }, []);
 &nbsp;
   return (
-<span class="cstat-no" title="statement not covered" >    &lt;div className="productos-criticos"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;h1&gt;Productos críticos&lt;/h1&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span></span>
+    &lt;div className="productos-criticos"&gt;
+      &lt;h1&gt;Productos críticos&lt;/h1&gt;
 &nbsp;
       &lt;table className="productos-criticos-tabla"&gt;
-<span class="cstat-no" title="statement not covered" >        &lt;thead&gt;</span>
+        &lt;thead&gt;
           &lt;tr&gt;&lt;th&gt;Código&lt;/th&gt;&lt;th&gt;Nombre&lt;/th&gt;&lt;th&gt;Stock&lt;/th&gt;&lt;th&gt;Crítico&lt;/th&gt;&lt;th&gt;Acciones&lt;/th&gt;&lt;/tr&gt;
-        &lt;/thead&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+        &lt;/thead&gt;
         &lt;tbody&gt;
-          {<span class="cstat-no" title="statement not covered" >criticos.map((p) =&gt; (</span>
+          {criticos.map((p) =&gt; (
             &lt;tr key={p.id}&gt;
               &lt;td&gt;{p.codigo}&lt;/td&gt;
               &lt;td&gt;{p.nombre}&lt;/td&gt;
@@ -170,10 +170,10 @@ import '../../../styles/admin/productos/ProductosCriticos.css';
               &lt;td&gt;{p.stock_critico}&lt;/td&gt;
               &lt;td&gt;&lt;Link to={`/admin/productos/${p.id}/editar`}&gt;Reponer&lt;/Link&gt;&lt;/td&gt;
             &lt;/tr&gt;
-          ))<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >}</span></span>
+          ))<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span>}</span>
         &lt;/tbody&gt;
       &lt;/table&gt;
-    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" ></span></span>
+    &lt;/div&gt;<span class="cstat-no" title="statement not covered" ><span class="missing-if-branch" title="else path not taken" >E</span></span>
   );
 }
 &nbsp;
@@ -184,7 +184,7 @@ export default ProductosCriticos;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-10-12T03:43:48.759Z
+                at 2026-10-12T07:41:54.073Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>
