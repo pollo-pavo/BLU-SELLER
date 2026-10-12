@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import '../styles/Contacto.css';
 import '../styles/General.css';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
+import { PATRON_CORREO, TEXTO_CORREO } from '../utils/validaciones';
 
 function Contacto() {
 
@@ -44,17 +45,17 @@ function Contacto() {
 
             <Form.Group className="mb-3" controlId="nombreCompleto">
               <Form.Label className='texto-izquierda'>Nombre completo</Form.Label>
-              <Form.Control type="text" placeholder="Ingrese su nombre completo" />
+              <Form.Control type="text" placeholder="Ingrese su nombre completo" required maxLength={100} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label className='texto-izquierda'>Correo</Form.Label>
-              <Form.Control type="email" placeholder="Ingrese su correo" />
+              <Form.Control type="email" placeholder="Ingrese su correo" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="contenido">
               <Form.Label className='texto-izquierda'>Contenido</Form.Label>
-              < Form.Control as="textarea" rows={10} placeholder="Escriba su mensaje aquí..."/>
+              <Form.Control as="textarea" rows={10} placeholder="Escriba su mensaje aquí..." required maxLength={500} />
             </Form.Group>
 
             <Button variant="primary" type="submit" className='mt-3'>

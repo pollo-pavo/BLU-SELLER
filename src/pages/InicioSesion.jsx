@@ -7,6 +7,7 @@ import { useAuth } from '../context/AuthContext';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/InicioSesion.css';
 import '../styles/General.css';
+import { PATRON_CORREO, TEXTO_CORREO } from '../utils/validaciones';
 
 
 function InicioSesion() {
@@ -50,6 +51,10 @@ function InicioSesion() {
                 value={correo}
                 onChange={(e) => setCorreo(e.target.value)}
                 required
+                minLength={4}
+                maxLength={10}
+                pattern={PATRON_CORREO}
+                title={TEXTO_CORREO}
               />
             </Form.Group>
 
