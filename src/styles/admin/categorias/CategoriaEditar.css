@@ -37,3 +37,10 @@
     border: none; 
     cursor: pointer; 
 }
+
+.categoria-editar-caja input { 
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000; 
+}

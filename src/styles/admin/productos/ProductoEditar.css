@@ -37,3 +37,31 @@
     border: none; 
     cursor: pointer; 
 }
+
+.producto-form-caja input{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}
+
+.producto-editar-caja input{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+} 
+
+.producto-editar-caja select{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000; 
+}
+
+.producto-editar-caja textarea { 
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}

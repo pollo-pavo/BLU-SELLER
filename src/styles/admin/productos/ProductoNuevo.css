@@ -37,3 +37,24 @@
     border: none; 
     cursor: pointer; 
 }
+
+.producto-nuevo-caja input{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+} 
+
+.producto-nuevo-caja select{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000; 
+}
+
+.producto-nuevo-caja textarea { 
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}

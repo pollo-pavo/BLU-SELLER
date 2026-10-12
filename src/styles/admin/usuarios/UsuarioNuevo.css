@@ -47,3 +47,26 @@
     border: none; 
     cursor: pointer; 
 }
+
+.usuario-form-caja input{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+} 
+
+.usuario-form-caja select {
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}
+
+.usuario-form-caja input::placeholder {
+    color: #555; 
+}
+
+.usuario-form-caja a {
+    align-self: center;
+    margin-top: 12px; 
+}

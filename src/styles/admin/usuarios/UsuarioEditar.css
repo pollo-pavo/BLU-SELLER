@@ -47,3 +47,27 @@
     border: none; 
     cursor: pointer; 
 }
+
+.usuario-editar-caja button { 
+    align-self: center; 
+    margin-top: 24px; 
+    padding: 8px 40px; 
+    background: #000; 
+    color: #fff; 
+    border: none; 
+    cursor: pointer; 
+}
+
+.usuario-editar-caja input{
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+} 
+
+.usuario-editar-caja select {
+    padding: 6px; 
+    border: 1px solid #333; 
+    background: #fff; 
+    color: #000;
+}
