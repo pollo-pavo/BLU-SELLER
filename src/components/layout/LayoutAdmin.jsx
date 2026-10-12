@@ -24,7 +24,7 @@ function LayoutAdmin() {
 return (
     <div className="layout-admin">
       <aside className="layout-admin-barra">
-        <div className="layout-admin-logo">Company</div>
+        <div className="layout-admin-logo">BLUE-SELLER</div>
 
         <nav className="layout-admin-menu">
           {menuPrincipal.map((item) => (

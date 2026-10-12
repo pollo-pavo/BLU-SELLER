@@ -41,7 +41,9 @@
     width: 100%; 
     border-collapse: collapse; 
     font-size: 13px; 
-    margin-bottom: 12px; }
+    margin-bottom: 12px; 
+}
+
 .panel-admin-tabla th { 
     background: #ddd; 
     text-align: left; 

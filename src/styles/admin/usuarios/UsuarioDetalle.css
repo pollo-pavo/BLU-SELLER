@@ -5,7 +5,8 @@
     background: #fff; 
     border: 1px solid #ccc; 
     padding: 16px; 
-    max-width: 700px; 
+    max-width: 700px;
+    margin: 0 auto 16px; 
 }
 
 .usuario-detalle dt { 

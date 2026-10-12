@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { regiones } from '../../../data/regiones';
 import { adminObtenerUsuario, adminActualizarUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioEditar.css';
+import { Link } from 'react-router-dom';
 import { validarRun, PATRON_CORREO, TEXTO_CORREO } from '../../../utils/validaciones';
 
 function UsuarioEditar() {
@@ -103,6 +104,7 @@ function UsuarioEditar() {
         </div>
 
         <button type="submit">ACTUALIZAR</button>
+        <Link to="/admin/usuarios">Volver</Link>
       </form>
     </div>
   );

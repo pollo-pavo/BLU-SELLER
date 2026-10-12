@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link} from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { adminObtenerProducto, adminActualizarProducto, obtenerCategorias } from '../../../services/api';
 import '../../../styles/admin/productos/ProductoEditar.css';
@@ -83,6 +84,7 @@ function ProductoEditar() {
         </select>
 
         <button type="submit">ACTUALIZAR</button>
+        <Link to="/admin/productos">Volver</Link>
       </form>
     </div>
   );

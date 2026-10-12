@@ -20,3 +20,9 @@
 .usuario-historial-tabla tbody tr:nth-child(even) { 
     background: #eee; 
 }
+
+.acciones {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}

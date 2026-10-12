@@ -48,7 +48,11 @@ function UsuarioHistorial() {
         </table>
       )}
 
-      <Link to={`/admin/usuarios/${u.id}`}>Volver</Link>
+      <div className='acciones'>
+        <Link to={`/admin/usuarios/${u.id}`}>Ver usuario</Link>
+        <Link to="/admin/usuarios">Volver</Link>
+      </div>
+
     </div>
   );
 }

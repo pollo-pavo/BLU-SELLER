@@ -14,8 +14,12 @@ function ProductosAdmin() {
 
   return (
     <div className="productos-admin">
-      <div className="productos-admin-encabezado">
+
+      <div className='productos-admin'>
         <h1>Productos</h1>
+      </div>  
+
+      <div className="productos-admin-encabezado">
         <Link to="/admin/productos/nuevo" className="productos-admin-boton">NUEVO PRODUCTO</Link>
         <Link to="/admin/productos/criticos" className="productos-admin-boton claro">CRÍTICOS</Link>
         <Link to="/admin/productos/reportes" className="productos-admin-boton claro">REPORTES</Link>

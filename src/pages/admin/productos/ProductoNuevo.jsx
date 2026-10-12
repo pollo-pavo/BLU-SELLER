@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { adminCrearProducto, obtenerCategorias } from '../../../services/api';
 import '../../../styles/admin/productos/ProductoNuevo.css';
 
@@ -72,6 +73,7 @@ function ProductoNuevo() {
         </select>
 
         <button type="submit">GUARDAR</button>
+        <Link to="/admin/productos">Volver</Link>
       </form>
     </div>
   );

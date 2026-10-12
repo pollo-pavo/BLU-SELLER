@@ -1,3 +1,9 @@
+.productos-admin {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
 .productos-admin-encabezado { 
     display: flex; 
     align-items: center; 

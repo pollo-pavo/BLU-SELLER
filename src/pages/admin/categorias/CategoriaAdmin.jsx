@@ -14,8 +14,12 @@ function CategoriaAdmin() {
 
   return (
     <div className="categoria-admin">
-      <div className="categoria-admin-encabezado">
+      
+      <div className='categoria-admin'>
         <h1>Categorías</h1>
+      </div>
+      
+      <div className="categoria-admin-encabezado">
         <Link to="/admin/categorias/nueva" className="categoria-admin-boton">NUEVA CATEGORÍA</Link>
       </div>
 

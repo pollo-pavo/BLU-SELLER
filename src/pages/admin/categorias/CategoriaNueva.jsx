@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { adminCrearCategoria } from '../../../services/api';
 import '../../../styles/admin/categorias/CategoriaNueva.css';
 
@@ -28,6 +29,7 @@ function CategoriaNueva() {
         <input id="nombre" type="text" required minLength={2} maxLength={50} />
 
         <button type="submit">GUARDAR</button>
+        <Link to="/admin/categorias">Volver</Link>
       </form>
     </div>
   );

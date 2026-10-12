@@ -12,7 +12,8 @@
     min-width: 180px; 
     display: flex;
     flex-direction: column; 
-    gap: 6px; 
+    gap: 6px;
+    margin: 0 auto;
 }
 
 .reportes-admin-tarjetas strong { 

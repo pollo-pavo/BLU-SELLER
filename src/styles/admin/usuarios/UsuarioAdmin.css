@@ -1,3 +1,9 @@
+.usuarios-admin {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
 .usuarios-admin-encabezado { 
     display: flex; 
     align-items: center; 

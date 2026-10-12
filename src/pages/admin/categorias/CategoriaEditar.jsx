@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 import { adminObtenerCategoria, adminActualizarCategoria } from '../../../services/api';
 import '../../../styles/admin/categorias/CategoriaEditar.css';
 
@@ -42,6 +44,8 @@ function CategoriaEditar() {
         <input id="nombre" type="text" defaultValue={categoria.nombre} required minLength={2} maxLength={50} />
 
         <button type="submit">ACTUALIZAR</button>
+        <Link to="/admin/categorias">Volver</Link>
+
       </form>
     </div>
   );
