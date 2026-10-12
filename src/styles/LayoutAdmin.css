@@ -6,7 +6,7 @@
 
 .layout-admin-barra {
   width: 220px;
-  background: #f5f5f5;
+  background: #0b1f3a;
   border-right: 1px solid #cccccc;
   display: flex;
   flex-direction: column;
@@ -15,8 +15,9 @@
 
 .layout-admin-logo {
   font-weight: bold;
+  color: #ffffff;
   padding-bottom: 12px;
-  border-bottom: 1px solid #cccccc;
+  border-bottom: 1px solid #1c3558;
   margin-bottom: 16px;
 }
 
@@ -29,17 +30,17 @@
 .layout-admin-link {
   padding: 8px 10px;
   border-radius: 6px;
-  color: #333333;
+  color: #cfd8e6;
   text-decoration: none;
   font-size: 14px;
 }
 
 .layout-admin-link:hover {
-  background: #e0e0e0;
+  background: #16335c;
 }
 
 .layout-admin-link.activo {
-  color: #1a73e8;
+  color: #6ea8ff;
   font-weight: bold;
 }
 
@@ -55,7 +56,7 @@
 
 .layout-admin-inferior {
   margin-top: auto;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #1c3558;
   padding-top: 12px;
 }
 
@@ -63,13 +64,13 @@
   width: 100%;
   padding: 8px 10px;
   background: transparent;
-  color: #333333;
-  border: 1px solid #333333;
+  color: #cfd8e6;
+  border: 1px solid #cfd8e6;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
 }
 
 .layout-admin-salir:hover {
-  background: #e0e0e0;
+  background: #16335c;
 }

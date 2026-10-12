@@ -1,6 +1,36 @@
-.categoria-admin-encabezado { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.categoria-admin-boton { background: #000; color: #fff; padding: 10px 20px; font-size: 12px; text-decoration: none; }
-.categoria-admin-tabla { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
-.categoria-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
-.categoria-admin-tabla td { padding: 6px 10px; }
-.categoria-admin-tabla tbody tr:nth-child(even) { background: #eee; }
+.categoria-admin-encabezado { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    margin-bottom: 16px; 
+}
+
+.categoria-admin-boton { 
+    background: #000; 
+    color: #fff; 
+    padding: 10px 20px; 
+    font-size: 12px; 
+    text-decoration: none; 
+}
+
+.categoria-admin-tabla { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: #fff; 
+    font-size: 13px; 
+}
+
+.categoria-admin-tabla th { 
+    background: #ddd; 
+    text-align: left; 
+    padding: 6px 10px; 
+    border: 1px solid #999; 
+}
+
+.categoria-admin-tabla td { 
+    padding: 6px 10px; 
+}
+
+.categoria-admin-tabla tbody tr:nth-child(even) {
+    background: #eee; 
+}

@@ -1,4 +1,26 @@
-.usuario-detalle dl { display: grid; grid-template-columns: 160px 1fr; gap: 8px; background: #fff; border: 1px solid #ccc; padding: 16px; max-width: 700px; }
-.usuario-detalle dt { font-weight: bold; }
-.usuario-detalle dd { margin: 0; }
-.usuario-detalle-boton { background: #000; color: #fff; padding: 8px 20px; text-decoration: none; display: inline-block; margin-top: 16px; }
+.usuario-detalle dl { 
+    display: grid; 
+    grid-template-columns: 160px 1fr; 
+    gap: 8px; 
+    background: #fff; 
+    border: 1px solid #ccc; 
+    padding: 16px; 
+    max-width: 700px; 
+}
+
+.usuario-detalle dt { 
+    font-weight: bold; 
+}
+
+.usuario-detalle dd { 
+    margin: 0; 
+}
+
+.usuario-detalle-boton { 
+    background: #000; 
+    color: #fff; 
+    padding: 8px 20px;
+    text-decoration: none; 
+    display: inline-block; 
+    margin-top: 16px; 
+}

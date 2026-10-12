@@ -1,7 +1,42 @@
-.boleta-admin-caja { background: #fff; border: 1px solid #ccc; padding: 24px; max-width: 800px; margin-bottom: 16px; }
-.boleta-admin-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px; margin-bottom: 20px; font-size: 14px; }
-.boleta-admin-datos p { margin: 0; }
-.boleta-admin-tabla { width: 100%; border-collapse: collapse; font-size: 13px; }
-.boleta-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
-.boleta-admin-tabla td { padding: 6px 10px; border-bottom: 1px solid #eee; }
-.boleta-admin-tabla tfoot td { border-top: 2px solid #333; font-size: 15px; }
+.boleta-admin-caja { 
+    background: #fff; 
+    border: 1px solid #ccc; 
+    padding: 24px; 
+    max-width: 800px; 
+    margin-bottom: 16px; 
+}
+
+.boleta-admin-datos { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 4px 24px; 
+    margin-bottom: 20px; 
+    font-size: 14px; 
+}
+
+.boleta-admin-datos p { 
+    margin: 0; 
+}
+
+.boleta-admin-tabla {
+     width: 100%; 
+     border-collapse: collapse; 
+     font-size: 13px; 
+}
+
+.boleta-admin-tabla th { 
+    background: #ddd; 
+    text-align: left; 
+    padding: 6px 10px; 
+    border: 1px solid #999; 
+}
+
+.boleta-admin-tabla td { 
+    padding: 6px 10px; 
+    border-bottom: 1px solid #eee; 
+}
+
+.boleta-admin-tabla tfoot td { 
+    border-top: 2px solid #333; 
+    font-size: 15px; 
+}

@@ -1,14 +1,66 @@
-.panel-admin-bloque { background: #fff; border: 1px solid #ccc; padding: 16px; margin-top: 16px; flex: 1; min-width: 300px; }
-.panel-admin-bloque h2 { font-size: 16px; margin-top: 0; }
+.panel-admin-bloque { 
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-top: 16px; flex: 1;
+    min-width: 300px; 
+}
 
-.panel-admin-tarjetas { display: flex; flex-wrap: wrap; gap: 16px; }
-.panel-admin-tarjetas .tarjeta { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 20px; min-width: 150px; display: flex; flex-direction: column; gap: 4px; }
-.panel-admin-tarjetas strong { font-size: 22px; }
+.panel-admin-bloque h2 { 
+    font-size: 16px; 
+    margin-top: 0; 
+}
 
-.panel-admin-columnas { display: flex; flex-wrap: wrap; gap: 24px; }
+.panel-admin-tarjetas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: fit-content;  
+  margin: 0 auto;       
+}
 
-.panel-admin-tabla { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 12px; }
-.panel-admin-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
-.panel-admin-tabla td { padding: 6px 10px; border-bottom: 1px solid #eee; text-transform: capitalize; }
-.panel-admin-tabla .bajo { color: #b36b00; font-weight: bold; }
-.panel-admin-tabla .agotado { color: #c00; font-weight: bold; }
+.panel-admin-tarjetas .tarjeta { 
+    background: #f5f5f5; 
+    border: 1px solid #ddd; 
+    padding: 12px 20px; min-width: 150px; 
+    display: flex; flex-direction: column; 
+    gap: 4px; 
+}
+
+.panel-admin-tarjetas strong { 
+    font-size: 22px; 
+}
+
+.panel-admin-columnas { 
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 24px; 
+}
+
+.panel-admin-tabla { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 13px; 
+    margin-bottom: 12px; }
+.panel-admin-tabla th { 
+    background: #ddd; 
+    text-align: left; 
+    padding: 6px 10px; 
+    border: 1px solid #999; 
+}
+
+.panel-admin-tabla td { 
+    padding: 6px 10px; 
+    border-bottom: 1px solid #eee; 
+    text-transform: capitalize; 
+}
+
+.panel-admin-tabla .bajo { 
+    color: #b36b00; 
+    font-weight: bold; 
+}
+
+.panel-admin-tabla .agotado { 
+    color: #c00; 
+    font-weight: bold; 
+}

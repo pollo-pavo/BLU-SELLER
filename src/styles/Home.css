@@ -1,14 +1,80 @@
-.home-slide { height: 300px; background: #c8c8c8; display: flex; align-items: center; justify-content: center; font-size: 48px; color: #888; }
-.home-carrusel .carousel-caption { bottom: 40px; }
-.home-categorias { padding: 32px 0; }
-.home-categorias h2 { text-align: center; margin-bottom: 24px; }
-.home-tarjeta { text-decoration: none; color: inherit; border: none; }
-.home-tarjeta-imagen { height: 200px; background: #c8c8c8; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #888; }
-.home-tarjeta .card-title { text-align: center; font-size: 16px; }
-.home-productos { padding: 16px 0 40px; }
-.home-productos h2 { text-align: center; margin-bottom: 24px; }
-.home-producto { height: 100%; }
-.home-producto-imagen { height: 200px; background: #c8c8c8; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #888; }
-.home-producto .card-title { font-size: 16px; }
-.home-producto-precio { font-weight: bold; margin-bottom: 8px; }
-.home-productos-ver { text-align: center; margin-top: 8px; }
+.home-slide { 
+    height: 300px; 
+    background: #c8c8c8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 48px; 
+    color: #888; 
+}
+
+.home-carrusel .carousel-caption { 
+    bottom: 40px; 
+}
+
+.home-categorias { 
+    padding: 32px 0; 
+}
+
+.home-categorias h2 { 
+    text-align: center; 
+    margin-bottom: 24px; 
+}
+
+.home-tarjeta { 
+    text-decoration: none; 
+    color: inherit; 
+    border: none; 
+}
+
+.home-tarjeta-imagen { 
+    height: 200px; 
+    background: #c8c8c8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 32px; 
+    color: #888; 
+}
+
+.home-tarjeta .card-title { 
+    text-align: center; 
+    font-size: 16px; 
+}
+
+.home-productos { 
+    padding: 16px 0 40px; 
+}
+
+.home-productos h2 { 
+    text-align: center; 
+    margin-bottom: 24px; 
+}
+
+.home-producto { 
+    height: 100%; 
+}
+
+.home-producto-imagen { 
+    height: 200px; 
+    background: #c8c8c8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 28px; 
+    color: #888; 
+}
+
+.home-producto .card-title { 
+    font-size: 16px; 
+}
+
+.home-producto-precio { 
+    font-weight: bold;
+    margin-bottom: 8px; 
+}
+
+.home-productos-ver { 
+    text-align: center; 
+    margin-top: 8px; 
+}

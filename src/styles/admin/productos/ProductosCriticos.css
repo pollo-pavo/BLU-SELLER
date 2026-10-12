@@ -1,5 +1,27 @@
-.productos-criticos-tabla { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
-.productos-criticos-tabla th { background: #ddd; text-align: left; padding: 6px 10px; border: 1px solid #999; }
-.productos-criticos-tabla td { padding: 6px 10px; }
-.productos-criticos-tabla .bajo { color: #b36b00; font-weight: bold; }
-.productos-criticos-tabla .agotado { color: #c00; font-weight: bold; }
+.productos-criticos-tabla { 
+    width: 100%; 
+    border-collapse: collapse; 
+    background: #fff; 
+    font-size: 13px; 
+}
+
+.productos-criticos-tabla th { 
+    background: #ddd; 
+    text-align: left; 
+    padding: 6px 10px; 
+    border: 1px solid #999; 
+}
+
+.productos-criticos-tabla td { 
+    padding: 6px 10px; 
+}
+
+.productos-criticos-tabla .bajo { 
+    color: #b36b00; 
+    font-weight: bold; 
+}
+
+.productos-criticos-tabla .agotado { 
+    color: #c00; 
+    font-weight: bold; 
+}
