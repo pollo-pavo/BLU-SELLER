@@ -62,7 +62,7 @@ function UsuarioEditar() {
         <input id="run" type="text" defaultValue={u.run} required minLength={7} maxLength={9} />
 
         <label htmlFor="nombre">NOMBRE</label>
-        <input id="correo" type="email" defaultValue={u.correo} required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
+        <input id="nombre" type="text" defaultValue={u.nombre} required maxLength={100} />
 
         <label htmlFor="apellidos">APELLIDOS</label>
         <input id="apellidos" type="text" defaultValue={u.apellidos} required maxLength={100} />

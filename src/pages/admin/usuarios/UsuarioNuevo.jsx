@@ -58,10 +58,10 @@ function UsuarioNuevo() {
         <input id="run" type="text" required minLength={7} maxLength={9} placeholder="Sin puntos ni guion, ej: 123456785" />
 
         <label htmlFor="nombre">NOMBRE</label>
-        <input id="correo" type="email" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
+        <input id="nombre" type="text" required maxLength={100} />
 
         <label htmlFor="apellidos">APELLIDOS</label>
-        <input id="correo2" type="email" required maxLength={100} pattern={PATRON_CORREO} title={TEXTO_CORREO} />
+        <input id="apellidos" type="text" required maxLength={100} />
 
         <label htmlFor="correo">CORREO</label>
         <input id="correo" type="email" required maxLength={100} />
