@@ -6,12 +6,15 @@ import { useAuth } from '../context/AuthContext';
 import { crearOrden } from '../services/api';
 import '../styles/Checkout.css';
 import { PATRON_CORREO, TEXTO_CORREO } from '../utils/validaciones';
+import { useState } from 'react';
 
 function Checkout() {
   const navigate = useNavigate();
   const { items, totalPrecio: total, vaciar } = useCarrito();
   const { usuario } = useAuth();
-  const comunas = regiones.flatMap((r) => r.comunas);
+  const [region, setRegion] = useState(usuario?.region ?? '');
+  const [comuna, setComuna] = useState(usuario?.comuna ?? '');
+  const comunas = regiones.find((r) => r.nombre === region)?.comunas ?? [];
 
   const pagar = async (e) => {
     e.preventDefault();
@@ -128,7 +131,14 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="region">
               <Form.Label>Región<span className="checkout-req">*</span></Form.Label>
-              <Form.Select defaultValue={usuario?.region ?? ''} required>
+              <Form.Select
+                value={region}
+                onChange={(e) => {
+                  setRegion(e.target.value);
+                  setComuna('');
+                }}
+                required
+              >
                 <option value="" disabled>-- Seleccione la región --</option>
                 {regiones.map((r) => (
                   <option key={r.nombre}>{r.nombre}</option>
@@ -139,7 +149,7 @@ function Checkout() {
           <Col md={6}>
             <Form.Group className="mb-3" controlId="comuna">
               <Form.Label>Comuna<span className="checkout-req">*</span></Form.Label>
-              <Form.Select defaultValue={usuario?.comuna ?? ''} required>
+              <Form.Select value={comuna} onChange={(e) => setComuna(e.target.value)} required>
                 <option value="" disabled>-- Seleccione la comuna --</option>
                 {comunas.map((c) => (
                   <option key={c}>{c}</option>

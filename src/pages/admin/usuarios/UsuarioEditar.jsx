@@ -11,12 +11,18 @@ function UsuarioEditar() {
   const navigate = useNavigate();
   const [u, setU] = useState(null);
   const [error, setError] = useState('');
-  const comunas = regiones.flatMap((r) => r.comunas);
+  const [region, setRegion] = useState('');
+  const [comuna, setComuna] = useState('');
+  const comunas = regiones.find((r) => r.nombre === region)?.comunas ?? [];
 
   useEffect(() => {
     setError('');
     adminObtenerUsuario(id)
-      .then((datos) => setU(datos))
+      .then((datos) => {
+        setU(datos);
+        setRegion(datos.region ?? '');
+        setComuna(datos.comuna ?? '');
+      })
       .catch((err) => setError(err.message));
   }, [id]);
 
@@ -88,14 +94,22 @@ function UsuarioEditar() {
         </select>
 
         <div className="usuario-editar-selects">
-          <select id="region" defaultValue={u.region ?? ''} required>
+          <select
+            id="region"
+            value={region}
+            onChange={(e) => {
+              setRegion(e.target.value);
+              setComuna('');
+            }}
+            required
+          >
             <option value="" disabled>-- Seleccione la región --</option>
             {regiones.map((r) => (
               <option key={r.nombre}>{r.nombre}</option>
             ))}
           </select>
 
-          <select id="comuna" defaultValue={u.comuna ?? ''} required>
+          <select id="comuna" value={comuna} onChange={(e) => setComuna(e.target.value)} required>
             <option value="" disabled>-- Seleccione la comuna --</option>
             {comunas.map((c) => (
               <option key={c}>{c}</option>

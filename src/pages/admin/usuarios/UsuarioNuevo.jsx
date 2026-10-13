@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 import { adminCrearUsuario } from '../../../services/api';
 import '../../../styles/admin/usuarios/UsuarioNuevo.css';
 import { validarRun, PATRON_CORREO, TEXTO_CORREO } from '../../../utils/validaciones';
+import { useState } from 'react';
 
 function UsuarioNuevo() {
   const navigate = useNavigate();
-  const comunas = regiones.flatMap((r) => r.comunas);
+  const [region, setRegion] = useState('');
+  const [comuna, setComuna] = useState('');
+  const comunas = regiones.find((r) => r.nombre === region)?.comunas ?? [];
 
   const guardar = async (e) => {
     e.preventDefault();
@@ -93,14 +96,22 @@ function UsuarioNuevo() {
         </select>
 
         <div className="usuario-form-selects">
-          <select id="region" defaultValue="" required>
+          <select
+            id="region"
+            value={region}
+            onChange={(e) => {
+              setRegion(e.target.value);
+              setComuna('');
+            }}
+            required
+          >
             <option value="" disabled>-- Seleccione la región --</option>
             {regiones.map((r) => (
               <option key={r.nombre}>{r.nombre}</option>
             ))}
           </select>
 
-          <select id="comuna" defaultValue="" required>
+          <select id="comuna" value={comuna} onChange={(e) => setComuna(e.target.value)} required>
             <option value="" disabled>-- Seleccione la comuna --</option>
             {comunas.map((c) => (
               <option key={c}>{c}</option>
