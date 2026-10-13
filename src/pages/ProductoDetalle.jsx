@@ -58,7 +58,7 @@ function ProductoDetalle() {
 
       <div className="fondo-pagina">
         <div className="detalle-migas">
-          <Link to="/">Home</Link> &gt;{' '}
+          <Link to="/" >Home</Link> &gt;{' '}
           {producto.categoria && (
             <>
               <Link to={`/categorias/${producto.categoria_id}`}>{producto.categoria}</Link> &gt;{' '}

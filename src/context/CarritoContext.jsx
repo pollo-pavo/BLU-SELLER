@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import '../styles/General.css'
 
 const CarritoContext = createContext(null);
 
