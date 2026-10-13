@@ -2,18 +2,21 @@
   text-align: left;
   font-size: 0.8rem;
   margin-bottom: 16px;
+  color: white;
 }
 
 .blogdetalle-contenido {
   max-width: 800px;
   margin: 0 auto;
   text-align: left;
+  color: white;
 }
 
 .blogdetalle-datos {
   display: block;
   font-size: 0.85rem;
   margin-bottom: 16px;
+  color: white
 }
 
 .blogdetalle-imagen {
