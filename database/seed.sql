@@ -23,14 +23,17 @@ INSERT INTO productos (codigo, nombre, descripcion, precio, precio_oferta, stock
 ('P012', 'Producto 12', 'Descripción del producto 12', 1000, NULL, 10, 4, NULL);
 
 INSERT INTO blogs (titulo, descripcion, contenido, imagen_portada, autor_id) VALUES
-('hola', 'que pasa??!!!', 'que pasa??!!!', NULL, 1),
-('Spider-Man: Brand New Day Es BUENISIMAAAA', 'Esto no tiene nada que ver con la pagina o los blu-rays, es algo que queria decir, de hecho si o si uno de los productos va a ser un blu-ray de la pelicula', 'Esto no tiene nada que ver con la pagina o los blu-rays, es algo que queria decir, de hecho si o si uno de los productos va a ser un blu-ray de la pelicula', NULL, 1);
+('¿Por qué el Blu-ray sigue siendo igual de importante?',
+ 'Explicación detrás de la importancia del Blu-ray en la era del internet',
+ 'Hace poco hubo un caos por el reciente intento de atentado contra los formatos físicos de los videojuegos, y en ese sentido, Blu-ray es EL formato físico para el sector de las películas y series, es la propiedad real del consumidor y posee una independencia del internet, además, por favor, todos nos preguntamos qué contenido adicional exclusivo traerá el blu-ray de nuestra película favorita del año',
+ NULL, 1),
+('Cómo cuidar y ordenar tu colección de Blu-ray',
+ 'Algunos consejos simples para que tus discos duren años: cómo guardarlos, limpiarlos y organizarlos.',
+ 'Para que tus discos se mantengan en buen estado, guárdalos siempre en su caja y de forma vertical, lejos del calor, la humedad y la luz directa del sol. Tómalos por los bordes y evita tocar la superficie brillante. Si tienen polvo o huellas, límpialos con un paño suave de microfibra, siempre desde el centro hacia afuera y nunca en círculos. Por último, ordena tu colección por saga, género o año de estreno: así encontrarás cada película rápido y notarás qué títulos te faltan. Hasta luego y muchas gracias por leer!!',
+ NULL, 1);
 
 INSERT INTO mensajes_contacto (nombre, correo, contenido) VALUES
 ('Cliente Prueba', 'cliente@correo.com', 'Todo mal!!');
-
-UPDATE blogs SET contenido = 'desquiciado' WHERE id = 1;
-UPDATE blogs SET contenido = 'eloquente' WHERE id = 2;
 
 INSERT INTO ordenes (usuario_id, nombre, apellidos, correo, calle, departamento, region, comuna, indicaciones, total) VALUES
 (3, 'Cliente', 'Prueba', 'cliente@gmail.com', 'Calle Falsa 123', '603', 'Región Metropolitana de Santiago', 'Ñuñoa', 'Dejar con el conserje', 2600);
