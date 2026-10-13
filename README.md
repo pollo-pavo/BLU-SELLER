@@ -1,19 +1,59 @@
-# React + Vite
+Tienda online de Blu-ray desarrollada con React, Express y PostgreSQL (Neon).
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Requisitos:
 
-Currently, two official plugins are available:
+- Node.js 20 o superior
+- Una base de datos PostgreSQL (Neon)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Instalacion:
 
-## React Compiler
+1. Instalar dependencias del frontend y del backend en terminal:
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+   ```
+   npm install
+   cd backend
+   npm install
+   ```
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+2. Crear un archivo .env en la raíz (ver .env.example):
 
-## Expanding the Oxlint configuration
+   ```
+   DATABASE_URL=cadena_de_conexion_de_neon
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+3. Crear las tablas y los datos de ejemplo ejecutando, en ese orden,
+   database/schema.sql y database/seed.sql en la base de datos.
+
+Pasos para ejecutar -
+
+En dos terminales:
+
+```
+cd backend
+npm run dev
+```
+
+```
+npm run dev
+```
+
+La tienda queda en http://localhost:5173 y la API en http://localhost:3001.
+
+Pruebas:
+
+```
+npm run test:run
+npm run coverage
+```
+
+Usuarios de ejemplo:
+
+| Rol | Correo |
+|---|---|
+| Administrador | admin@duoc.cl |
+| Vendedor | vendedor@profesor.duoc.cl |
+| Cliente | cliente@gmail.com |
+
+
+Hecho por:
+Miguel Gonzalez y Esteban Orellana
