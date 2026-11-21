@@ -1,19 +1,24 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import '../../styles/LayoutAdmin.css';
+import { ROLES } from '../../utils/roles';
+
+const TODOS = [ROLES.ADMIN, ROLES.VENDEDOR];
+const SOLO_ADMIN = [ROLES.ADMIN];
 
 const menuPrincipal = [
-  { to: '/admin/dashboard', texto: 'Dashboard' },
-  { to: '/admin/ordenes', texto: 'Órdenes' },
-  { to: '/admin/productos', texto: 'Productos' },
-  { to: '/admin/categorias', texto: 'Categorías' },
-  { to: '/admin/usuarios', texto: 'Usuarios' },
-  { to: '/admin/reportes', texto: 'Reportes' },
-    { to: '/admin/perfil', texto: 'Perfil' },
+  { to: '/admin/dashboard', texto: 'Dashboard', roles: SOLO_ADMIN },
+  { to: '/admin/ordenes', texto: 'Órdenes', roles: TODOS },
+  { to: '/admin/productos', texto: 'Productos', roles: TODOS },
+  { to: '/admin/categorias', texto: 'Categorías', roles: SOLO_ADMIN },
+  { to: '/admin/usuarios', texto: 'Usuarios', roles: SOLO_ADMIN },
+  { to: '/admin/reportes', texto: 'Reportes', roles: SOLO_ADMIN },
+  { to: '/admin/perfil', texto: 'Perfil', roles: SOLO_ADMIN },
 ];
 
 function LayoutAdmin() {
-  const { logout } = useAuth();
+  const { usuario, logout } = useAuth();
+  const menu = menuPrincipal.filter((i) => i.roles.includes(usuario?.rol));
   const navigate = useNavigate();
 
   const cerrarSesion = () => {
@@ -27,7 +32,7 @@ return (
         <div className="layout-admin-logo">BLUE-SELLER</div>
 
         <nav className="layout-admin-menu">
-          {menuPrincipal.map((item) => (
+          {menu.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}

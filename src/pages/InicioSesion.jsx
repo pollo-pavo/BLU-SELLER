@@ -8,7 +8,13 @@ import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/InicioSesion.css';
 import '../styles/General.css';
 import { PATRON_CORREO, TEXTO_CORREO } from '../utils/validaciones';
+import { ROLES } from '../utils/roles';
 
+const destinoPorRol = (rol) => {
+  if (rol === ROLES.ADMIN) return '/admin/dashboard';
+  if (rol === ROLES.VENDEDOR) return '/admin/ordenes';
+  return '/';
+};
 
 function InicioSesion() {
 
@@ -23,7 +29,7 @@ function InicioSesion() {
     setError('');
     try {
       const usuario = await iniciarSesion(correo, contraseña);
-      navigate(usuario.rol === 'admin' ? '/admin/dashboard' : '/');
+      navigate(destinoPorRol(usuario.rol));
     } catch (err) {
       setError('Correo o contraseña incorrectos');
     }

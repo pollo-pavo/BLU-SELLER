@@ -13,7 +13,7 @@ describe('Nosotros', () => {
 
     expect(screen.getByText('Header de prueba')).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Nosotros', level: 2 })).toBeInTheDocument();
-    expect(screen.getByText(/Somos una empresa dedicada a ofrecer los mejores productos/)).toBeInTheDocument();
-    expect(screen.getByText(/una experiencia de compra sencilla/)).toBeInTheDocument();
+    expect(screen.getByText(/Para usted este proyecto venta de blu-rays/)).toBeInTheDocument();
+    expect(screen.getByText(/Desarrollo Fullstack II/)).toBeInTheDocument();
   });
 });

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import InicioSesion from '../pages/InicioSesion';
 import { useAuth } from '../context/AuthContext';
+import { ROLES } from '../utils/roles';
 
 const navigate = vi.hoisted(() => vi.fn());
 
@@ -27,7 +28,7 @@ describe('InicioSesion', () => {
     const iniciarSesion = vi
       .fn()
       .mockRejectedValueOnce(new Error('Credenciales inválidas'))
-      .mockResolvedValueOnce({ id: 1, rol: 'admin' });
+      .mockResolvedValueOnce({ id: 1, rol: ROLES.ADMIN });
     useAuth.mockReturnValue({ iniciarSesion });
 
     render(

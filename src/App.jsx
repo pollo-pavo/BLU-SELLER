@@ -3,11 +3,9 @@ import { BrowserRouter, Route ,Routes } from "react-router-dom";
 
 import LayoutPublico from "./components/layout/LayoutPublico";
 import LayoutAdmin from './components/layout/LayoutAdmin';
-import RutaAdmin from './components/auth/RutaAdmin';
 import { AuthProvider } from "./context/AuthContext";
 
 import { CarritoProvider } from "./context/CarritoContext";
-
 
 import Home from "./pages/Home";
 import Productos from "./pages/Productos";
@@ -51,6 +49,9 @@ import CategoriaDetalle from "./pages/CategoriaDetalle";
 import Ofertas from "./pages/Ofertas";
 import Carrito from "./pages/Carrito";
 
+import RutaProtegida from './components/auth/RutaProtegida';
+import { ROLES } from './utils/roles';
+
 
 function App() {
   return (
@@ -79,31 +80,34 @@ function App() {
               <Route path="/pago-error" element={<PagoError />} />
             </Route>
 
-            <Route element={<RutaAdmin />}>
+            <Route element={<RutaProtegida roles={[ROLES.ADMIN, ROLES.VENDEDOR]} />}>
               <Route element={<LayoutAdmin />}>
-                <Route path="/admin/perfil" element={<PerfilAdmin />} />
-                <Route path="/admin/dashboard" element={<PanelAdmin />} />
-                <Route path="/admin/reportes" element={<ReportesAdmin />} />
-
                 <Route path="/admin/ordenes" element={<OrdenesAdmin />} />
                 <Route path="/admin/ordenes/:id" element={<BoletaAdmin />} />
-
                 <Route path="/admin/productos" element={<ProductosAdmin />} />
-                <Route path="/admin/productos/nuevo" element={<ProductoNuevo />} />
-                <Route path="/admin/productos/criticos" element={<ProductosCriticos />} />
-                <Route path="/admin/productos/reportes" element={<ProductosReportes />} />
+
+                <Route element={<RutaProtegida roles={[ROLES.ADMIN]} />}>
+                  <Route path="/admin/perfil" element={<PerfilAdmin />} />
+                  <Route path="/admin/dashboard" element={<PanelAdmin />} />
+                  <Route path="/admin/reportes" element={<ReportesAdmin />} />
+
+                  <Route path="/admin/productos/nuevo" element={<ProductoNuevo />} />
+                  <Route path="/admin/productos/criticos" element={<ProductosCriticos />} />
+                  <Route path="/admin/productos/reportes" element={<ProductosReportes />} />
+                  <Route path="/admin/productos/:id/editar" element={<ProductoEditar />} />
+
+                  <Route path="/admin/categorias" element={<CategoriasAdmin />} />
+                  <Route path="/admin/categorias/nueva" element={<CategoriaNueva />} />
+                  <Route path="/admin/categorias/:id/editar" element={<CategoriaEditar />} />
+
+                  <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
+                  <Route path="/admin/usuarios/nuevo" element={<UsuarioNuevo />} />
+                  <Route path="/admin/usuarios/:id" element={<UsuarioDetalle />} />
+                  <Route path="/admin/usuarios/:id/editar" element={<UsuarioEditar />} />
+                  <Route path="/admin/usuarios/:id/historial" element={<UsuarioHistorial />} />
+                </Route>
+
                 <Route path="/admin/productos/:id" element={<ProductoDetalleA />} />
-                <Route path="/admin/productos/:id/editar" element={<ProductoEditar />} />
-
-                <Route path="/admin/categorias" element={<CategoriasAdmin />} />
-                <Route path="/admin/categorias/nueva" element={<CategoriaNueva />} />
-                <Route path="/admin/categorias/:id/editar" element={<CategoriaEditar />} />
-
-                <Route path="/admin/usuarios" element={<UsuariosAdmin />} />
-                <Route path="/admin/usuarios/nuevo" element={<UsuarioNuevo />} />
-                <Route path="/admin/usuarios/:id" element={<UsuarioDetalle />} />
-                <Route path="/admin/usuarios/:id/editar" element={<UsuarioEditar />} />
-                <Route path="/admin/usuarios/:id/historial" element={<UsuarioHistorial />} />
               </Route>
             </Route>
 

@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import LayoutAdmin from '../../../components/layout/LayoutAdmin';
 import { useAuth } from '../../../context/AuthContext';
+import { ROLES } from '../../../utils/roles';
 
 const navigate = vi.hoisted(() => vi.fn());
 
@@ -20,7 +21,7 @@ describe('LayoutAdmin', () => {
   it('muestra el menú con la sección activa, el contenido de la ruta y cierra la sesión', async () => {
     const user = userEvent.setup();
     const logout = vi.fn();
-    useAuth.mockReturnValue({ logout });
+    useAuth.mockReturnValue({ usuario: { rol: ROLES.ADMIN }, logout });
 
     render(
       <MemoryRouter initialEntries={['/admin/productos']}>
@@ -33,7 +34,7 @@ describe('LayoutAdmin', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('Company')).toBeInTheDocument();
+    expect(screen.getByText('BLUE-SELLER')).toBeInTheDocument();
     expect(screen.getByLabelText('Notificaciones')).toBeInTheDocument();
 
     const menu = [
@@ -63,5 +64,26 @@ describe('LayoutAdmin', () => {
     await user.click(screen.getByRole('button', { name: 'Cerrar sesión' }));
     expect(logout).toHaveBeenCalledTimes(1);
     expect(navigate).toHaveBeenCalledWith('/InicioSesion');
+  });
+
+  it('al vendedor solo le muestra Órdenes y Productos', () => {
+    useAuth.mockReturnValue({ usuario: { rol: ROLES.VENDEDOR }, logout: vi.fn() });
+
+    render(
+      <MemoryRouter initialEntries={['/admin/ordenes']}>
+        <Routes>
+          <Route element={<LayoutAdmin />}>
+            <Route path="/admin/ordenes" element={<p>Contenido de órdenes</p>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(screen.getByRole('link', { name: 'Órdenes' })).toHaveAttribute('href', '/admin/ordenes');
+    expect(screen.getByRole('link', { name: 'Productos' })).toHaveAttribute('href', '/admin/productos');
+
+    for (const texto of ['Dashboard', 'Categorías', 'Usuarios', 'Reportes', 'Perfil']) {
+      expect(screen.queryByRole('link', { name: texto })).not.toBeInTheDocument();
+    }
   });
 });

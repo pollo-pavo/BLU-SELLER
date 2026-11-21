@@ -64,9 +64,13 @@ describe('UsuarioHistorial', () => {
       '/admin/ordenes/102'
     );
 
-    expect(screen.getByRole('link', { name: 'Volver' })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Ver usuario' })).toHaveAttribute(
       'href',
       '/admin/usuarios/21'
+    );
+    expect(screen.getByRole('link', { name: 'Volver' })).toHaveAttribute(
+      'href',
+      '/admin/usuarios'
     );
   });
 });

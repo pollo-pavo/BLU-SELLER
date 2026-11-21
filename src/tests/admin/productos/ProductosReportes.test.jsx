@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import ProductosReportes from '../../../pages/admin/productos/ProductosReportes';
 import { adminObtenerReporteProductos } from '../../../services/api';
 
@@ -18,7 +19,11 @@ describe('ProductosReportes', () => {
       criticos: 7,
     });
 
-    render(<ProductosReportes />);
+    render(
+      <MemoryRouter>
+        <ProductosReportes />
+      </MemoryRouter>
+    );
 
     expect(screen.getByText('Cargando...')).toBeInTheDocument();
 
@@ -31,5 +36,7 @@ describe('ProductosReportes', () => {
     expect(valorDe('Unidades en stock')).toHaveTextContent('320');
     expect(valorDe('Valor del inventario')).toHaveTextContent('$1.250.000');
     expect(valorDe('En estado crítico')).toHaveTextContent('7');
+
+    expect(screen.getByRole('link', { name: 'Volver' })).toHaveAttribute('href', '/admin/productos');
   });
 });
