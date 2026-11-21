@@ -3,6 +3,7 @@ import cors from 'cors';
 import pool from './db.js';
 import bcrypt from 'bcryptjs';
 import { validarProducto, validarUsuario, validarCategoria, validarContacto, validarCompra } from './validaciones.js';
+import jwt from 'jsonwebtoken';
 
 const app = express();
 app.use(cors());
@@ -12,6 +13,38 @@ const aNulo = (v) => (v === undefined || v === '' ? null : v);
 process.on('unhandledRejection', (error) => {
   console.error('Error no controlado:', error);
 });
+
+const SECRET = process.env.JWT_SECRET || 'cambia-esto-en-produccion';
+const REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'cambia-esto-tambien';
+
+const firmarToken = (u) => jwt.sign({ id: u.id, rol: u.rol }, SECRET, { expiresIn: '15m' });
+const firmarRefresh = (u) => jwt.sign({ id: u.id }, REFRESH_SECRET, { expiresIn: '7d' });
+
+const COLUMNAS_SESION = 'id, nombre, apellidos, correo, rol, direccion, region, comuna';
+
+// Middleware: exige token válido
+const requiereAuth = (req, res, next) => {
+  const token = req.headers.authorization?.replace('Bearer ', '');
+  if (!token) return res.status(401).json({ error: 'No autenticado' });
+  try {
+    req.auth = jwt.verify(token, SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: 'Token inválido o expirado' });
+  }
+};
+
+// Middleware: exige rol admin
+const requiereAdmin = (req, res, next) => {
+  if (req.auth?.rol !== 'administrador') {
+    return res.status(403).json({ error: 'Acceso denegado' });
+  }
+  next();
+};
+
+// Protege TODAS las rutas de administración de una vez
+
+app.use('/api/admin', requiereAuth, requiereAdmin);
 
 app.get('/api/salud', async (req, res) => {
   try {
@@ -128,7 +161,7 @@ app.post('/api/registro', async (req, res) => {
   }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/api/auth/login', async (req, res) => {
   const { correo, contrasena } = req.body;
 
   if (!correo || !contrasena) {
@@ -136,30 +169,47 @@ app.post('/api/login', async (req, res) => {
   }
 
   try {
-    const resultado = await pool.query(
-      'SELECT id, nombre, apellidos, correo, contrasena, rol, direccion, region, comuna FROM usuarios WHERE LOWER(correo) = LOWER($1)',
+    const r = await pool.query(
+      `SELECT ${COLUMNAS_SESION}, contrasena FROM usuarios WHERE LOWER(correo) = LOWER($1)`,
       [correo]
     );
-    const usuario = resultado.rows[0];
+    const u = r.rows[0];
 
-    const coincide = usuario && await bcrypt.compare(contrasena, usuario.contrasena);
+    const coincide = u && await bcrypt.compare(contrasena, u.contrasena);
     if (!coincide) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
 
-      res.json({
-      id: usuario.id,
-      nombre: usuario.nombre,
-      apellidos: usuario.apellidos,
-      correo: usuario.correo,
-      rol: usuario.rol,
-      direccion: usuario.direccion,
-      region: usuario.region,
-      comuna: usuario.comuna,
-    });
+    const { contrasena: _omitida, ...usuario } = u;
+    res.json({ token: firmarToken(u), refreshToken: firmarRefresh(u), usuario });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'No se pudo iniciar sesión' });
+  }
+});
+
+app.post('/api/auth/refresh', async (req, res) => {
+  const { refreshToken } = req.body;
+  if (!refreshToken) return res.status(401).json({ error: 'Sin refresh token' });
+
+  try {
+    const { id } = jwt.verify(refreshToken, REFRESH_SECRET);
+    const r = await pool.query(`SELECT ${COLUMNAS_SESION} FROM usuarios WHERE id = $1`, [id]);
+    if (!r.rows[0]) return res.status(401).json({ error: 'Usuario no existe' });
+    res.json({ token: firmarToken(r.rows[0]) });
+  } catch {
+    res.status(401).json({ error: 'Refresh token inválido' });
+  }
+});
+
+app.get('/api/auth/me', requiereAuth, async (req, res) => {
+  try {
+    const r = await pool.query(`SELECT ${COLUMNAS_SESION} FROM usuarios WHERE id = $1`, [req.auth.id]);
+    if (!r.rows[0]) return res.status(401).json({ error: 'Usuario no existe' });
+    res.json(r.rows[0]);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo obtener el usuario' });
   }
 });
 
@@ -565,11 +615,6 @@ app.put('/api/admin/categorias/:id', async (req, res) => {
   }
 });
 
-// Administración de categorías
-export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);
-export const adminCrearCategoria = (datos) => crear('/admin/categorias', datos);
-export const adminActualizarCategoria = (id, datos) => actualizar(`/admin/categorias/${id}`, datos);
-
 // ---------- Administración de usuarios ----------
 const COLUMNAS_USUARIO = `id, run, nombre, apellidos, correo, telefono, direccion, region, comuna, rol,
   to_char(fecha_nacimiento, 'YYYY-MM-DD') AS fecha_nacimiento, fecha_creacion`;
@@ -686,6 +731,53 @@ app.put('/api/admin/usuarios/:id', async (req, res) => {
     }
     console.error(error);
     res.status(500).json({ error: 'No se pudo actualizar el usuario' });
+  }
+});
+
+// Borrado lógico: el producto queda inactivo
+app.delete('/api/admin/productos/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Id de producto inválido' });
+  try {
+    const r = await pool.query('UPDATE productos SET activo = FALSE WHERE id = $1 RETURNING id', [id]);
+    if (!r.rows[0]) return res.status(404).json({ error: 'Producto no encontrado' });
+    res.json({ ok: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo eliminar el producto' });
+  }
+});
+
+app.delete('/api/admin/categorias/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Id de categoría inválido' });
+  try {
+    const r = await pool.query('DELETE FROM categorias WHERE id = $1 RETURNING id', [id]);
+    if (!r.rows[0]) return res.status(404).json({ error: 'Categoría no encontrada' });
+    res.json({ ok: true });
+  } catch (error) {
+    if (error.code === '23503') {
+      return res.status(409).json({ error: 'La categoría tiene productos asociados' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo eliminar la categoría' });
+  }
+});
+
+app.delete('/api/admin/usuarios/:id', async (req, res) => {
+  const id = Number(req.params.id);
+  if (!Number.isInteger(id)) return res.status(400).json({ error: 'Id de usuario inválido' });
+  if (id === req.auth.id) return res.status(400).json({ error: 'No puedes eliminar tu propia cuenta' });
+  try {
+    const r = await pool.query('DELETE FROM usuarios WHERE id = $1 RETURNING id', [id]);
+    if (!r.rows[0]) return res.status(404).json({ error: 'Usuario no encontrado' });
+    res.json({ ok: true });
+  } catch (error) {
+    if (error.code === '23503') {
+      return res.status(409).json({ error: 'El usuario tiene órdenes o blogs asociados' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo eliminar el usuario' });
   }
 });
 
