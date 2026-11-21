@@ -1,4 +1,4 @@
-const BASE = '/api/v1';
+const BASE = '/api';
 const CLAVE = 'sesion';
 
 export const leerSesion = () => {

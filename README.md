@@ -37,7 +37,7 @@ npm run dev
 npm run dev
 ```
 
-La tienda queda en http://localhost:5173 y la API en http://localhost:3001.
+La tienda queda en http://localhost:5173 y la API en http://localhost:8080.
 
 Pruebas:
 

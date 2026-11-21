@@ -10,7 +10,7 @@ describe('api', () => {
   it('agrega Authorization a cada petición', async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue(resp([])));
     await leer('/productos');
-    expect(fetch).toHaveBeenCalledWith('/api/v1/productos', expect.objectContaining({
+    expect(fetch).toHaveBeenCalledWith('/api/productos', expect.objectContaining({
       headers: expect.objectContaining({ Authorization: 'Bearer viejo' }),
     }));
   });
@@ -22,8 +22,8 @@ describe('api', () => {
       .mockResolvedValueOnce(resp({ ok: true })));
 
     expect(await leer('/admin/productos')).toEqual({ ok: true });
-    expect(fetch).toHaveBeenNthCalledWith(2, '/api/v1/auth/refresh', expect.objectContaining({ method: 'POST' }));
-    expect(fetch).toHaveBeenNthCalledWith(3, '/api/v1/admin/productos', expect.objectContaining({
+    expect(fetch).toHaveBeenNthCalledWith(2, '/api/auth/refresh', expect.objectContaining({ method: 'POST' }));
+    expect(fetch).toHaveBeenNthCalledWith(3, '/api/admin/productos', expect.objectContaining({
       headers: expect.objectContaining({ Authorization: 'Bearer nuevo' }),
     }));
     expect(JSON.parse(localStorage.getItem('sesion')).token).toBe('nuevo');
