@@ -1,17 +1,53 @@
 import { createContext, useState, useEffect, useContext } from 'react';
+import { useAuth } from './AuthContext';
 import '../styles/General.css'
 
 const CarritoContext = createContext(null);
 
+const CLAVE_INVITADO = 'carrito';
+const claveDe = (usuario) => (usuario ? `carrito_${usuario.id}` : CLAVE_INVITADO);
+
+const leer = (clave) => {
+  try {
+    const datos = JSON.parse(localStorage.getItem(clave));
+    return Array.isArray(datos) ? datos : [];
+  } catch {
+    return [];
+  }
+};
+
+const fusionar = (base, extra) => {
+  const mapa = new Map(base.map((i) => [i.id, { ...i }]));
+  for (const i of extra) {
+    const existente = mapa.get(i.id);
+    if (existente) existente.cantidad += i.cantidad;
+    else mapa.set(i.id, { ...i });
+  }
+  return [...mapa.values()];
+};
+
 export function CarritoProvider({ children }) {
-  const [items, setItems] = useState(() => {
-    const guardado = localStorage.getItem('carrito');
-    return guardado ? JSON.parse(guardado) : [];
-  });
+  const usuario = useAuth()?.usuario ?? null;
+  const clave = claveDe(usuario);
+
+  const [claveActual, setClaveActual] = useState(clave);
+  const [items, setItems] = useState(() =>
+    usuario ? fusionar(leer(clave), leer(CLAVE_INVITADO)) : leer(clave)
+  );
+
+  if (clave !== claveActual) {
+    setClaveActual(clave);
+    const propios = leer(clave);
+    setItems(claveActual === CLAVE_INVITADO ? fusionar(propios, items) : propios);
+  }
 
   useEffect(() => {
-    localStorage.setItem('carrito', JSON.stringify(items));
-  }, [items]);
+    localStorage.setItem(clave, JSON.stringify(items));
+  }, [clave, items]);
+
+  useEffect(() => {
+    if (usuario) localStorage.removeItem(CLAVE_INVITADO);
+  }, [usuario]);
 
   const agregar = (producto, cantidad = 1) => {
     setItems((actuales) => {
@@ -23,7 +59,7 @@ export function CarritoProvider({ children }) {
       }
       return [
         ...actuales,
-                { id: producto.id, nombre: producto.nombre, precio: Number(producto.precio_oferta ?? producto.precio), cantidad },
+        { id: producto.id, nombre: producto.nombre, precio: Number(producto.precio_oferta ?? producto.precio), cantidad },
       ];
     });
   };
