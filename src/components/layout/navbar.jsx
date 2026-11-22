@@ -1,11 +1,25 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { ROLES } from '../../utils/roles';
 import "../../styles/BarraNavegacion.css";
 
 function BarraNavegacion() {
+
+  const { usuario, logout } = useAuth();
+
+  const cerrarSesion = () => {
+    logout();
+    window.location.href = '/';
+  };
+
+  const esPersonal = usuario?.rol === ROLES.ADMIN || usuario?.rol === ROLES.VENDEDOR;
+
   return (
+    
     <Navbar className="navbar-personalizada">
       <Container>
           <Nav className="me-auto">
@@ -42,15 +56,40 @@ function BarraNavegacion() {
 
           <Nav>
 
-            <Nav.Link as={Link} to="/InicioSesion">
-              Inicio de Sesión
-            </Nav.Link>
+            {usuario ? (
+              <NavDropdown
+                title={`Hola, ${usuario.nombre}`}
+                id="menu-usuario"
+                align="end"
+              >
+                {esPersonal && (
+                  <>
+                    <NavDropdown.Item
+                      as={Link}
+                      to={usuario.rol === ROLES.VENDEDOR ? '/admin/ordenes' : '/admin/dashboard'}
+                    >
+                      Panel
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                  </>
+                )}
 
-            <Nav.Link as={Link} to="/Registro">
-              Registrate
-            </Nav.Link>
+                <NavDropdown.Item onClick={cerrarSesion}>
+                  Cerrar sesión
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <>
+                <Nav.Link as={Link} to="/InicioSesion">
+                  Inicio de Sesión
+                </Nav.Link>
 
-            
+                <Nav.Link as={Link} to="/Registro">
+                  Registrate
+                </Nav.Link>
+              </>
+            )}
+
           </Nav>
       </Container>
     </Navbar>

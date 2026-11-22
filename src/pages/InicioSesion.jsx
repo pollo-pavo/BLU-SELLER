@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Alert from 'react-bootstrap/Alert';
 import { Link, useNavigate } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../context/AuthContext';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import '../styles/InicioSesion.css';
@@ -16,12 +17,13 @@ const destinoPorRol = (rol) => {
   return '/';
 };
 
+
 function InicioSesion() {
 
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [error, setError] = useState('');
-  const { iniciarSesion } = useAuth();
+  const { iniciarSesion, iniciarSesionGoogle } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -32,6 +34,16 @@ function InicioSesion() {
       navigate(destinoPorRol(usuario.rol));
     } catch (err) {
       setError('Correo o contraseña incorrectos');
+    }
+  };
+
+  const entrarConGoogle = async ({ credential }) => {
+    setError('');
+    try {
+      const usuario = await iniciarSesionGoogle(credential);
+      navigate(destinoPorRol(usuario.rol));
+    } catch (err) {
+      setError('No se pudo iniciar sesión con Google');
     }
   };
 
@@ -83,6 +95,13 @@ function InicioSesion() {
               <Link to="/registro">¿No tienes una cuenta? Regístrate</Link>
             </div>
           </Form>
+
+          <div className="d-flex justify-content-center mt-3">
+            <GoogleLogin
+              onSuccess={entrarConGoogle}
+              onError={() => setError('No se pudo iniciar sesión con Google')}
+            />
+          </div>
           
         </div>
       </div>

@@ -21,6 +21,10 @@ vi.mock('../components/layout/HeaderGeneral', () => ({
   default: () => <header>Header de prueba</header>,
 }));
 
+vi.mock('@react-oauth/google', () => ({
+  GoogleLogin: () => <button>Continuar con Google</button>,
+}));
+
 describe('InicioSesion', () => {
   it('muestra un error con credenciales inválidas y redirige al panel si el login es de un admin', async () => {
     const user = userEvent.setup();

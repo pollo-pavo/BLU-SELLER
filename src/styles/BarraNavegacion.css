@@ -5,3 +5,18 @@
 .navbar-personalizada .nav-link {
   color: white;
 }
+
+.navbar-personalizada button.nav-link {
+  background: none;
+  border: none;
+}
+
+.navbar-personalizada .dropdown-menu {
+  background-color: #1f1f1f; 
+}
+.navbar-personalizada .dropdown-item {
+  color: #fff;
+}
+.navbar-personalizada .dropdown-item:hover {
+  background-color: #333;
+}

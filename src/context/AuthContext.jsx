@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react';
-import { leerSesion, guardarSesion, borrarSesion, onSesionExpirada, login, leer } from '../services/api';
+import { leerSesion, guardarSesion, borrarSesion, onSesionExpirada, login, loginGoogle, leer } from '../services/api';
+import { googleLogout } from '@react-oauth/google';
 
 const AuthContext = createContext(null);
 
@@ -8,9 +9,10 @@ export function AuthProvider({ children }) {
   const [cargando, setCargando] = useState(() => Boolean(leerSesion()?.token));
 
   const logout = useCallback(() => {
-    borrarSesion();
-    setUsuario(null);
-  }, []);
+  googleLogout();
+  borrarSesion();
+  setUsuario(null);
+}, []);
 
   useEffect(() => { onSesionExpirada(logout); }, [logout]);
 
@@ -29,15 +31,20 @@ export function AuthProvider({ children }) {
     return () => { activo = false; };
   }, [logout]);
 
-  const iniciarSesion = async (correo, contrasena) => {
-    const d = await login(correo, contrasena);
+  const abrirSesion = (d) => {
     guardarSesion({ token: d.token, refreshToken: d.refreshToken, usuario: d.usuario });
     setUsuario(d.usuario);
     return d.usuario;
   };
 
+  const iniciarSesion = async (correo, contrasena) =>
+    abrirSesion(await login(correo, contrasena));
+
+  const iniciarSesionGoogle = async (credential) =>
+    abrirSesion(await loginGoogle(credential));
+
   return (
-    <AuthContext.Provider value={{ usuario, cargando, iniciarSesion, logout }}>
+    <AuthContext.Provider value={{ usuario, cargando, iniciarSesion, iniciarSesionGoogle, logout }}>
       {children}
     </AuthContext.Provider>
   );

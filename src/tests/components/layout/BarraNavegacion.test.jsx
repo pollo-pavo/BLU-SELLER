@@ -1,10 +1,17 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import BarraNavegacion from '../../../components/layout/navbar';
+import { useAuth } from '../../../context/AuthContext';
+
+vi.mock('../../../context/AuthContext', () => ({
+  useAuth: vi.fn(),
+}));
 
 describe('BarraNavegacion', () => {
   it('muestra todos los enlaces de navegación y de cuenta, cada uno hacia su ruta', () => {
+    useAuth.mockReturnValue({ usuario: null, logout: vi.fn() });
+
     render(
       <MemoryRouter>
         <BarraNavegacion />

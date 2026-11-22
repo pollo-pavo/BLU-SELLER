@@ -5,6 +5,11 @@ import bcrypt from 'bcryptjs';
 import { validarProducto, validarUsuario, validarCategoria, validarContacto, validarCompra } from './validaciones.js';
 import jwt from 'jsonwebtoken';
 
+import { OAuth2Client } from 'google-auth-library';
+import { correoPermitido } from './validaciones.js';
+
+const clienteGoogle = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -34,17 +39,19 @@ const requiereAuth = (req, res, next) => {
   }
 };
 
-// Middleware: exige rol admin
-const requiereAdmin = (req, res, next) => {
-  if (req.auth?.rol !== 'administrador') {
-    return res.status(403).json({ error: 'Acceso denegado' });
-  }
-  next();
-};
-
 // Protege TODAS las rutas de administración de una vez
 
-app.use('/api/admin', requiereAuth, requiereAdmin);
+// Rutas de /api/admin que el vendedor puede LEER (solo GET): órdenes, listado y detalle de productos
+const LECTURA_VENDEDOR = [/^\/ordenes\/?$/, /^\/productos\/?$/, /^\/productos\/\d+\/?$/];
+
+app.use('/api/admin', requiereAuth, (req, res, next) => {
+  const { rol } = req.auth;
+  if (rol === 'administrador') return next();
+  if (rol === 'vendedor' && req.method === 'GET' && LECTURA_VENDEDOR.some((re) => re.test(req.path))) {
+    return next();
+  }
+  res.status(403).json({ error: 'Acceso denegado' });
+});
 
 app.get('/api/salud', async (req, res) => {
   try {
@@ -175,7 +182,7 @@ app.post('/api/auth/login', async (req, res) => {
     );
     const u = r.rows[0];
 
-    const coincide = u && await bcrypt.compare(contrasena, u.contrasena);
+    const coincide = u && u.contrasena && await bcrypt.compare(contrasena, u.contrasena);
     if (!coincide) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
@@ -185,6 +192,86 @@ app.post('/api/auth/login', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'No se pudo iniciar sesión' });
+  }
+});
+
+app.post('/api/auth/google', async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) {
+    return res.status(400).json({ error: 'Falta la credencial de Google' });
+  }
+
+  let datos;
+  try {
+    const ticket = await clienteGoogle.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    datos = ticket.getPayload();
+  } catch {
+    return res.status(401).json({ error: 'Credencial de Google inválida' });
+  }
+
+  if (!datos.email || !datos.email_verified) {
+    return res.status(401).json({ error: 'El correo de Google no está verificado' });
+  }
+
+  const correo = datos.email.trim().toLowerCase();
+  if (!correoPermitido(correo)) {
+    return res.status(403).json({ error: 'Solo se permiten correos @gmail.com, @duoc.cl y @profesor.duoc.cl' });
+  }
+
+  try {
+    const existente = await pool.query(
+      `SELECT id, nombre, apellidos, correo, rol, direccion, region, comuna, proveedor
+       FROM usuarios WHERE LOWER(correo) = $1`,
+      [correo]
+    );
+    let usuario = existente.rows[0];
+
+    if (usuario && usuario.proveedor !== 'google') {
+      return res.status(409).json({
+        error: 'Ya existe una cuenta con este correo. Inicia sesión con tu contraseña.',
+      });
+    }
+
+    if (!usuario) {
+      const nuevo = await pool.query(
+        `INSERT INTO usuarios (nombre, apellidos, correo, rol, proveedor)
+         VALUES ($1, $2, $3, 'cliente', 'google')
+         RETURNING id, nombre, apellidos, correo, rol, direccion, region, comuna`,
+        [
+          (datos.given_name || datos.name || 'Usuario').slice(0, 50),
+          (datos.family_name || '-').slice(0, 100),
+          correo,
+        ]
+      );
+      usuario = nuevo.rows[0];
+    }
+
+    const token = firmarToken(usuario);
+    const refreshToken = firmarRefresh(usuario);
+
+    res.json({
+      token,
+      refreshToken,
+      usuario: {
+        id: usuario.id,
+        nombre: usuario.nombre,
+        apellidos: usuario.apellidos,
+        correo: usuario.correo,
+        rol: usuario.rol,
+        direccion: usuario.direccion,
+        region: usuario.region,
+        comuna: usuario.comuna,
+      },
+    });
+  } catch (error) {
+    if (error.code === '23505') {
+      return res.status(409).json({ error: 'Ya existe una cuenta con este correo' });
+    }
+    console.error(error);
+    res.status(500).json({ error: 'No se pudo iniciar sesión con Google' });
   }
 });
 

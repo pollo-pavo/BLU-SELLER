@@ -71,6 +71,8 @@ export const eliminar = (ruta) => solicitar(ruta, { method: 'DELETE' });
 // Auth (públicas: un 401 aquí no dispara renovación)
 export const login = (correo, contrasena) =>
   crear('/auth/login', { correo, contrasena }, { publica: true });
+export const loginGoogle = (credential) =>
+  crear('/auth/google', { credential }, { publica: true });
 
 // Productos
 export const obtenerProductos = (buscar = '') =>
