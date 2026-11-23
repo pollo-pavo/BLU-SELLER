@@ -25,3 +25,6 @@ dist-ssr
 
 
 .env
+
+# Cobertura de tests (se genera con npm run coverage)
+coverage
