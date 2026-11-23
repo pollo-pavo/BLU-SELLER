@@ -48,6 +48,7 @@ import Categorias from "./pages/Categorias";
 import CategoriaDetalle from "./pages/CategoriaDetalle";
 import Ofertas from "./pages/Ofertas";
 import Carrito from "./pages/Carrito";
+import MisPedidos from "./pages/MisPedidos";
 
 import RutaProtegida from './components/auth/RutaProtegida';
 import { ROLES } from './utils/roles';
@@ -75,9 +76,13 @@ function App() {
               <Route path="/InicioSesion" element={<InicioSesion />} />
               <Route path="/registro" element={<Registro />} />
               <Route path="/carrito" element={<Carrito />} />
-              <Route path="/checkout" element={<Checkout />} />
-              <Route path="/pago-correcto" element={<PagoCorrecto />} />
               <Route path="/pago-error" element={<PagoError />} />
+
+              <Route element={<RutaProtegida />}>
+                <Route path="/checkout" element={<Checkout />} />
+                <Route path="/pago-correcto" element={<PagoCorrecto />} />
+                <Route path="/mis-pedidos" element={<MisPedidos />} />
+              </Route>
             </Route>
 
             <Route element={<RutaProtegida roles={[ROLES.ADMIN, ROLES.VENDEDOR]} />}>

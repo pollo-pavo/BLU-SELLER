@@ -62,6 +62,10 @@ function BarraNavegacion() {
                 id="menu-usuario"
                 align="end"
               >
+                <NavDropdown.Item as={Link} to="/mis-pedidos">
+                  Mis pedidos
+                </NavDropdown.Item>
+
                 {esPersonal && (
                   <>
                     <NavDropdown.Item

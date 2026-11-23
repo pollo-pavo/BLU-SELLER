@@ -15,7 +15,7 @@ describe('AuthContext', () => {
 
     await act(async () => { await result.current.iniciarSesion('ana@correo.cl', 'clave123'); });
 
-    expect(fetch).toHaveBeenCalledWith('/api/auth/login', expect.objectContaining({
+    expect(fetch).toHaveBeenCalledWith('/api/v1/auth/login', expect.objectContaining({
       method: 'POST',
       body: JSON.stringify({ correo: 'ana@correo.cl', contrasena: 'clave123' }),
     }));
@@ -35,7 +35,7 @@ describe('AuthContext', () => {
     expect(result.current.cargando).toBe(true);
     await waitFor(() => expect(result.current.cargando).toBe(false));
 
-    expect(fetch).toHaveBeenCalledWith('/api/auth/me', expect.objectContaining({
+    expect(fetch).toHaveBeenCalledWith('/api/v1/auth/me', expect.objectContaining({
       headers: expect.objectContaining({ Authorization: 'Bearer t1' }),
     }));
     expect(result.current.usuario).toEqual(ana);
@@ -50,5 +50,19 @@ describe('AuthContext', () => {
 
     expect(result.current.usuario).toBeNull();
     expect(localStorage.getItem('sesion')).toBeNull();
+  });
+
+  it('inicia sesión con Google enviando la credencial a /auth/google', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(resp({ token: 'tg', refreshToken: 'rg', usuario: ana })));
+    const { result } = renderHook(() => useAuth(), { wrapper: AuthProvider });
+
+    await act(async () => { await result.current.iniciarSesionGoogle('cred-google'); });
+
+    expect(fetch).toHaveBeenCalledWith('/api/v1/auth/google', expect.objectContaining({
+      method: 'POST',
+      body: JSON.stringify({ credential: 'cred-google' }),
+    }));
+    expect(result.current.usuario).toEqual(ana);
+    expect(JSON.parse(localStorage.getItem('sesion')).token).toBe('tg');
   });
 });

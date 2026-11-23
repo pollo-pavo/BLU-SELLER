@@ -1,16 +1,28 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { adminObtenerUsuarios } from '../../../services/api';
+import { adminObtenerUsuarios, adminEliminarUsuario } from '../../../services/api';
+import { useAuth } from '../../../context/AuthContext';
 import '../../../styles/admin/usuarios/UsuarioAdmin.css';
 
 function UsuariosAdmin() {
   const [usuarios, setUsuarios] = useState([]);
+  const { usuario: yo } = useAuth();
 
   useEffect(() => {
     adminObtenerUsuarios()
       .then((datos) => setUsuarios(datos))
       .catch((error) => console.error(error));
   }, []);
+
+  const eliminar = async (u) => {
+    if (!window.confirm(`¿Eliminar a "${u.nombre} ${u.apellidos}"?`)) return;
+    try {
+      await adminEliminarUsuario(u.id);
+      setUsuarios((actuales) => actuales.filter((x) => x.id !== u.id));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="usuarios-admin">
@@ -40,6 +52,9 @@ function UsuariosAdmin() {
                 <Link to={`/admin/usuarios/${u.id}`}>Ver</Link>{' '}
                 <Link to={`/admin/usuarios/${u.id}/editar`}>Editar</Link>{' '}
                 <Link to={`/admin/usuarios/${u.id}/historial`}>Historial</Link>
+                {u.id !== yo?.id && (
+                  <>{' '}<button type="button" onClick={() => eliminar(u)}>Eliminar</button></>
+                )}
               </td>
             </tr>
           ))}

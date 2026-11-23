@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { obtenerCategorias } from '../../../services/api';
+import { obtenerCategorias, adminEliminarCategoria } from '../../../services/api';
 import '../../../styles/admin/categorias/CategoriaAdmin.css';
 
 function CategoriaAdmin() {
@@ -11,6 +11,16 @@ function CategoriaAdmin() {
       .then((datos) => setCategorias(datos))
       .catch((error) => console.error(error));
   }, []);
+
+  const eliminar = async (c) => {
+    if (!window.confirm(`¿Eliminar la categoría "${c.nombre}"?`)) return;
+    try {
+      await adminEliminarCategoria(c.id);
+      setCategorias((actuales) => actuales.filter((x) => x.id !== c.id));
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <div className="categoria-admin">
@@ -33,7 +43,8 @@ function CategoriaAdmin() {
               <td>{c.id}</td>
               <td>{c.nombre}</td>
               <td>
-                <Link to={`/admin/categorias/${c.id}/editar`}>Editar</Link>
+                <Link to={`/admin/categorias/${c.id}/editar`}>Editar</Link>{' '}
+                <button type="button" onClick={() => eliminar(c)}>Eliminar</button>
               </td>
             </tr>
           ))}

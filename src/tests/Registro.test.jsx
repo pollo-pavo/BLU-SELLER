@@ -74,7 +74,7 @@ describe('Registro', () => {
 
     await waitFor(() => expect(fetchFalso).toHaveBeenCalledTimes(1));
     const [url, opciones] = fetchFalso.mock.calls[0];
-    expect(url).toBe('/api/registro');
+    expect(url).toBe('/api/v1/registro');
     expect(opciones.method).toBe('POST');
     expect(JSON.parse(opciones.body)).toEqual({
       run: '123456785',

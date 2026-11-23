@@ -1,4 +1,4 @@
-const BASE = '/api';
+const BASE = '/api/v1';
 const CLAVE = 'sesion';
 
 export const leerSesion = () => {
@@ -101,6 +101,7 @@ export const adminActualizarProducto = (id, datos) => actualizar(`/admin/product
 // Órdenes
 export const crearOrden = (datos) => crear('/ordenes', datos);
 export const obtenerOrden = (id) => leer(`/ordenes/${id}`);
+export const obtenerMisOrdenes = () => leer('/ordenes/mias');
 
 // Administración de categorías
 export const adminObtenerCategoria = (id) => leer(`/admin/categorias/${id}`);

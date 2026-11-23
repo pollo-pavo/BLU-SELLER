@@ -20,7 +20,6 @@ function Checkout() {
     e.preventDefault();
     const c = e.target.elements;
     const datos = {
-      usuario_id: usuario?.id,
       nombre: c.nombre.value,
       apellidos: c.apellidos.value,
       correo: c.correo.value,

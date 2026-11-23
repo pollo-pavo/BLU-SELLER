@@ -32,7 +32,7 @@ function registro() {
       return;
     }
 
-    const respuesta = await fetch('/api/registro', {
+    const respuesta = await fetch('/api/v1/registro', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

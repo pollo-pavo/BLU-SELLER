@@ -12,7 +12,7 @@ function Contacto() {
     const formulario = e.target;
     const campos = formulario.elements;
 
-    const respuesta = await fetch('/api/contacto', {
+    const respuesta = await fetch('/api/v1/contacto', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

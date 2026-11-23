@@ -1,45 +1,45 @@
-Tienda online de Blu-ray desarrollada con React, Express y PostgreSQL (Neon).
+# Blu-Seller · Frontend
 
-Requisitos:
+Tienda online de Blu-ray hecha con React 19 y Vite. Consume la API REST del repositorio **blu-seller-backend** (Spring Boot, PostgreSQL, JWT).
+
+## Requisitos
 
 - Node.js 20 o superior
-- Una base de datos PostgreSQL (Neon)
+- El backend `blu-seller-backend` corriendo en http://localhost:8080 (ver su README)
 
-Instalacion:
+## Instalación y ejecución
 
-1. Instalar dependencias del frontend y del backend en terminal:
+1. Instalar dependencias:
 
    ```
    npm install
-   cd backend
-   npm install
    ```
 
-2. Crear un archivo .env en la raíz (ver .env.example):
+2. Crear un archivo `.env` en la raíz (ver `.env.example`) con el Client ID de Google:
 
    ```
-   DATABASE_URL=cadena_de_conexion_de_neon
+   VITE_GOOGLE_CLIENT_ID=tu-client-id.apps.googleusercontent.com
    ```
 
-3. Crear las tablas y los datos de ejemplo ejecutando, en ese orden,
-   database/schema.sql y database/seed.sql en la base de datos.
+   Solo se necesita para el botón "Iniciar sesión con Google". El mismo valor va como `GOOGLE_CLIENT_ID` en el `.env` del backend. No pongas claves secretas aquí: las variables `VITE_` quedan visibles en el navegador.
 
-Pasos para ejecutar -
+3. Levantar primero el backend y luego la tienda:
 
-En dos terminales:
+   ```
+   npm run dev
+   ```
 
-```
-cd backend
-npm run dev
-```
+La tienda queda en http://localhost:5173. Vite redirige `/api` hacia http://localhost:8080, y el frontend llama a `/api/v1/...`.
 
-```
-npm run dev
-```
+## Roles
 
-La tienda queda en http://localhost:5173 y la API en http://localhost:8080.
+| Rol | Acceso |
+|---|---|
+| Cliente | Tienda, carrito, compra (requiere sesión) y "Mis pedidos" |
+| Vendedor | Panel en solo lectura: órdenes y productos |
+| Administrador | Panel completo: productos, categorías, usuarios, órdenes, dashboard y reportes |
 
-Pruebas:
+## Pruebas
 
 ```
 npm run test:run

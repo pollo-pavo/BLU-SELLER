@@ -36,7 +36,7 @@ describe('Contacto', () => {
 
     await waitFor(() => expect(fetchFalso).toHaveBeenCalledTimes(1));
     const [url, opciones] = fetchFalso.mock.calls[0];
-    expect(url).toBe('/api/contacto');
+    expect(url).toBe('/api/v1/contacto');
     expect(opciones.method).toBe('POST');
     expect(JSON.parse(opciones.body)).toEqual({
       nombre: 'Ana Pérez',

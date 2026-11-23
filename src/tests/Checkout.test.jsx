@@ -96,7 +96,6 @@ describe('Checkout', () => {
 
     await waitFor(() => expect(crearOrden).toHaveBeenCalledTimes(1));
     expect(crearOrden).toHaveBeenCalledWith({
-      usuario_id: 5,
       nombre: 'Luis',
       apellidos: 'Pérez',
       correo: 'ana@duoc.cl',
