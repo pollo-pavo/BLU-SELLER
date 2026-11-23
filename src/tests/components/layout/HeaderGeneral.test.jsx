@@ -27,7 +27,7 @@ describe('HeaderGeneral', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByRole('img', { name: 'Logo' })).toHaveAttribute('src', '/imagenes/logo.png');
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'BLU-SELLER' })).toBeInTheDocument();
 
     expect(screen.getByRole('link', { name: 'Carrito (3)' })).toHaveAttribute('href', '/carrito');

@@ -34,8 +34,8 @@ describe('LayoutAdmin', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText('BLUE-SELLER')).toBeInTheDocument();
-    expect(screen.getByLabelText('Notificaciones')).toBeInTheDocument();
+    expect(screen.getByText('BLU-SELLER')).toBeInTheDocument();
+    expect(screen.queryByLabelText('Notificaciones')).not.toBeInTheDocument();
 
     const menu = [
       ['Dashboard', '/admin/dashboard'],

@@ -49,11 +49,6 @@
   padding: 24px;
 }
 
-.layout-admin-superior {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .layout-admin-inferior {
   margin-top: auto;
   border-top: 1px solid #1c3558;

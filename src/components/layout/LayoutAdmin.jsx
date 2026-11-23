@@ -29,7 +29,7 @@ function LayoutAdmin() {
 return (
     <div className="layout-admin">
       <aside className="layout-admin-barra">
-        <div className="layout-admin-logo">BLUE-SELLER</div>
+        <div className="layout-admin-logo">BLU-SELLER</div>
 
         <nav className="layout-admin-menu">
           {menu.map((item) => (
@@ -53,9 +53,6 @@ return (
       </aside>
 
       <main className="layout-admin-contenido">
-        <div className="layout-admin-superior">
-          <span aria-label="Notificaciones">🔔</span>
-        </div>
         <Outlet />
       </main>
     </div>
