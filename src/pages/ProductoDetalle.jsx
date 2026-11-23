@@ -69,7 +69,9 @@ function ProductoDetalle() {
 
         <div className="detalle-principal">
           <div className="detalle-galeria">
-            <div className="detalle-imagen"></div>
+            <div className="detalle-imagen">
+              {producto.imagen && <img src={producto.imagen} alt={producto.nombre} />}
+            </div>
             <div className="detalle-miniaturas">
               <div className="detalle-miniatura"></div>
               <div className="detalle-miniatura"></div>

@@ -9,7 +9,9 @@ function TarjetaProducto({ producto }) {
 
   return (
     <div className="producto-card">
-      <Link to={`/productos/${producto.id}`} className="producto-imagen"></Link>
+      <Link to={`/productos/${producto.id}`} className="producto-imagen">
+        {producto.imagen && <img src={producto.imagen} alt="" loading="lazy" />}
+      </Link>
       <Link to={`/productos/${producto.id}`} className="producto-nombre">{producto.nombre}</Link>
 
       {enOferta ? (

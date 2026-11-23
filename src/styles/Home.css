@@ -1,15 +1,32 @@
 .home-slide { 
-    height: 300px; 
-    background: #c8c8c8; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 48px; 
-    color: #888; 
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 1;
+    object-fit: cover;
+    background: #fff; 
 }
 
 .home-carrusel .carousel-caption { 
-    bottom: 40px; 
+    top: 0;
+    bottom: 0;
+    left: 6%;
+    right: auto;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    color: #0b2a4a;
+}
+
+.home-carrusel .carousel-caption h3 {
+    font-size: clamp(1rem, 2.6vw, 2.2rem);
+    font-weight: 700;
+}
+
+.home-carrusel .carousel-caption p {
+    font-size: clamp(0.7rem, 1.4vw, 1.1rem);
+    margin-bottom: 0;
 }
 
 .home-categorias { 
@@ -27,8 +44,16 @@
     border: none; 
 }
 
+.home-tarjeta-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
 .home-tarjeta-imagen { 
     height: 200px; 
+    overflow: hidden;
     background: #c8c8c8; 
     display: flex; 
     align-items: center; 
@@ -55,8 +80,15 @@
     height: 100%; 
 }
 
+.home-producto-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .home-producto-imagen { 
-    height: 200px; 
+    height: 280px; 
+    overflow: hidden; 
     background: #c8c8c8; 
     display: flex; 
     align-items: center; 

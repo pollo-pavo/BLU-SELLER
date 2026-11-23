@@ -18,8 +18,18 @@
 }
 
 .detalle-imagen {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
+  max-width: 380px;
+  margin: 0 auto;
   background-color: #fff;
+  overflow: hidden;
+}
+
+.detalle-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .detalle-miniaturas {

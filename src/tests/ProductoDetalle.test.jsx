@@ -81,4 +81,29 @@ describe('ProductoDetalle', () => {
     expect(agregar).toHaveBeenCalledTimes(1);
     expect(agregar).toHaveBeenCalledWith(producto, 3);
   });
+
+  it('muestra la portada del producto', async () => {
+    useCarrito.mockReturnValue({ agregar: vi.fn() });
+    obtenerProducto.mockResolvedValue({
+      id: 1,
+      nombre: 'Interstellar',
+      categoria: 'Películas',
+      categoria_id: 1,
+      precio: '1000',
+      precio_oferta: null,
+      descripcion: 'Ciencia ficción.',
+      imagen: '/imagenes/productos/interstellar.jpg',
+    });
+    obtenerProductos.mockResolvedValue([]);
+
+    render(
+      <MemoryRouter initialEntries={['/productos/1']}>
+        <Routes>
+          <Route path="/productos/:id" element={<ProductoDetalle />} />
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByAltText('Interstellar')).toHaveAttribute('src', '/imagenes/productos/interstellar.jpg');
+  });
 });

@@ -66,4 +66,34 @@ describe('Home', () => {
 
     expect(screen.getByRole('link', { name: 'Ver todos los productos' })).toHaveAttribute('href', '/productos');
   });
+
+  it('muestra una imagen en cada slide y en las categorías conocidas (sin tildes ni mayúsculas)', async () => {
+    obtenerCategorias.mockResolvedValue([
+      { id: 1, nombre: 'Películas' },
+      { id: 3, nombre: 'Ediciones especiales' },
+      { id: 9, nombre: 'Otra cosa' },
+    ]);
+    obtenerProductos.mockResolvedValue([]);
+
+    const { container } = render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    );
+
+    const slides = Array.from(container.querySelectorAll('.home-slide')).map((i) => i.getAttribute('src'));
+    expect(slides).toEqual([
+      '/imagenes/home/lanzamientos.jpg',
+      '/imagenes/home/ofertas.jpg',
+      '/imagenes/home/mas-vendidos.jpg',
+    ]);
+
+    await screen.findByRole('link', { name: /Películas/ });
+    const imagenes = Array.from(container.querySelectorAll('.home-tarjeta-imagen img')).map((i) => i.getAttribute('src'));
+    expect(imagenes).toEqual([
+      '/imagenes/categorias/peliculas.jpg',
+      '/imagenes/categorias/ediciones-especiales.jpg',
+    ]);
+    expect(screen.getByText('400 x 200')).toBeInTheDocument();
+  });
 });

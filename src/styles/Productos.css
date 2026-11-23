@@ -15,7 +15,8 @@
 
 .producto-imagen {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
   background-color: #fff;
   border: 1px solid #999;
   display: block;
@@ -44,3 +45,10 @@
   .productos-grid { grid-template-columns: 1fr; }
 }
 
+
+.producto-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}

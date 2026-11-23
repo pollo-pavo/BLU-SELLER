@@ -38,4 +38,21 @@ describe('TarjetaProducto', () => {
     expect(agregar).toHaveBeenCalledTimes(1);
     expect(agregar).toHaveBeenCalledWith(producto);
   });
+
+  it('muestra la imagen del producto cuando la tiene y no dibuja <img> cuando no', () => {
+    const conImagen = { id: 1, nombre: 'Interstellar', precio: '1000', precio_oferta: null, imagen: '/imagenes/productos/interstellar.jpg' };
+    const { container, rerender } = render(
+      <MemoryRouter>
+        <TarjetaProducto producto={conImagen} />
+      </MemoryRouter>
+    );
+    expect(container.querySelector('img')).toHaveAttribute('src', '/imagenes/productos/interstellar.jpg');
+
+    rerender(
+      <MemoryRouter>
+        <TarjetaProducto producto={{ ...conImagen, imagen: null }} />
+      </MemoryRouter>
+    );
+    expect(container.querySelector('img')).toBeNull();
+  });
 });

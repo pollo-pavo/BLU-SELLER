@@ -7,16 +7,23 @@ import '../styles/General.css';
 import '../styles/Home.css';
 
 const slides = [
-  { id: 1, titulo: 'Nuevos Lanzamientos', texto: 'Descubre los últimos juegos disponibles en nuestra tienda.' },
-  { id: 2, titulo: 'Ofertas de la semana', texto: 'Aprovecha los mejores descuentos.' },
-  { id: 3, titulo: 'Los más vendidos', texto: 'Lo que más eligen nuestros clientes.' },
+  { id: 1, titulo: 'Nuevos Lanzamientos', texto: 'Descubre los últimos estrenos en Blu-ray de nuestra tienda.', imagen: '/imagenes/home/lanzamientos.jpg' },
+  { id: 2, titulo: 'Ofertas de la semana', texto: 'Aprovecha los mejores descuentos.', imagen: '/imagenes/home/ofertas.jpg' },
+  { id: 3, titulo: 'Los más vendidos', texto: 'Lo que más eligen nuestros clientes.', imagen: '/imagenes/home/mas-vendidos.jpg' },
 ];
 
-const categorias = [
-  { id: 1, nombre: 'Categoría 1' },
-  { id: 2, nombre: 'Categoría 2' },
-  { id: 3, nombre: 'Categoría 3' },
-];
+// Imagen de cada categoría, según su nombre (sin tildes ni mayúsculas)
+const IMAGENES_CATEGORIA = {
+  peliculas: '/imagenes/categorias/peliculas.jpg',
+  series: '/imagenes/categorias/series.jpg',
+  'ediciones especiales': '/imagenes/categorias/ediciones-especiales.jpg',
+  sagas: '/imagenes/categorias/sagas.jpg',
+};
+
+const imagenCategoria = (nombre) =>
+  IMAGENES_CATEGORIA[
+    String(nombre).normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase()
+  ];
 
 function Home() {
   const [productos, setProductos] = useState([]);
@@ -41,7 +48,7 @@ function Home() {
         <Carousel className="home-carrusel">
           {slides.map((s) => (
             <Carousel.Item key={s.id}>
-              <div className="home-slide">1200 x 300</div>
+              <img className="home-slide" src={s.imagen} alt="" />
               <Carousel.Caption>
                 <h3>{s.titulo}</h3>
                 <p>{s.texto}</p>
@@ -56,7 +63,13 @@ function Home() {
             {categorias.map((c) => (
               <Col md={4} key={c.id} className="mb-4">
                 <Card as={Link} to={`/categorias/${c.id}`} className="home-tarjeta">
-                  <div className="home-tarjeta-imagen">400 x 200</div>
+                  <div className="home-tarjeta-imagen">
+                    {imagenCategoria(c.nombre) ? (
+                      <img src={imagenCategoria(c.nombre)} alt="" />
+                    ) : (
+                      '400 x 200'
+                    )}
+                  </div>
                   <Card.Body>
                     <Card.Title>{c.nombre}</Card.Title>
                   </Card.Body>
@@ -72,7 +85,9 @@ function Home() {
             {destacados.map((p) => (
               <Col sm={6} lg={3} key={p.id} className="mb-4">
                 <Card className="home-producto">
-                  <div className="home-producto-imagen">300 x 200</div>
+                  <div className="home-producto-imagen">
+                    {p.imagen ? <img src={p.imagen} alt={p.nombre} /> : '300 x 200'}
+                  </div>
                   <Card.Body>
                     <Card.Title>{p.nombre}</Card.Title>
                     <Card.Text className="home-producto-precio">
