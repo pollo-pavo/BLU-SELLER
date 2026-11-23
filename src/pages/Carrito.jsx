@@ -55,7 +55,7 @@ function Carrito() {
                   <tbody>
                     {items.map((i) => (
                       <tr key={i.id}>
-                        <td><div className="carrito-miniatura"></div></td>
+                        <td><div className="carrito-miniatura">{i.imagen && <img src={i.imagen} alt="" />}</div></td>
                         <td>{i.nombre}</td>
                         <td>${i.precio.toLocaleString('es-CL')}</td>
                         <td>

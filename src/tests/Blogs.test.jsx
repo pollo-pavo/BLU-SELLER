@@ -44,4 +44,20 @@ describe('Blogs', () => {
     expect(enlaces[0]).toHaveAttribute('href', '/blogs/1');
     expect(enlaces[1]).toHaveAttribute('href', '/blogs/2');
   });
+
+  it('muestra la portada del blog cuando existe', async () => {
+    obtenerBlogs.mockResolvedValue([
+      { id: 1, titulo: 'Con portada', descripcion: 'a', imagen_portada: 'https://ejemplo.cl/foto.jpg' },
+      { id: 2, titulo: 'Sin portada', descripcion: 'b', imagen_portada: null },
+    ]);
+
+    render(
+      <MemoryRouter>
+        <Blogs />
+      </MemoryRouter>
+    );
+
+    expect(await screen.findByAltText('Con portada')).toHaveAttribute('src', 'https://ejemplo.cl/foto.jpg');
+    expect(screen.queryByAltText('Sin portada')).not.toBeInTheDocument();
+  });
 });

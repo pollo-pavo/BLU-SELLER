@@ -55,7 +55,9 @@ function BlogDetalle() {
             Por {blog.autor} · {new Date(blog.fecha_creacion).toLocaleDateString('es-CL')}
           </span>
 
-          <div className="blogdetalle-imagen"></div>
+          <div className="blogdetalle-imagen">
+            {blog.imagen_portada && <img src={blog.imagen_portada} alt={blog.titulo} referrerPolicy="no-referrer" />}
+          </div>
 
           <p>{blog.contenido}</p>
         </div>

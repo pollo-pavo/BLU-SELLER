@@ -29,7 +29,9 @@ function Blogs() {
               <p>{c.descripcion}</p>
               <Button as={Link} to={`/blogs/${c.id}`} variant="light" className="blog-boton">VER CASO</Button>
             </div>
-            <div className="blog-imagen"></div>
+            <div className="blog-imagen">
+              {c.imagen_portada && <img src={c.imagen_portada} alt={c.titulo} loading="lazy" referrerPolicy="no-referrer" />}
+            </div>
           </div>
         ))}
       </div>

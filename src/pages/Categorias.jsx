@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import TarjetaProducto from '../components/ui/TarjetaProducto';
 import { obtenerCategorias, obtenerProductos } from '../services/api';
+import { imagenCategoria } from '../utils/imagenes';
 import '../styles/General.css';
 import '../styles/Categorias.css';
 
@@ -30,7 +31,9 @@ function Categorias() {
         <div className="categorias-lista">
           {categorias.map((c) => (
             <Link to={`/categorias/${c.id}`} className="categoria-card" key={c.id}>
-              <div className="categoria-imagen"></div>
+              <div className="categoria-imagen">
+                {imagenCategoria(c.nombre) && <img src={imagenCategoria(c.nombre)} alt="" loading="lazy" />}
+              </div>
               <span>{c.nombre}</span>
             </Link>
           ))}

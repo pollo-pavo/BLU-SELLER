@@ -77,7 +77,7 @@ function ResumenCompra({ compra }) {
         <tbody>
           {compra.items.map((i) => (
             <tr key={i.id}>
-              <td><div className="resumen-imagen" /></td>
+              <td><div className="resumen-imagen">{i.imagen && <img src={i.imagen} alt="" />}</div></td>
               <td>{i.nombre}</td>
               <td>${i.precio.toLocaleString('es-CL')}</td>
               <td>{i.cantidad}</td>

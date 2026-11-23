@@ -64,4 +64,18 @@ describe('Categorias', () => {
 
     expect(screen.queryByText('Producto huérfano')).not.toBeInTheDocument();
   });
+
+  it('muestra la imagen de las categorías conocidas', async () => {
+    obtenerCategorias.mockResolvedValue([{ id: 1, nombre: 'Películas' }]);
+    obtenerProductos.mockResolvedValue([]);
+
+    const { container } = render(
+      <MemoryRouter>
+        <Categorias />
+      </MemoryRouter>
+    );
+
+    await screen.findByRole('link', { name: 'Películas' });
+    expect(container.querySelector('.categoria-imagen img')).toHaveAttribute('src', '/imagenes/categorias/peliculas.jpg');
+  });
 });

@@ -3,6 +3,7 @@ import { Carousel, Container, Row, Col, Card } from 'react-bootstrap';
 import HeaderGeneral from '../components/layout/HeaderGeneral';
 import { Link } from 'react-router-dom';
 import { obtenerProductos, obtenerCategorias } from '../services/api';
+import { imagenCategoria } from '../utils/imagenes';
 import '../styles/General.css';
 import '../styles/Home.css';
 
@@ -11,19 +12,6 @@ const slides = [
   { id: 2, titulo: 'Ofertas de la semana', texto: 'Aprovecha los mejores descuentos.', imagen: '/imagenes/home/ofertas.jpg' },
   { id: 3, titulo: 'Los más vendidos', texto: 'Lo que más eligen nuestros clientes.', imagen: '/imagenes/home/mas-vendidos.jpg' },
 ];
-
-// Imagen de cada categoría, según su nombre (sin tildes ni mayúsculas)
-const IMAGENES_CATEGORIA = {
-  peliculas: '/imagenes/categorias/peliculas.jpg',
-  series: '/imagenes/categorias/series.jpg',
-  'ediciones especiales': '/imagenes/categorias/ediciones-especiales.jpg',
-  sagas: '/imagenes/categorias/sagas.jpg',
-};
-
-const imagenCategoria = (nombre) =>
-  IMAGENES_CATEGORIA[
-    String(nombre).normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toLowerCase()
-  ];
 
 function Home() {
   const [productos, setProductos] = useState([]);

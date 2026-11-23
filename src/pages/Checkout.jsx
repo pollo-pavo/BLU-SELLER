@@ -71,7 +71,7 @@ function Checkout() {
           <tbody>
             {items.map((i) => (
               <tr key={i.id}>
-                <td><div className="checkout-imagen" /></td>
+                <td><div className="checkout-imagen">{i.imagen && <img src={i.imagen} alt="" />}</div></td>
                 <td>{i.nombre}</td>
                 <td>${i.precio.toLocaleString('es-CL')}</td>
                 <td>{i.cantidad}</td>

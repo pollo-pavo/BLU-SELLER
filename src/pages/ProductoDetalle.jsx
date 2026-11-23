@@ -116,7 +116,9 @@ function ProductoDetalle() {
           <div className="relacionados-grid">
             {relacionados.map((p) => (
               <Link to={`/productos/${p.id}`} className="relacionado-card" key={p.id}>
-                <div className="relacionado-imagen"></div>
+                <div className="relacionado-imagen">
+                  {p.imagen && <img src={p.imagen} alt="" loading="lazy" />}
+                </div>
                 <span>{p.nombre}</span>
               </Link>
             ))}
