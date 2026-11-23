@@ -56,6 +56,7 @@ describe('ProductoNuevo', () => {
       stock: '40',
       stock_critico: '5',
       categoria_id: '2',
+      imagen: '',
     });
     expect(alertSpy).toHaveBeenCalledWith('Producto creado correctamente');
     expect(await screen.findByText('Listado de productos')).toBeInTheDocument();

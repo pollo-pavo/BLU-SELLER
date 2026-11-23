@@ -29,6 +29,7 @@ describe('ProductoEditar', () => {
       stock: 40,
       stock_critico: 5,
       categoria_id: 2,
+      imagen: '/imagenes/productos/zapatillas.jpg',
     });
     obtenerCategorias.mockResolvedValue([
       { id: 1, nombre: 'Ropa' },
@@ -76,6 +77,7 @@ describe('ProductoEditar', () => {
       stock: '40',
       stock_critico: '5',
       categoria_id: '2',
+      imagen: '/imagenes/productos/zapatillas.jpg',
     });
     expect(alertSpy).toHaveBeenCalledWith('Producto actualizado correctamente');
     expect(await screen.findByText('Listado de productos')).toBeInTheDocument();

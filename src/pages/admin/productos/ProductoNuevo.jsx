@@ -28,6 +28,7 @@ function ProductoNuevo() {
         stock: c.stock.value,
         stock_critico: c.critico.value,
         categoria_id: c.categoria.value,
+        imagen: c.imagen.value,
       });
       window.alert('Producto creado correctamente');
       navigate('/admin/productos');
@@ -71,6 +72,9 @@ function ProductoNuevo() {
             <option key={cat.id} value={cat.id}>{cat.nombre}</option>
           ))}
         </select>
+
+        <label htmlFor="imagen">IMAGEN (RUTA O URL, OPCIONAL)</label>
+        <input id="imagen" type="text" maxLength={300} />
 
         <button type="submit">GUARDAR</button>
         <Link to="/admin/productos">Volver</Link>

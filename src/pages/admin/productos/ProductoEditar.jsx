@@ -36,6 +36,7 @@ function ProductoEditar() {
         stock: c.stock.value,
         stock_critico: c.critico.value,
         categoria_id: c.categoria.value,
+        imagen: c.imagen.value,
       });
       window.alert('Producto actualizado correctamente');
       navigate('/admin/productos');
@@ -82,6 +83,9 @@ function ProductoEditar() {
             <option key={cat.id} value={cat.id}>{cat.nombre}</option>
           ))}
         </select>
+
+        <label htmlFor="imagen">IMAGEN (RUTA O URL, OPCIONAL)</label>
+        <input id="imagen" type="text" defaultValue={producto.imagen ?? ''} maxLength={300} />
 
         <button type="submit">ACTUALIZAR</button>
         <Link to="/admin/productos">Volver</Link>
